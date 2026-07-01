@@ -1,0 +1,451 @@
+/* ============================================
+   TITANIUM FITNESS — STYLES
+   Dark/light theme via CSS custom properties,
+   set on <html data-theme="dark|light">.
+   ============================================ */
+
+/* DARK THEME (default) */
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --accent: #f97316;
+    --accent-hover: #ea580c;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --nav-bg: rgba(15, 23, 42, 0.95);
+    --btn-tema-bg: #1e293b;
+    --btn-tema-color: #f8fafc;
+    --btn-tema-border: #334155;
+}
+
+/* LIGHT THEME */
+[data-theme="light"] {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --accent: #f97316;
+    --accent-hover: #ea580c;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --border: #e2e8f0;
+    --nav-bg: rgba(248, 250, 252, 0.95);
+    --btn-tema-bg: #ffffff;
+    --btn-tema-color: #0f172a;
+    --btn-tema-border: #e2e8f0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    line-height: 1.5;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.25rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-decoration: none;
+    color: var(--text-main);
+    white-space: nowrap;
+}
+
+.logo span { color: var(--accent); }
+
+.nav-links { display: flex; align-items: center; gap: 0.5rem; }
+
+nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    white-space: nowrap;
+    /* --- Estilos para prevenir el Layout Shift --- */
+    display: inline-block; /* Crucial para que min-width funcione */
+    min-width: 130px; /* Ajusta este valor si "Equipamiento" o "Memberships" necesitan más espacio */
+    text-align: center;
+    box-sizing: border-box; /* Para que padding/border no sumen al min-width */
+}
+
+nav a:hover { color: var(--accent); }
+
+/*
+    DARK/LIGHT BUTTON — FIX (also reused by the language button)
+    Before: no fixed width. "Dark" and "Light" are different
+    lengths, so the button resized on every click and pushed
+    the 3 nav links sideways.
+    Fix: fixed width + flex-shrink:0 + centered text, so the
+    box size never changes no matter what text is inside.
+    #btn-idioma shares this rule so "ES"/"EN" gets the same
+    no-layout-shift treatment.
+*/
+#btn-tema, #btn-idioma {
+    width: 108px;
+    flex-shrink: 0;
+    margin-left: 1.5rem;
+    padding: 0.4rem 0;
+    text-align: center;
+    border-radius: 2rem;
+    border: 1px solid var(--btn-tema-border);
+    background-color: var(--btn-tema-bg);
+    color: var(--btn-tema-color);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background-color 0.3s;
+}
+
+#btn-tema:hover, #btn-idioma:hover { border-color: var(--accent); color: var(--accent); }
+
+section {
+    padding: 7rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+}
+
+/* HERO — now a 2-column grid: copy + real photo */
+#hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+    padding-top: 8rem;
+}
+
+h1 {
+    font-size: clamp(2.75rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+h1 span { color: var(--accent); }
+
+.hero-subtitle {
+    font-size: clamp(1.125rem, 2vw, 1.35rem);
+    color: var(--text-muted);
+    max-width: 540px;
+    margin-bottom: 2.5rem;
+}
+
+.hero-photo {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--border);
+}
+
+.hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15,23,42,0) 50%, rgba(15,23,42,0.55) 100%);
+    pointer-events: none;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--accent);
+    color: #ffffff;
+    padding: 1.1rem 2.5rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    font-family: inherit;
+}
+
+.cta-button:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+/* VIDEO SECTION — same border-radius/border language as .hero-photo */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background-color: var(--bg-secondary);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.grid-servicios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background-color: var(--bg-secondary);
+    padding: 2.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    /* Fix layout shift on language switch: equal height cards */
+    display: flex;
+    flex-direction: column;
+}
+
+.card h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.card p { color: var(--text-muted); flex: 1; }
+
+.grid-planes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.plan-card {
+    background-color: var(--bg-secondary);
+    padding: 3rem 2rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.plan-card.vip { border-color: var(--accent); position: relative; }
+
+.badge-vip {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 1rem;
+    border-radius: 1rem;
+    text-transform: uppercase;
+}
+
+.precio { font-size: 2.75rem; font-weight: 900; margin: 1rem 0; }
+.precio span { font-size: 1rem; font-weight: 400; color: var(--text-muted); }
+
+.lista-beneficios { list-style: none; margin-bottom: 2rem; text-align: left; }
+.lista-beneficios li {
+    margin-bottom: 0.65rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+.lista-beneficios li::before { content: "✓ "; color: var(--accent); font-weight: 700; }
+
+.form-container { max-width: 500px; margin: 0 auto; }
+.form-group { margin-bottom: 1.25rem; }
+
+input, select {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, background-color 0.3s, color 0.3s;
+    font-family: inherit;
+}
+
+input::placeholder { color: var(--text-muted); }
+input:focus, select:focus { border-color: var(--accent); }
+
+select option {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+}
+
+.form-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-main);
+}
+
+.form-success.visible { display: block; }
+.success-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.success-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+.success-sub { color: var(--text-muted); font-size: 0.9rem; }
+
+.btn-loading { opacity: 0.7; cursor: not-allowed; }
+
+/* Confirms to the visitor that "plan" was auto-filled after clicking a plan card */
+@keyframes campo-resaltado {
+    0% { box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.45); border-color: var(--accent); }
+    100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); border-color: var(--border); }
+}
+
+.campo-autocompletado { animation: campo-resaltado 1.6s ease-out; }
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 1rem;
+    text-align: center;
+}
+footer p { color: var(--text-muted); font-size: 0.825rem; }
+footer span { color: var(--accent); }
+
+@media (max-width: 768px) {
+    nav a { display: none; }
+    section { padding-top: 5rem; }
+    #hero { grid-template-columns: 1fr; padding-top: 6rem; gap: 2rem; }
+    .hero-photo { aspect-ratio: 16/10; order: -1; }
+    .logo { font-size: 1.25rem; }
+    #btn-tema, #btn-idioma { width: 72px; font-size: 0.7rem; margin-left: 0.5rem; }
+}
+
+/* FLOATING WHATSAPP BUTTON */
+.whatsapp-float {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 56px;
+    height: 56px;
+    background-color: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 999;
+    text-decoration: none;
+    font-size: 1.7rem;
+    transition: transform 0.2s;
+}
+
+.whatsapp-float:hover { transform: scale(1.08); }
+
+/* PORTFOLIO BUTTONS */
+.portfolio-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    justify-content: center;
+    gap: 0.75rem; /* Space between buttons */
+}
+
+.portfolio-button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.1s;
+    font-size: 0.9rem; /* Slightly smaller than main CTA */
+    white-space: nowrap; /* Prevent text wrapping inside buttons */
+}
+
+/* Specific button styles */
+.fiverr-btn {
+    background-color: #22C55E; /* Fiverr green */
+    color: white;
+}
+.fiverr-btn:hover {
+    background-color: #16a34a;
+    transform: translateY(-2px);
+}
+
+.github-btn {
+    background-color: var(--bg-secondary); /* Use secondary background for GitHub */
+    color: var(--text-main);
+    border: 1px solid var(--border);
+}
+.github-btn:hover {
+    background-color: var(--border);
+    transform: translateY(-2px);
+}
+
+.livedemo-btn {
+    background-color: var(--accent); /* Reuse your accent color for live demo */
+    color: white;
+}
+.livedemo-btn:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+/* Adjust responsiveness for buttons */
+@media (max-width: 480px) {
+    .portfolio-buttons {
+        flex-direction: column; /* Stack buttons vertically on very small screens */
+        align-items: center;
+    }
+    .portfolio-button {
+        width: 90%; /* Make buttons take up more width */
+        max-width: 250px; /* Max width for stacked buttons */
+    }
+}
+
+

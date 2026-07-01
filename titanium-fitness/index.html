@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titanium Fitness | Forge Your Absolute Power</title>
+    <meta name="description" content="High-performance gym facilities, 5,000kg in free weights and certified coaches ready to break your plateau.">
+    <meta property="og:title" content="Titanium Fitness | Forge Your Absolute Power">
+    <meta property="og:description" content="Premium fitness facilities for serious athletes.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%92%AA</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#hero" class="logo">TITANIUM<span>FIT</span></a>
+            <div class="nav-links">
+                <nav>
+                    <a href="#services" data-i18n="nav_equipment">Equipment</a>
+                    <a href="#plans" data-i18n="nav_plans">Memberships</a>
+                    <a href="#contact" data-i18n="nav_contact">Free Pass</a>
+                </nav>
+                <button id="btn-idioma" aria-label="Switch language" data-i18n-aria="lang_btn_aria">🌐 ES</button>
+                <button id="btn-tema" aria-label="Toggle theme" data-i18n-aria="theme_btn_aria">🌙 Dark</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div>
+                <h1 data-i18n-html="hero_title">Forge Your<br><span>Absolute Power</span></h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">High-performance facilities, 5,000kg in free weights, and certified coaches ready to break your plateau.</p>
+                <a href="#contact" class="cta-button" data-i18n="hero_cta">Claim Your Free Day Pass</a>
+            </div>
+            <div class="hero-photo">
+                <img
+                    src="https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=1200&q=80"
+                    alt="Rack of dumbbells in a modern gym"
+                    data-i18n-alt="hero_img_alt"
+                    loading="eager">
+            </div>
+        </section>
+
+        <section id="video">
+            <h2 class="section-title" data-i18n="video_title">See Titanium Fitness in Action</h2>
+            <div class="video-wrapper">
+                <video
+                    controls
+                    loop
+                    preload="metadata"
+                    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:1rem;">
+                    <source src="Video/Video_Fit.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+
+        <section id="services">
+            <h2 class="section-title" data-i18n="services_title">Physical Engineering</h2>
+            <div class="grid-servicios">
+                <div class="card">
+                    <h3 data-i18n="service1_title">Strength Zone</h3>
+                    <p data-i18n="service1_desc">Olympic-calibrated power racks, dumbbells up to 60kg, and impact-absorbing lifting platforms.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="service2_title">Cross & Hybrid</h3>
+                    <p data-i18n="service2_desc">25m synthetic turf for sled work, assault bikes, Concept2 rowers, and a professional gymnastics rig.</p>
+                </div>
+                <div class="card">
+                    <h3 data-i18n="service3_title">Recovery</h3>
+                    <p data-i18n="service3_desc">Programmable ice immersion tubs and percussion massage guns, free to use in the locker rooms.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="plans">
+            <h2 class="section-title" data-i18n="plans_title">Invest in Your Biology</h2>
+            <div class="grid-planes">
+                <div class="plan-card">
+                    <div>
+                        <h3 data-i18n="plan_base_title">Base Plan</h3>
+                        <div class="precio">$35<span data-i18n="per_month">/mo</span></div>
+                        <ul class="lista-beneficios">
+                            <li data-i18n="plan_base_f1">Access 6:00 AM – 4:00 PM</li>
+                            <li data-i18n="plan_base_f2">Weights and cardio area</li>
+                            <li data-i18n="plan_base_f3">Showers and lockers</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="cta-button" data-plan="base" data-i18n="plan_base_cta" style="background-color: #334155;">Select Base</a>
+                </div>
+
+                <div class="plan-card vip">
+                    <div class="badge-vip" data-i18n="plan_vip_badge">Recommended</div>
+                    <div>
+                        <h3 data-i18n="plan_vip_title">Total VIP Plan</h3>
+                        <div class="precio">$55<span data-i18n="per_month">/mo</span></div>
+                        <ul class="lista-beneficios">
+                            <li data-i18n="plan_vip_f1">24/7 access with biometric scan</li>
+                            <li data-i18n="plan_vip_f2">All group classes included</li>
+                            <li data-i18n="plan_vip_f3">1 InBody body scan per month</li>
+                            <li data-i18n="plan_vip_f4">Guest pass every Friday</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="cta-button" data-plan="vip" data-i18n="plan_vip_cta">Select VIP</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="form-container">
+                <h2 class="section-title" style="margin-bottom: 1rem;" data-i18n="contact_title">Claim Your Free Pass Today</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2.5rem;" data-i18n="contact_subtitle">Enter your details and we'll send your access pass via WhatsApp.</p>
+
+                <form id="lead-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Full name" data-i18n-placeholder="form_name_ph" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your email address" data-i18n-placeholder="form_email_ph" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone" placeholder="WhatsApp number" data-i18n-placeholder="form_phone_ph" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="plan" name="plan" required>
+                            <option value="" disabled selected data-i18n="form_plan_ph">Which plan interests you?</option>
+                            <option value="base" data-i18n="plan_base_title">Base Plan</option>
+                            <option value="vip" data-i18n="plan_vip_title">Total VIP Plan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="goal" name="goal" required>
+                            <option value="" disabled selected data-i18n="form_goal_ph">What's your main goal?</option>
+                            <option value="fat_loss" data-i18n="form_goal_fatloss">Body recomposition (Fat loss)</option>
+                            <option value="muscle" data-i18n="form_goal_muscle">Hypertrophy (Build muscle)</option>
+                            <option value="health" data-i18n="form_goal_health">Aerobic capacity / General health</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="cta-button" id="btn-submit" data-i18n="form_submit" style="width: 100%;">
+                        Generate My Pass
+                    </button>
+                </form>
+
+                <div class="form-success" id="form-success">
+                    <div class="success-icon">✅</div>
+                    <p class="success-title" data-i18n="success_title">Pass generated!</p>
+                    <p class="success-sub" data-i18n="success_sub">Check your email — we've sent your access details. See you at the gym.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p data-i18n-html="footer_text">© 2026 <span>TitaniumFit</span>. All rights reserved. — Built by <span>ArielSyncLabs</span></p>
+
+        <!-- New Portfolio Buttons -->
+        <div class="portfolio-buttons">
+            <a href="https://es.fiverr.com/s/qDE81rd" id="fiverr-btn" target="_blank" rel="noopener" class="portfolio-button fiverr-btn" data-i18n="fiverr_button">Hire Me on Fiverr</a>
+            <a href="https://github.com/CoderX396/modern-landing-showcase" id="github-btn" target="_blank" rel="noopener" class="portfolio-button github-btn" data-i18n="github_button">View GitHub Portfolio</a>
+            <a href="https://titanium-fit.pages.dev" id="livedemo-btn" target="_blank" rel="noopener" class="portfolio-button livedemo-btn" data-i18n="livedemo_button">Live Demo (Cloudflare)</a>
+        </div>
+    </footer>
+
+    <!--
+        WHATSAPP BUTTON
+        This number is a clearly fake placeholder for the portfolio demo
+        (555 = fictional in US numbering). For a real client, replace it
+        with THEIR business WhatsApp number — never your own personal one.
+    -->
+    <a
+        class="whatsapp-float"
+        href="https://wa.me/15550123456?text=Hi!%20I'd%20like%20to%20know%20more%20about%20Titanium%20Fitness"
+        target="_blank"
+        rel="noopener"
+        aria-label="Chat on WhatsApp"
+        data-i18n-aria="whatsapp_aria">
+        💬
+    </a>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
