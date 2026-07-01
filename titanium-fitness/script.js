@@ -2,7 +2,7 @@
    TITANIUM FITNESS — MAIN SCRIPT
    1. Translations (EN/ES)
    2. Dark/Light toggle
-   3. EmailJS lead form with advanced feedback
+   3. EmailJS lead form (now includes the comment field + server-side rate-limit)
    4. Auto-fill plan from pricing cards
    ============================================ */
 
@@ -65,6 +65,11 @@ const translations = {
         form_submit_sending: "Sending...",
         form_submit_error: "Error: Could not send. Try again.",
         form_submit_network_error: "Network error. Check connection.",
+        form_submit_rate_limited: "You've reached the submission limit for now. Please try again later, or reach us directly on WhatsApp.",
+        form_comment_ph: "What do you think of this page, or is there anything you'd like to tell us?",
+        form_comment_chars: "characters",
+        form_comment_error_missing: "Please tell us your comment before submitting.",
+        form_comment_error_too_long: "1000 characters max — please shorten your comment.",
         success_title: "Request received!",
         success_sub: "Check your email — we've sent your selection. We'll be in touch soon. See you at the gym.",
         footer_text: "© 2026 <span>TitaniumFit</span>. All rights reserved. — Built by <span>ArielSyncLabs</span>",
@@ -73,6 +78,8 @@ const translations = {
         fiverr_button: "Hire Me on Fiverr",
         github_button: "View GitHub Portfolio",
         livedemo_button: "Live Demo (Cloudflare)",
+        fiverr_header_button: "Fiverr",
+        fiverr_header_aria: "See my services on Fiverr",
     },
     es: {
         page_title: "Titanium Fitness | Forja Tu Poder Absoluto",
@@ -124,6 +131,11 @@ const translations = {
         form_submit_sending: "Enviando...",
         form_submit_error: "Error: No se pudo enviar. Intenta de nuevo.",
         form_submit_network_error: "Error de red. Revisa tu conexión.",
+        form_submit_rate_limited: "Alcanzaste el límite de envíos por ahora. Intenta más tarde, o escríbenos directo por WhatsApp.",
+        form_comment_ph: "¿Qué te pareció esta página, o hay algo que quieras contarnos?",
+        form_comment_chars: "caracteres",
+        form_comment_error_missing: "Contanos tu comentario antes de enviar.",
+        form_comment_error_too_long: "Máximo 1000 caracteres — acorta tu comentario.",
         success_title: "¡Solicitud recibida!",
         success_sub: "Revisa tu correo — te enviamos tu selección. Nos pondremos en contacto pronto. ¡Nos vemos en el gimnasio!",
         footer_text: "© 2026 <span>TitaniumFit</span>. Todos los derechos reservados. — Creado por <span>ArielSyncLabs</span>",
@@ -132,6 +144,8 @@ const translations = {
         fiverr_button: "Contrátame en Fiverr",
         github_button: "Ver Portafolio en GitHub",
         livedemo_button: "Demo en Vivo (Cloudflare)",
+        fiverr_header_button: "Fiverr",
+        fiverr_header_aria: "Ver mis servicios en Fiverr",
     }
 };
 
@@ -219,9 +233,33 @@ applyTranslations(currentLang);
 // =====================
 const EMAILJS_PUBLIC_KEY  = 'RDMUeLcSb6keXwqhG';
 const EMAILJS_SERVICE_ID  = 'service_93mh7mj';
-const EMAILJS_TEMPLATE_ID = 'template_hh14ehp'; // Already updated as per your files
+const EMAILJS_TEMPLATE_ID = 'template_hh14ehp'; // Ya trae admin notification + auto-reply al cliente
 
 emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+const MAX_COMMENT_CHARS = 1000;
+const commentInput = document.getElementById('comment');
+const commentCharCount = document.getElementById('comment-char-count');
+
+if (commentInput) {
+    commentInput.addEventListener('input', () => {
+        const chars = commentInput.value.trim().length;
+        commentCharCount.textContent = chars;
+        commentCharCount.parentElement.style.color = chars > MAX_COMMENT_CHARS ? '#ef4444' : '';
+    });
+}
+
+function showLeadError(message, formContainer, formSuccess) {
+    const existing = formContainer.querySelector('.form-error-message');
+    if (existing) existing.remove();
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'form-error-message';
+    errorDiv.style.color = 'red';
+    errorDiv.style.textAlign = 'center';
+    errorDiv.style.marginTop = '1rem';
+    errorDiv.textContent = message;
+    formContainer.insertBefore(errorDiv, formSuccess);
+}
 
 document.getElementById('lead-form').addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -231,23 +269,65 @@ document.getElementById('lead-form').addEventListener('submit', async function (
     const formContainer = document.querySelector('.form-container'); // Use formContainer to show error below it
     const originalBtnText = translations[currentLang].form_submit;
 
-    btn.textContent = translations[currentLang].form_submit_sending;
-    btn.classList.add('btn-loading');
-    btn.disabled = true;
-
     // Remove any previous error messages
     const existingError = formContainer.querySelector('.form-error-message');
     if (existingError) {
         existingError.remove();
     }
 
+    const commentEl = document.getElementById('comment');
+    const comment = commentEl.value.trim();
+
+    if (!comment) {
+        showLeadError(translations[currentLang].form_comment_error_missing, formContainer, formSuccess);
+        return;
+    }
+    if (comment.length > MAX_COMMENT_CHARS) {
+        showLeadError(translations[currentLang].form_comment_error_too_long, formContainer, formSuccess);
+        return;
+    }
+
+    btn.textContent = translations[currentLang].form_submit_sending;
+    btn.classList.add('btn-loading');
+    btn.disabled = true;
+
     const params = {
-        name:  document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        plan:  document.getElementById('plan').value,
-        goal:  document.getElementById('goal').value,
+        name:    document.getElementById('name').value,
+        email:   document.getElementById('email').value,
+        phone:   document.getElementById('phone').value,
+        plan:    document.getElementById('plan').value,
+        goal:    document.getElementById('goal').value,
+        comment: comment,
     };
+
+    // Paso 1: chequeo de rate-limit server-side (3 envíos / 24h por IP,
+    // ver functions/api/lead.js). Esto evita que alguien gaste la cuota
+    // mensual de EmailJS mandando el formulario en loop — el navegador
+    // solo no puede aplicar este límite de forma confiable.
+    try {
+        const rateRes = await fetch('/api/lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(params),
+        });
+
+        if (rateRes.status === 429) {
+            showLeadError(translations[currentLang].form_submit_rate_limited, formContainer, formSuccess);
+            btn.textContent = originalBtnText;
+            btn.classList.remove('btn-loading');
+            btn.disabled = false;
+            return;
+        }
+        // Si /api/lead devuelve otro error (400, etc.) igual seguimos:
+        // el problema más probable ahí es de validación server-side
+        // redundante, no queremos perder un lead real por eso.
+    } catch (rateError) {
+        // Si el endpoint no responde (caída puntual de la Function),
+        // dejamos pasar el envío: preferimos arriesgarnos a perder el
+        // rate-limit por un rato antes que perder un lead real por un
+        // problema de infraestructura ajeno al visitante.
+        console.warn('Lead rate-limit check failed, proceeding anyway:', rateError);
+    }
 
     try {
         await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
@@ -287,7 +367,7 @@ document.getElementById('lead-form').addEventListener('submit', async function (
 });
 
 // =====================
-// 4. AUTO-FILL PLAN FROM PRICING CARDS
+// 6. AUTO-FILL PLAN FROM PRICING CARDS
 // =====================
 // Clicking "Select Base" / "Select VIP" pre-fills the Plan field in the
 // form below, so the visitor only has to type the rest.
