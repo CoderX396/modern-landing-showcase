@@ -30,6 +30,7 @@
                 </nav>
                 <button id="btn-idioma" aria-label="Switch language" data-i18n-aria="lang_btn_aria">🌐 ES</button>
                 <button id="btn-tema" aria-label="Toggle theme" data-i18n-aria="theme_btn_aria">🌙 Dark</button>
+                <a href="https://es.fiverr.com/s/qDE81rd" id="btn-fiverr-header" target="_blank" rel="noopener" data-i18n-aria="fiverr_header_aria" aria-label="Ver mis servicios en Fiverr" data-i18n="fiverr_header_button">Fiverr</a>
             </div>
         </div>
     </header>
@@ -148,6 +149,10 @@
                             <option value="health" data-i18n="form_goal_health">Aerobic capacity / General health</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <textarea id="comment" name="comment" rows="4" maxlength="1000" data-i18n-placeholder="form_comment_ph" placeholder="What do you think of this page, or is there anything you'd like to tell us?" required></textarea>
+                        <div class="feedback-counter"><span id="comment-char-count">0</span> / 1000 <span data-i18n="form_comment_chars">characters</span></div>
+                    </div>
                     <button type="submit" class="cta-button" id="btn-submit" data-i18n="form_submit" style="width: 100%;">
                         Generate My Pass
                     </button>
@@ -169,7 +174,7 @@
         <div class="portfolio-buttons">
             <a href="https://es.fiverr.com/s/qDE81rd" id="fiverr-btn" target="_blank" rel="noopener" class="portfolio-button fiverr-btn" data-i18n="fiverr_button">Hire Me on Fiverr</a>
             <a href="https://github.com/CoderX396/modern-landing-showcase" id="github-btn" target="_blank" rel="noopener" class="portfolio-button github-btn" data-i18n="github_button">View GitHub Portfolio</a>
-            <a href="https://titanium-fit.pages.dev" id="livedemo-btn" target="_blank" rel="noopener" class="portfolio-button livedemo-btn" data-i18n="livedemo_button">Live Demo (Cloudflare)</a>
+            <a href="https://titanium-fitness.devpagesprojects.workers.dev/" id="livedemo-btn" target="_blank" rel="noopener" class="portfolio-button livedemo-btn" data-i18n="livedemo_button">Live Demo (Cloudflare)</a>
         </div>
     </footer>
 
@@ -186,7 +191,10 @@
         rel="noopener"
         aria-label="Chat on WhatsApp"
         data-i18n-aria="whatsapp_aria">
-        💬
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path fill="#ffffff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path fill="#ffffff" d="M12.001 2C6.478 2 2 6.478 2 12c0 1.865.505 3.62 1.386 5.128L2 22l4.977-1.363C8.435 21.472 10.166 22 12.001 22c5.523 0 10.001-4.477 10.001-10S17.524 2 12.001 2zm0 18.199c-1.638 0-3.187-.443-4.53-1.246l-.323-.19-3.4.918.923-3.345-.209-.343C3.53 14.596 3.08 13.322 3.08 12c0-4.925 4.004-8.93 8.921-8.93 4.917 0 8.921 4.005 8.921 8.93 0 4.925-4.004 8.199-8.921 8.199z"/>
+        </svg>
     </a>
 
     <script src="script.js" defer></script>
