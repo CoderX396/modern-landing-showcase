@@ -297,9 +297,13 @@ document.querySelectorAll('[data-plan]').forEach(button => {
         planField.value = button.getAttribute('data-plan');
 
         // Restart the highlight animation even on a repeat click
+        // (double rAF instead of reading offsetWidth — avoids a forced synchronous reflow)
         planField.classList.remove('campo-autocompletado');
-        void planField.offsetWidth;
-        planField.classList.add('campo-autocompletado');
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                planField.classList.add('campo-autocompletado');
+            });
+        });
 
         // Smooth scroll to the contact form
         const contactSection = document.getElementById('contact');
@@ -308,4 +312,6 @@ document.querySelectorAll('[data-plan]').forEach(button => {
         }
     });
 });
+
+
 
