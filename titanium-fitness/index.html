@@ -8,8 +8,14 @@
     <meta property="og:title" content="Titanium Fitness | Forge Your Absolute Power">
     <meta property="og:description" content="Premium fitness facilities for serious athletes.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%92%AA</text></svg>">
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- Preconnect: acelera la primera conexión a los orígenes externos críticos -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+
     <link rel="stylesheet" href="styles.css">
+    <!-- defer: deja de bloquear el parseo del HTML; se ejecuta en orden junto a script.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
 </head>
 <body>
 
@@ -37,9 +43,13 @@
             </div>
             <div class="hero-photo">
                 <img
-                    src="https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=1200&q=80"
+                    src="https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=650&q=80"
+                    srcset="https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=650&q=80 650w,
+                            https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=1300&q=80 1300w"
+                    sizes="(max-width: 768px) 100vw, 560px"
                     alt="Rack of dumbbells in a modern gym"
                     data-i18n-alt="hero_img_alt"
+                    fetchpriority="high"
                     loading="eager">
             </div>
         </section>
@@ -179,7 +189,7 @@
         💬
     </a>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 
 </body>
 </html>
