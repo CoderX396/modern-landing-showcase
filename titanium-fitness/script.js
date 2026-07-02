@@ -52,7 +52,7 @@ const translations = {
         plan_vip_f4: "Guest pass every Friday",
         plan_vip_cta: "Select VIP",
         contact_title: "Claim Your Free Pass Today",
-        contact_subtitle: "Enter your details and we'll send your access pass via WhatsApp.",
+        contact_subtitle: "Enter your details and we'll email you your access pass.",
         form_name_ph: "Full name",
         form_email_ph: "Your email address",
         form_phone_ph: "WhatsApp number",
@@ -118,7 +118,7 @@ const translations = {
         plan_vip_f4: "Pase de invitado cada viernes",
         plan_vip_cta: "Elegir VIP",
         contact_title: "Reclama Tu Pase Gratis Hoy",
-        contact_subtitle: "Ingresa tus datos y te enviaremos tu pase de acceso por WhatsApp.",
+        contact_subtitle: "Ingresa tus datos y te enviaremos tu pase de acceso por correo electrónico.",
         form_name_ph: "Nombre completo",
         form_email_ph: "Tu correo electrónico",
         form_phone_ph: "Número de WhatsApp",
@@ -392,6 +392,7 @@ document.querySelectorAll('[data-plan]').forEach(button => {
         }
     });
 });
+
 
 
 
