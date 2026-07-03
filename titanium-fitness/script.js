@@ -66,6 +66,8 @@ const translations = {
         form_submit_error: "Error: Could not send. Try again.",
         form_submit_network_error: "Network error. Check connection.",
         form_submit_rate_limited: "You've reached the submission limit for now. Please try again later, or reach us directly on WhatsApp.",
+        lead_attempts_left: "You have {n} submission(s) left today.",
+        lead_reset_in: "You can try again in {time}.",
         form_comment_ph: "What do you think of this page, or is there anything you'd like to tell us?",
         form_comment_chars: "characters",
         form_comment_error_missing: "Please tell us your comment before submitting.",
@@ -132,6 +134,8 @@ const translations = {
         form_submit_error: "Error: No se pudo enviar. Intenta de nuevo.",
         form_submit_network_error: "Error de red. Revisa tu conexión.",
         form_submit_rate_limited: "Alcanzaste el límite de envíos por ahora. Intenta más tarde, o escríbenos directo por WhatsApp.",
+        lead_attempts_left: "Te quedan {n} envío(s) hoy.",
+        lead_reset_in: "Podrás intentar de nuevo en {time}.",
         form_comment_ph: "¿Qué te pareció esta página, o hay algo que quieras contarnos?",
         form_comment_chars: "caracteres",
         form_comment_error_missing: "Contanos tu comentario antes de enviar.",
@@ -261,6 +265,55 @@ function showLeadError(message, formContainer, formSuccess) {
     formContainer.insertBefore(errorDiv, formSuccess);
 }
 
+// =====================
+// CONTADOR DE INTENTOS RESTANTES
+// =====================
+let countdownInterval = null;
+
+function formatTimeLeft(ms) {
+    const totalMin = Math.max(0, Math.floor(ms / 60000));
+    const h = Math.floor(totalMin / 60);
+    const m = totalMin % 60;
+    return h > 0 ? `${h}h ${m}m` : `${m}m`;
+}
+
+function renderLimitInfo(remaining, resetAt) {
+    const el = document.getElementById('lead-limit-info');
+    if (!el) return;
+
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+
+    if (remaining > 0) {
+        el.textContent = translations[currentLang].lead_attempts_left.replace('{n}', remaining);
+        el.classList.remove('limit-warning');
+        return;
+    }
+
+    // remaining === 0: cuenta regresiva en vivo
+    el.classList.add('limit-warning');
+    const update = () => {
+        const msLeft = resetAt - Date.now();
+        if (msLeft <= 0) {
+            clearInterval(countdownInterval);
+            el.textContent = '';
+            el.classList.remove('limit-warning');
+            return;
+        }
+        el.textContent = translations[currentLang].lead_reset_in.replace('{time}', formatTimeLeft(msLeft));
+    };
+    update();
+    countdownInterval = setInterval(update, 60000);
+}
+
+// Consulta el estado al cargar la página (no gasta intento)
+fetch('/api/lead')
+    .then(res => res.json())
+    .then(data => renderLimitInfo(data.remaining, data.resetAt))
+    .catch(() => {}); // si falla, simplemente no se muestra el contador
+
 document.getElementById('lead-form').addEventListener('submit', async function (e) {
     e.preventDefault();
 
@@ -310,6 +363,9 @@ document.getElementById('lead-form').addEventListener('submit', async function (
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(params),
         });
+
+        const rateData = await rateRes.clone().json().catch(() => null);
+        if (rateData) renderLimitInfo(rateData.remaining, rateData.resetAt);
 
         if (rateRes.status === 429) {
             showLeadError(translations[currentLang].form_submit_rate_limited, formContainer, formSuccess);
@@ -392,8 +448,6 @@ document.querySelectorAll('[data-plan]').forEach(button => {
         }
     });
 });
-
-
 
 
 
