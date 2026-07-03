@@ -1,0 +1,11 @@
+{
+  "name": "titanium-fitness",
+  "compatibility_date": "2026-07-01",
+  "pages_build_output_dir": ".",
+  "kv_namespaces": [
+    {
+      "binding": "COMMENTS_KV",
+      "id": "54e833ad110f4f119d8fdde577c35fc7"
+    }
+  ]
+}
