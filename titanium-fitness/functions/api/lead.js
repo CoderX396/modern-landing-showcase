@@ -26,20 +26,45 @@
 const MAX_SUBMISSIONS_PER_IP = 3;
 const BLOCK_SECONDS = 24 * 60 * 60; // 24 horas
 const MAX_COMMENT_CHARS = 1000;
-const MAX_STORED_LEADS = 200; // log privado de respaldo, sin endpoint GET público
+const MAX_STORED_LEADS = 200;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// GET /api/lead -> solo consulta el estado (no gasta intento).
+// Lo usa el frontend al cargar la página para mostrar "te quedan X".
+export async function onRequestGet(context) {
+  const { request, env } = context;
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const rateKey = `lead-rate:${ip}`;
+  const now = Date.now();
+
+  const current = await env.COMMENTS_KV.get(rateKey);
+  const data = current ? JSON.parse(current) : null;
+
+  if (!data || data.resetAt <= now) {
+    return json({ remaining: MAX_SUBMISSIONS_PER_IP, resetAt: null });
+  }
+
+  const remaining = Math.max(0, MAX_SUBMISSIONS_PER_IP - data.count);
+  return json({ remaining, resetAt: data.resetAt });
+}
 
 export async function onRequestPost(context) {
   const { request, env } = context;
 
   const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
   const rateKey = `lead-rate:${ip}`;
+  const now = Date.now();
 
   const current = await env.COMMENTS_KV.get(rateKey);
-  const attempts = current ? parseInt(current, 10) : 0;
+  let data = current ? JSON.parse(current) : null;
 
-  if (attempts >= MAX_SUBMISSIONS_PER_IP) {
-    return json({ error: 'rate_limited' }, 429);
+  // Si no hay ventana activa (o ya venció), arranca una nueva de 24h
+  if (!data || data.resetAt <= now) {
+    data = { count: 0, resetAt: now + BLOCK_SECONDS * 1000 };
+  }
+
+  if (data.count >= MAX_SUBMISSIONS_PER_IP) {
+    return json({ error: 'rate_limited', remaining: 0, resetAt: data.resetAt }, 429);
   }
 
   let body;
@@ -59,36 +84,31 @@ export async function onRequestPost(context) {
   if (!name || !email || !phone || !plan || !goal || !comment) {
     return json({ error: 'missing_fields' }, 400);
   }
-
   if (!EMAIL_RE.test(email)) {
     return json({ error: 'invalid_email' }, 400);
   }
-
   if (comment.length > MAX_COMMENT_CHARS) {
     return json({ error: 'too_long' }, 400);
   }
 
-  // Sumar el intento antes de guardar, para que un error de guardado
-  // no permita reintentos infinitos.
-  await env.COMMENTS_KV.put(rateKey, String(attempts + 1), {
-    expirationTtl: BLOCK_SECONDS,
-  });
+  data.count += 1;
+  const ttlSeconds = Math.max(60, Math.ceil((data.resetAt - now) / 1000));
+  await env.COMMENTS_KV.put(rateKey, JSON.stringify(data), { expirationTtl: ttlSeconds });
 
-  // Log privado de respaldo: no hay endpoint GET que lo muestre en la
-  // web, queda solo en KV por si algún día lo querés revisar a mano
-  // desde el dashboard de Cloudflare. El email sigue siendo el canal
-  // principal de aviso.
   try {
     const raw = await env.COMMENTS_KV.get('leads:list');
     const leads = raw ? JSON.parse(raw) : [];
-    leads.push({ name, email, phone, plan, goal, comment, timestamp: Date.now() });
-    const trimmed = leads.slice(-MAX_STORED_LEADS);
-    await env.COMMENTS_KV.put('leads:list', JSON.stringify(trimmed));
+    leads.push({ name, email, phone, plan, goal, comment, timestamp: now });
+    await env.COMMENTS_KV.put('leads:list', JSON.stringify(leads.slice(-MAX_STORED_LEADS)));
   } catch {
-    // Si el log falla no bloqueamos el lead — lo importante es el rate-limit.
+    // no bloquea el lead si falla el log
   }
 
-  return json({ success: true });
+  return json({
+    success: true,
+    remaining: MAX_SUBMISSIONS_PER_IP - data.count,
+    resetAt: data.resetAt,
+  });
 }
 
 function json(data, status = 200) {
