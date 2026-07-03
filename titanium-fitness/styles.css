@@ -502,3 +502,12 @@ footer span { color: var(--accent); }
     }
 }
 
+/* LEAD FORM SUBMISSION COUNTER */
+.limit-info {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.75rem;
+}
+.limit-info.limit-warning { color: #ef4444; }
+
