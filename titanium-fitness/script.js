@@ -5,15 +5,23 @@
    3. EmailJS lead form (now includes the comment field + server-side rate-limit)
    4. Auto-fill plan from pricing cards
    ============================================ */
-
+ 
 // =====================
 // 1. TRANSLATIONS (EN / ES)
 // =====================
+// EN: One object per language holds every translatable string, keyed by
+//     the same `data-i18n` values used in index.html. applyTranslations()
+//     walks the DOM and swaps text based on the active language — no
+//     page reload needed when the visitor clicks the language button.
+// ES: Un objeto por idioma guarda cada texto traducible, con las mismas
+//     claves que los atributos `data-i18n` de index.html. applyTranslations()
+//     recorre el DOM y cambia el texto según el idioma activo — sin
+//     recargar la página cuando el visitante toca el botón de idioma.
 const html = document.documentElement;
 const themeBtn = document.getElementById('btn-tema');
 const langBtn = document.getElementById('btn-idioma');
 const waLink = document.querySelector('.whatsapp-float');
-
+ 
 const translations = {
     en: {
         page_title: "Titanium Fitness | Forge Your Absolute Power",
@@ -152,13 +160,13 @@ const translations = {
         fiverr_header_aria: "Ver mis servicios en Fiverr",
     }
 };
-
+ 
 function applyTranslations(lang) {
     const t = translations[lang];
-
+ 
     html.lang = lang;
     document.title = t.page_title;
-
+ 
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (t[key] !== undefined) el.textContent = t[key];
@@ -183,17 +191,17 @@ function applyTranslations(lang) {
         const key = el.getAttribute('data-i18n-title');
         if (t[key] !== undefined) el.title = t[key];
     });
-
+ 
     // Theme button label depends on the language AND the active theme
     const isDark = html.getAttribute('data-theme') === 'dark';
     themeBtn.textContent = isDark ? t.theme_light : t.theme_dark;
-
+ 
     // Language button always shows the language you'd switch TO
     langBtn.textContent = lang === 'en' ? '🌐 ES' : '🌐 EN';
-
+ 
     // WhatsApp deep-link message follows the active language too
     if (waLink) waLink.href = `https://wa.me/15550123456?text=${encodeURIComponent(t.whatsapp_message)}`;
-
+ 
     // Update new buttons
     const fiverrBtn = document.getElementById('fiverr-btn');
     const githubBtn = document.getElementById('github-btn');
@@ -201,26 +209,32 @@ function applyTranslations(lang) {
     if (fiverrBtn) fiverrBtn.textContent = t.fiverr_button;
     if (githubBtn) githubBtn.textContent = t.github_button;
     if (livedemoBtn) livedemoBtn.textContent = t.livedemo_button;
-
+ 
     // The CSS for nav a (min-width, text-align) should handle layout stability.
     // No need for inline styles here.
 }
-
+ 
 let currentLang = localStorage.getItem('titanium_lang') || 'en';
-
+ 
 langBtn.addEventListener('click', () => {
     currentLang = currentLang === 'en' ? 'es' : 'en';
     localStorage.setItem('titanium_lang', currentLang);
     applyTranslations(currentLang);
 });
-
+ 
 // =====================
 // 2. DARK / LIGHT TOGGLE
 // =====================
+// EN: Theme is stored in localStorage so it survives page reloads.
+//     It's applied to the <html> tag's data-theme attribute, which
+//     styles.css reads to swap the CSS custom properties (colors).
+// ES: El tema se guarda en localStorage para que sobreviva a recargas.
+//     Se aplica al atributo data-theme de <html>, que styles.css lee
+//     para intercambiar las variables CSS (colores).
 const savedTheme = localStorage.getItem('titanium_theme') || 'dark';
-
+ 
 html.setAttribute('data-theme', savedTheme);
-
+ 
 themeBtn.addEventListener('click', () => {
     const current = html.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
@@ -228,31 +242,58 @@ themeBtn.addEventListener('click', () => {
     localStorage.setItem('titanium_theme', next);
     applyTranslations(currentLang); // re-apply so the button label stays in the active language
 });
-
+ 
 // First paint, now that the theme attribute + DOM refs are ready
 applyTranslations(currentLang);
-
+ 
 // =====================
 // 3. EMAILJS (ARQUITECTURA UNIFICADA)
+// 3. EMAILJS (UNIFIED ARCHITECTURE)
 // =====================
+// EN: EMAILJS_PUBLIC_KEY is meant to be public (EmailJS designed it that
+//     way — abuse control happens via allowed domains + quota, not by
+//     hiding this value). The template already handles both the admin
+//     notification and the client auto-reply, so one emailjs.send() call
+//     covers both emails.
+// ES: EMAILJS_PUBLIC_KEY está pensada para ser pública (así la diseñó
+//     EmailJS — el control de abuso se hace con dominios permitidos y
+//     cuota, no ocultando este valor). La plantilla ya maneja tanto la
+//     notificación al admin como el auto-reply al cliente, así que un
+//     solo emailjs.send() cubre ambos correos.
 const EMAILJS_PUBLIC_KEY  = 'RDMUeLcSb6keXwqhG';
 const EMAILJS_SERVICE_ID  = 'service_93mh7mj';
 const EMAILJS_TEMPLATE_ID = 'template_hh14ehp'; // Ya trae admin notification + auto-reply al cliente
-
+ 
 emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-
+ 
+// EN: Character counter for the comment textarea. Kept as a named
+//     function (not just an inline arrow in the listener) so we can also
+//     call it once immediately below — this syncs the count even if the
+//     browser pre-fills the field on its own (autofill, "restore form
+//     data" after reload, etc.), which fires no 'input' event and used
+//     to leave the counter stuck at 0 until the user typed a key.
+// ES: Contador de caracteres del textarea de comentario. Lo separamos en
+//     una función con nombre (en vez de un arrow inline en el listener)
+//     para poder llamarla una vez apenas carga la página — así se
+//     sincroniza aunque el navegador rellene el campo solo (autocompletado,
+//     "restaurar formulario" al recargar, etc.), que no dispara 'input' y
+//     antes dejaba el contador clavado en 0 hasta que el usuario tipeaba.
 const MAX_COMMENT_CHARS = 1000;
 const commentInput = document.getElementById('comment');
 const commentCharCount = document.getElementById('comment-char-count');
-
-if (commentInput) {
-    commentInput.addEventListener('input', () => {
-        const chars = commentInput.value.trim().length;
-        commentCharCount.textContent = chars;
-        commentCharCount.parentElement.style.color = chars > MAX_COMMENT_CHARS ? '#ef4444' : '';
-    });
+ 
+function updateCommentCharCount() {
+    if (!commentInput || !commentCharCount) return;
+    const chars = commentInput.value.trim().length;
+    commentCharCount.textContent = chars;
+    commentCharCount.parentElement.style.color = chars > MAX_COMMENT_CHARS ? '#ef4444' : '';
 }
-
+ 
+if (commentInput) {
+    commentInput.addEventListener('input', updateCommentCharCount);
+    updateCommentCharCount(); // EN: sync immediately / ES: sincroniza de entrada
+}
+ 
 function showLeadError(message, formContainer, formSuccess) {
     const existing = formContainer.querySelector('.form-error-message');
     if (existing) existing.remove();
@@ -264,35 +305,56 @@ function showLeadError(message, formContainer, formSuccess) {
     errorDiv.textContent = message;
     formContainer.insertBefore(errorDiv, formSuccess);
 }
-
+ 
 // =====================
 // CONTADOR DE INTENTOS RESTANTES
+// REMAINING-SUBMISSIONS COUNTER
 // =====================
+// EN: Shows "you have N submissions left" while the visitor still has
+//     attempts, and switches to a live countdown ("try again in Xh Ym Zs")
+//     once they hit the limit — so waiting doesn't feel static.
+// ES: Muestra "te quedan N envíos" mientras el visitante todavía tiene
+//     intentos, y pasa a una cuenta regresiva en vivo ("intenta de nuevo
+//     en Xh Ym Zs") apenas llega al límite — así la espera no se siente
+//     estática.
 let countdownInterval = null;
-
+ 
+// EN: Formats milliseconds left into a human string. Shows seconds only
+//     under the 1-hour mark (no point ticking seconds when 20 hours are
+//     left); shows them ticking live in the final minute so the visitor
+//     sees time actually moving, which reads as less of a dead-end wait.
+// ES: Formatea los milisegundos restantes en texto legible. Muestra
+//     segundos solo por debajo de 1 hora (no tiene sentido ver segundos
+//     corriendo si faltan 20 horas); en el último minuto los segundos
+//     corren en vivo para que el visitante vea que el tiempo avanza de
+//     verdad, lo que se percibe menos como una espera sin salida.
 function formatTimeLeft(ms) {
-    const totalMin = Math.max(0, Math.floor(ms / 60000));
-    const h = Math.floor(totalMin / 60);
-    const m = totalMin % 60;
-    return h > 0 ? `${h}h ${m}m` : `${m}m`;
+    const totalSec = Math.max(0, Math.floor(ms / 1000));
+    const h = Math.floor(totalSec / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    const s = totalSec % 60;
+    if (h > 0) return `${h}h ${m}m`;
+    if (m > 0) return `${m}m ${s}s`;
+    return `${s}s`;
 }
-
+ 
 function renderLimitInfo(remaining, resetAt) {
     const el = document.getElementById('lead-limit-info');
     if (!el) return;
-
+ 
     if (countdownInterval) {
         clearInterval(countdownInterval);
         countdownInterval = null;
     }
-
+ 
     if (remaining > 0) {
         el.textContent = translations[currentLang].lead_attempts_left.replace('{n}', remaining);
         el.classList.remove('limit-warning');
         return;
     }
-
-    // remaining === 0: cuenta regresiva en vivo
+ 
+    // EN: remaining === 0 -> live countdown, updates every second.
+    // ES: remaining === 0 -> cuenta regresiva en vivo, se actualiza cada segundo.
     el.classList.add('limit-warning');
     const update = () => {
         const msLeft = resetAt - Date.now();
@@ -305,32 +367,35 @@ function renderLimitInfo(remaining, resetAt) {
         el.textContent = translations[currentLang].lead_reset_in.replace('{time}', formatTimeLeft(msLeft));
     };
     update();
-    countdownInterval = setInterval(update, 60000);
+    countdownInterval = setInterval(update, 1000);
 }
-
-// Consulta el estado al cargar la página (no gasta intento)
+ 
+// EN: Check current status on page load (does NOT spend an attempt —
+//     that's the whole point of the GET endpoint in functions/api/lead.js).
+// ES: Consulta el estado al cargar la página (NO gasta un intento — para
+//     eso está el endpoint GET separado en functions/api/lead.js).
 fetch('/api/lead')
     .then(res => res.json())
     .then(data => renderLimitInfo(data.remaining, data.resetAt))
-    .catch(() => {}); // si falla, simplemente no se muestra el contador
-
+    .catch(() => {}); // EN: fails silently, counter just won't show / ES: falla en silencio, el contador simplemente no aparece
+ 
 document.getElementById('lead-form').addEventListener('submit', async function (e) {
     e.preventDefault();
-
+ 
     const btn = document.getElementById('btn-submit');
     const formSuccess = document.getElementById('form-success');
     const formContainer = document.querySelector('.form-container'); // Use formContainer to show error below it
     const originalBtnText = translations[currentLang].form_submit;
-
+ 
     // Remove any previous error messages
     const existingError = formContainer.querySelector('.form-error-message');
     if (existingError) {
         existingError.remove();
     }
-
+ 
     const commentEl = document.getElementById('comment');
     const comment = commentEl.value.trim();
-
+ 
     if (!comment) {
         showLeadError(translations[currentLang].form_comment_error_missing, formContainer, formSuccess);
         return;
@@ -339,11 +404,11 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         showLeadError(translations[currentLang].form_comment_error_too_long, formContainer, formSuccess);
         return;
     }
-
+ 
     btn.textContent = translations[currentLang].form_submit_sending;
     btn.classList.add('btn-loading');
     btn.disabled = true;
-
+ 
     const params = {
         name:    document.getElementById('name').value,
         email:   document.getElementById('email').value,
@@ -352,7 +417,7 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         goal:    document.getElementById('goal').value,
         comment: comment,
     };
-
+ 
     // Paso 1: chequeo de rate-limit server-side (3 envíos / 24h por IP,
     // ver functions/api/lead.js). Esto evita que alguien gaste la cuota
     // mensual de EmailJS mandando el formulario en loop — el navegador
@@ -363,10 +428,10 @@ document.getElementById('lead-form').addEventListener('submit', async function (
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(params),
         });
-
+ 
         const rateData = await rateRes.clone().json().catch(() => null);
         if (rateData) renderLimitInfo(rateData.remaining, rateData.resetAt);
-
+ 
         if (rateRes.status === 429) {
             showLeadError(translations[currentLang].form_submit_rate_limited, formContainer, formSuccess);
             btn.textContent = originalBtnText;
@@ -384,7 +449,7 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         // problema de infraestructura ajeno al visitante.
         console.warn('Lead rate-limit check failed, proceeding anyway:', rateError);
     }
-
+ 
     try {
         await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
         document.getElementById('lead-form').style.display = 'none';
@@ -392,7 +457,7 @@ document.getElementById('lead-form').addEventListener('submit', async function (
     } catch (error) {
         console.error('EmailJS error:', error);
         let errorMessage = translations[currentLang].form_submit_error;
-
+ 
         // Quota exceeded (EmailJS free plan: 200/month)
         if (error && (error.status === 429 || (error.text && error.text.toLowerCase().includes('limit')))) {
             errorMessage = currentLang === 'es'
@@ -405,8 +470,8 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         } else if (error && error.text) {
             errorMessage += ` (${error.text})`;
         }
-
-
+ 
+ 
         // Display error message to the user
         const errorDiv = document.createElement('div');
         errorDiv.className = 'form-error-message';
@@ -415,23 +480,33 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         errorDiv.style.marginTop = '1rem';
         errorDiv.textContent = errorMessage;
         formContainer.insertBefore(errorDiv, formSuccess); // Insert before success message
-
+ 
         btn.textContent = originalBtnText; // Revert to original text
         btn.classList.remove('btn-loading');
         btn.disabled = false;
     }
 });
-
+ 
 // =====================
 // 6. AUTO-FILL PLAN FROM PRICING CARDS
+// 6. AUTO-COMPLETAR PLAN DESDE LAS TARJETAS DE PRECIOS
 // =====================
-// Clicking "Select Base" / "Select VIP" pre-fills the Plan field in the
-// form below, so the visitor only has to type the rest.
+// EN: Clicking "Select Base" / "Select VIP" pre-fills the Plan field in
+//     the form below and smooth-scrolls the visitor to it, so they only
+//     have to type the rest. The double requestAnimationFrame restarts
+//     the CSS highlight animation on repeat clicks without forcing a
+//     synchronous layout reflow (which reading offsetWidth would cause).
+// ES: Al hacer click en "Elegir Base" / "Elegir VIP" se autocompleta el
+//     campo Plan del formulario de abajo y se hace scroll suave hasta
+//     ahí, así el visitante solo tiene que completar el resto. El doble
+//     requestAnimationFrame reinicia la animación de resaltado CSS en
+//     clicks repetidos sin forzar un reflow síncrono (que leer
+//     offsetWidth causaría).
 document.querySelectorAll('[data-plan]').forEach(button => {
     button.addEventListener('click', () => {
         const planField = document.getElementById('plan');
         planField.value = button.getAttribute('data-plan');
-
+ 
         // Restart the highlight animation even on a repeat click
         // (double rAF instead of reading offsetWidth — avoids a forced synchronous reflow)
         planField.classList.remove('campo-autocompletado');
@@ -440,7 +515,7 @@ document.querySelectorAll('[data-plan]').forEach(button => {
                 planField.classList.add('campo-autocompletado');
             });
         });
-
+ 
         // Smooth scroll to the contact form
         const contactSection = document.getElementById('contact');
         if (contactSection) {
