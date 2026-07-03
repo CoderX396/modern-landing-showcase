@@ -1,33 +1,31 @@
 // functions/api/lead.js
-// Chequeo de rate-limit server-side para el formulario de contacto
-// (ahora el formulario incluye también el campo de comentario/opinión,
-// así que este endpoint reemplaza al viejo functions/api/comments.js —
-// borralo de tu carpeta de Functions en Cloudflare Pages si todavía está).
 //
-//   POST /api/lead -> valida los datos mínimos y aplica el límite de
-//   3 envíos cada 24h por IP. Si pasa, el frontend recién ahí dispara
-//   el correo de EmailJS (que ya maneja tanto la notificación al admin
-//   como el auto-reply al cliente, dentro de la misma plantilla).
-//
-// ¿Por qué un paso server-side si el envío de email sigue siendo
-// client-side vía el SDK de EmailJS? Porque el navegador no puede
-// aplicar un límite real por IP por su cuenta — el visitante podría
-// borrar localStorage o abrir una pestaña de incógnito y mandar 100
-// formularios. Este endpoint es el único lugar donde de verdad se
-// conoce la IP real (header CF-Connecting-IP, que solo ve el servidor)
-// y se puede frenar un abuso ANTES de gastar la cuota mensual de
-// EmailJS (200 envíos/mes en el plan gratis).
-//
-// Requiere el mismo KV namespace binding que ya tenías configurado:
-//   Settings -> Functions -> KV namespace bindings -> COMMENTS_KV
-// (dejo el nombre del binding igual a propósito, para que no tengas
-// que tocar nada en el dashboard de Cloudflare Pages).
-
+// EN: Comments in this file are bilingual (EN/ES) — it ships to a public
+//     GitHub repo as a portfolio piece, so it should read clearly for both
+//     Spanish- and English-speaking reviewers.
+// ES: Los comentarios de este archivo son bilingües (EN/ES) — se sube a un
+//     repo público de GitHub como pieza de portfolio, así que debe leerse
+//     claro tanto para revisores de habla inglesa como española.
 const MAX_SUBMISSIONS_PER_IP = 3;
 const BLOCK_SECONDS = 24 * 60 * 60; // 24 horas
 const MAX_COMMENT_CHARS = 1000;
+// EN: Keep this in sync with MIN_COMMENT_CHARS in script.js — this is the
+//     server-side backstop in case someone bypasses the client validation
+//     (disabled JS, direct API call, etc).
+// ES: Mantener sincronizado con MIN_COMMENT_CHARS en script.js — este es el
+//     respaldo del lado servidor por si alguien evita la validación del
+//     cliente (JS deshabilitado, llamada directa a la API, etc).
+const MIN_COMMENT_CHARS = 200;
 const MAX_STORED_LEADS = 200;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// EN: Accepts the auto-formatted "(XXX) XXX-XXXX" from script.js as well as
+//     a plain 7-15 digit number (with optional +, spaces, dashes) in case a
+//     lead comes in through a different client (e.g. a raw API call).
+// ES: Acepta el "(XXX) XXX-XXXX" autoformateado desde script.js, además de
+//     un número plano de 7 a 15 dígitos (con +, espacios o guiones
+//     opcionales) por si un lead llega desde otro cliente (ej. una llamada
+//     directa a la API).
+const PHONE_RE = /^[+\d][\d\s()-]{6,19}\d$/;
 
 // GET /api/lead -> solo consulta el estado (no gasta intento).
 // Lo usa el frontend al cargar la página para mostrar "te quedan X".
@@ -74,18 +72,30 @@ export async function onRequestPost(context) {
     return json({ error: 'bad_request' }, 400);
   }
 
-  const name = (body.name || '').trim().slice(0, 120);
+  // EN: firstName/lastName are the source of truth now; "name" is only kept
+  //     as a combined fallback for older callers/logs.
+  // ES: firstName/lastName son ahora la fuente de verdad; "name" se
+  //     mantiene solo como respaldo combinado para llamadores/logs viejos.
+  const firstName = (body.firstName || '').trim().slice(0, 60);
+  const lastName = (body.lastName || '').trim().slice(0, 60);
+  const name = (body.name || `${firstName} ${lastName}`).trim().slice(0, 120);
   const email = (body.email || '').trim();
   const phone = (body.phone || '').trim().slice(0, 40);
   const plan = (body.plan || '').trim();
   const goal = (body.goal || '').trim();
   const comment = (body.comment || '').trim();
 
-  if (!name || !email || !phone || !plan || !goal || !comment) {
+  if (!firstName || !lastName || !email || !phone || !plan || !goal || !comment) {
     return json({ error: 'missing_fields' }, 400);
   }
   if (!EMAIL_RE.test(email)) {
     return json({ error: 'invalid_email' }, 400);
+  }
+  if (!PHONE_RE.test(phone)) {
+    return json({ error: 'invalid_phone' }, 400);
+  }
+  if (comment.length < MIN_COMMENT_CHARS) {
+    return json({ error: 'too_short' }, 400);
   }
   if (comment.length > MAX_COMMENT_CHARS) {
     return json({ error: 'too_long' }, 400);
@@ -98,7 +108,7 @@ export async function onRequestPost(context) {
   try {
     const raw = await env.COMMENTS_KV.get('leads:list');
     const leads = raw ? JSON.parse(raw) : [];
-    leads.push({ name, email, phone, plan, goal, comment, timestamp: now });
+    leads.push({ firstName, lastName, name, email, phone, plan, goal, comment, timestamp: now });
     await env.COMMENTS_KV.put('leads:list', JSON.stringify(leads.slice(-MAX_STORED_LEADS)));
   } catch {
     // no bloquea el lead si falla el log
