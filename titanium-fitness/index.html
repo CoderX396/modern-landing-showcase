@@ -125,14 +125,24 @@
                 <p style="text-align: center; color: var(--text-muted); margin-bottom: 2.5rem;" data-i18n="contact_subtitle">Enter your details and we'll email you your access pass.</p>
 
                 <form id="lead-form">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Full name" data-i18n-placeholder="form_name_ph" required>
+                    <!-- EN: First/last name split into two fields so EmailJS templates can greet
+                            the lead by first name only ("Hi, {{firstName}}") instead of the full string.
+                       ES: Nombre y apellido separados en dos campos para que las plantillas de EmailJS
+                            puedan saludar solo con el nombre ("Hola, {{firstName}}") en vez del string completo. -->
+                    <div class="form-group form-row">
+                        <input type="text" id="firstName" name="firstName" placeholder="First name" data-i18n-placeholder="form_firstname_ph" required>
+                        <input type="text" id="lastName" name="lastName" placeholder="Last name" data-i18n-placeholder="form_lastname_ph" required>
                     </div>
                     <div class="form-group">
                         <input type="email" id="email" name="email" placeholder="Your email address" data-i18n-placeholder="form_email_ph" required>
                     </div>
                     <div class="form-group">
-                        <input type="tel" id="phone" name="phone" placeholder="WhatsApp number" data-i18n-placeholder="form_phone_ph" required>
+                        <!-- EN: type="tel" + inputmode keeps the numeric keypad on mobile; JS auto-formats
+                                as (XXX) XXX-XXXX while typing (see script.js formatPhoneInput()).
+                           ES: type="tel" + inputmode mantiene el teclado numérico en móvil; el JS
+                                formatea automáticamente a (XXX) XXX-XXXX mientras se escribe (ver
+                                formatPhoneInput() en script.js). -->
+                        <input type="tel" id="phone" name="phone" inputmode="tel" placeholder="WhatsApp number" data-i18n-placeholder="form_phone_ph" maxlength="20" required>
                     </div>
                     <div class="form-group">
                         <select id="plan" name="plan" required>
@@ -150,8 +160,18 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <textarea id="comment" name="comment" rows="4" maxlength="1000" data-i18n-placeholder="form_comment_ph" placeholder="What do you think of this page, or is there anything you'd like to tell us?" required></textarea>
-                        <div class="feedback-counter"><span id="comment-char-count">0</span> / 1000 <span data-i18n="form_comment_chars">characters</span></div>
+                        <textarea id="comment" name="comment" rows="4" minlength="200" maxlength="1000" data-i18n-placeholder="form_comment_ph" placeholder="What do you think of this page, or is there anything you'd like to tell us?" required></textarea>
+                        <!-- EN: id="comment-char-count" is updated live by script.js; the min/max
+                                thresholds (200 / 1000) live in the MIN_COMMENT_CHARS / MAX_COMMENT_CHARS
+                                constants there, change them in one place, not here. The "(min. 200)"
+                                text is a deliberate second signal alongside the amber color, so the
+                                minimum isn't only communicated by color (accessibility + clarity).
+                           ES: id="comment-char-count" se actualiza en vivo desde script.js; los
+                                umbrales min/max (200 / 1000) viven en las constantes MIN_COMMENT_CHARS /
+                                MAX_COMMENT_CHARS de ese archivo, cambialos ahí, no acá. El texto
+                                "(mín. 200)" es una segunda señal deliberada junto con el color ámbar,
+                                para que el mínimo no se comunique solo por color (accesibilidad y claridad). -->
+                        <div class="feedback-counter"><span id="comment-char-count">0</span> / 1000 <span data-i18n="form_comment_chars">characters</span> <span id="comment-min-hint" data-i18n="form_comment_min_hint">(min. 200)</span></div>
                     </div>
                     <button type="submit" class="cta-button" id="btn-submit" data-i18n="form_submit" style="width: 100%;">
                         Generate My Pass
@@ -203,3 +223,4 @@
 
 </body>
 </html>
+
