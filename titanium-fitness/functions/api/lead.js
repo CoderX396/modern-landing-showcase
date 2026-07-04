@@ -37,7 +37,7 @@ function isValidPhone(raw) {
   const digits = raw.replace(/\D/g, '');
   return digits.length >= 7 && digits.length <= 15;
 }
-
+ 
 // GET /api/lead -> solo consulta el estado (no gasta intento).
 // Lo usa el frontend al cargar la página para mostrar "te quedan X".
 export async function onRequestGet(context) {
@@ -45,44 +45,44 @@ export async function onRequestGet(context) {
   const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
   const rateKey = `lead-rate:${ip}`;
   const now = Date.now();
-
+ 
   const current = await env.COMMENTS_KV.get(rateKey);
   const data = current ? JSON.parse(current) : null;
-
+ 
   if (!data || data.resetAt <= now) {
     return json({ remaining: MAX_SUBMISSIONS_PER_IP, resetAt: null });
   }
-
+ 
   const remaining = Math.max(0, MAX_SUBMISSIONS_PER_IP - data.count);
   return json({ remaining, resetAt: data.resetAt });
 }
-
+ 
 export async function onRequestPost(context) {
   const { request, env } = context;
-
+ 
   const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
   const rateKey = `lead-rate:${ip}`;
   const now = Date.now();
-
+ 
   const current = await env.COMMENTS_KV.get(rateKey);
   let data = current ? JSON.parse(current) : null;
-
+ 
   // Si no hay ventana activa (o ya venció), arranca una nueva de 24h
   if (!data || data.resetAt <= now) {
     data = { count: 0, resetAt: now + BLOCK_SECONDS * 1000 };
   }
-
+ 
   if (data.count >= MAX_SUBMISSIONS_PER_IP) {
     return json({ error: 'rate_limited', remaining: 0, resetAt: data.resetAt }, 429);
   }
-
+ 
   let body;
   try {
     body = await request.json();
   } catch {
     return json({ error: 'bad_request' }, 400);
   }
-
+ 
   // EN: firstName/lastName are the source of truth now; "name" is only kept
   //     as a combined fallback for older callers/logs.
   // ES: firstName/lastName son ahora la fuente de verdad; "name" se
@@ -95,7 +95,7 @@ export async function onRequestPost(context) {
   const plan = (body.plan || '').trim();
   const goal = (body.goal || '').trim();
   const comment = (body.comment || '').trim();
-
+ 
   if (!firstName || !lastName || !email || !phone || !plan || !goal || !comment) {
     return json({ error: 'missing_fields' }, 400);
   }
@@ -111,11 +111,11 @@ export async function onRequestPost(context) {
   if (comment.length > MAX_COMMENT_CHARS) {
     return json({ error: 'too_long' }, 400);
   }
-
+ 
   data.count += 1;
   const ttlSeconds = Math.max(60, Math.ceil((data.resetAt - now) / 1000));
   await env.COMMENTS_KV.put(rateKey, JSON.stringify(data), { expirationTtl: ttlSeconds });
-
+ 
   try {
     const raw = await env.COMMENTS_KV.get('leads:list');
     const leads = raw ? JSON.parse(raw) : [];
@@ -124,18 +124,18 @@ export async function onRequestPost(context) {
   } catch {
     // no bloquea el lead si falla el log
   }
-
+ 
   return json({
     success: true,
     remaining: MAX_SUBMISSIONS_PER_IP - data.count,
     resetAt: data.resetAt,
   });
 }
-
+ 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
     headers: { 'Content-Type': 'application/json' },
   });
 }
-
+ 
