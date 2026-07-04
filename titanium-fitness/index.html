@@ -5,17 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Titanium Fitness | Forge Your Absolute Power</title>
     <meta name="description" content="High-performance gym facilities, 5,000kg in free weights and certified coaches ready to break your plateau.">
+ 
+    <!-- EN: Open Graph / Twitter Card — controls the preview card shown when this
+            link is shared on WhatsApp, X, LinkedIn, etc. Without og:image, most
+            platforms show no thumbnail at all, which reads as unfinished for a
+            portfolio piece. Reusing the hero photo at a wide crop (1200x630 is
+            the standard OG size) instead of a separate asset to keep this simple.
+       ES: Open Graph / Twitter Card — controla la tarjeta de preview que se
+            muestra al compartir este link por WhatsApp, X, LinkedIn, etc. Sin
+            og:image, la mayoría de las plataformas no muestran ninguna miniatura,
+            lo cual se lee como incompleto para una pieza de portfolio. Reutilizo
+            la foto del hero en un recorte ancho (1200x630 es el tamaño estándar
+            de OG) en vez de un asset aparte, para mantener esto simple. -->
+    <meta property="og:type" content="website">
     <meta property="og:title" content="Titanium Fitness | Forge Your Absolute Power">
     <meta property="og:description" content="Premium fitness facilities for serious athletes.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=1200&h=630&q=80">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://titanium-fitness.pages.dev/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Titanium Fitness | Forge Your Absolute Power">
+    <meta name="twitter:description" content="Premium fitness facilities for serious athletes.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=1200&h=630&q=80">
+ 
+    <!-- EN: Canonical URL — tells Google "this is the one true address for this
+            page", avoiding duplicate-content confusion if it's ever reachable
+            from more than one URL (e.g. with/without trailing slash, a custom
+            domain later, etc). Update this if you ever move off *.pages.dev.
+       ES: URL canónica — le dice a Google "esta es la única dirección real de
+            esta página", evitando confusión de contenido duplicado si alguna vez
+            queda accesible desde más de una URL (con/sin barra final, un dominio
+            propio más adelante, etc). Actualizala si en algún momento te vas de
+            *.pages.dev. -->
+    <link rel="canonical" href="https://titanium-fitness.pages.dev/">
+ 
+    <!-- EN: Favicon (inline SVG, no extra file) + a real apple-touch-icon PNG for
+            when someone adds this page to their iPhone home screen — iOS ignores
+            SVG favicons for that specific use, it needs a PNG.
+       ES: Favicon (SVG inline, sin archivo aparte) + un apple-touch-icon PNG de
+            verdad para cuando alguien agrega esta página a la pantalla de inicio
+            del iPhone — iOS ignora los favicons SVG para ese uso puntual,
+            necesita un PNG. -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%92%AA</text></svg>">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
  
     <!-- Preconnect: acelera la primera conexión a los orígenes externos críticos -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preconnect" href="https://challenges.cloudflare.com" crossorigin>
  
     <link rel="stylesheet" href="styles.css">
+ 
+    <!-- EN: AOS (Animate On Scroll) — small (~4kb gzipped) scroll-triggered
+            animation library. Elements with data-aos="..." fade/slide in once
+            as they enter the viewport; nothing animates until scrolled to, so
+            it doesn't add ongoing CPU/GPU cost. Used sparingly here (section
+            titles, cards, plan cards) — over-animating starts to look like a
+            generic template instead of a considered choice.
+       ES: AOS (Animate On Scroll) — librería chica (~4kb gzipped) de animaciones
+            al hacer scroll. Los elementos con data-aos="..." aparecen con
+            fade/slide una sola vez al entrar en el viewport; nada se anima hasta
+            que se scrollea hasta ahí, así que no suma costo de CPU/GPU
+            permanente. Usada con moderación acá (títulos de sección, tarjetas,
+            tarjetas de planes) — abusar de esto empieza a verse como plantilla
+            genérica en vez de una elección pensada. -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+ 
+    <!-- EN: Cloudflare Turnstile — bot/spam protection for the lead form. The
+            sitekey used below (see the .cf-turnstile div near the form) is
+            PUBLIC by design, meant to be visible in page source — it only
+            identifies which widget config to use. The matching SECRET key lives
+            only server-side, as an environment variable in Cloudflare Pages —
+            see functions/api/lead.js. Never put the secret key here.
+       ES: Cloudflare Turnstile — protección anti-bot/spam para el form de leads.
+            La sitekey usada abajo (ver el div .cf-turnstile cerca del form) es
+            PÚBLICA a propósito, está pensada para verse en el código fuente —
+            solo identifica qué config de widget usar. La clave SECRETA que la
+            acompaña vive solo del lado servidor, como variable de entorno en
+            Cloudflare Pages — ver functions/api/lead.js. Nunca pongas la clave
+            secreta acá. -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+ 
     <!-- defer: deja de bloquear el parseo del HTML; se ejecuta en orden junto a script.js -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
 </head>
 <body>
  
@@ -37,12 +111,12 @@
  
     <main>
         <section id="hero">
-            <div>
+            <div data-aos="fade-right" data-aos-duration="700">
                 <h1 data-i18n-html="hero_title">Forge Your<br><span>Absolute Power</span></h1>
                 <p class="hero-subtitle" data-i18n="hero_subtitle">High-performance facilities, 5,000kg in free weights, and certified coaches ready to break your plateau.</p>
                 <a href="#contact" class="cta-button" data-i18n="hero_cta">Claim Your Free Day Pass</a>
             </div>
-            <div class="hero-photo">
+            <div class="hero-photo" data-aos="fade-left" data-aos-duration="700" data-aos-delay="150">
                 <img
                     src="https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=650&q=80"
                     srcset="https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=650&q=80 650w,
@@ -56,7 +130,7 @@
         </section>
  
         <section id="video">
-            <h2 class="section-title" data-i18n="video_title">See Titanium Fitness in Action</h2>
+            <h2 class="section-title" data-i18n="video_title" data-aos="fade-up">See Titanium Fitness in Action</h2>
             <div class="video-wrapper">
                 <video
                     controls
@@ -69,17 +143,17 @@
         </section>
  
         <section id="services">
-            <h2 class="section-title" data-i18n="services_title">Physical Engineering</h2>
+            <h2 class="section-title" data-i18n="services_title" data-aos="fade-up">Physical Engineering</h2>
             <div class="grid-servicios">
-                <div class="card">
+                <div class="card" data-aos="fade-up" data-aos-delay="0">
                     <h3 data-i18n="service1_title">Strength Zone</h3>
                     <p data-i18n="service1_desc">Olympic-calibrated power racks, dumbbells up to 60kg, and impact-absorbing lifting platforms.</p>
                 </div>
-                <div class="card">
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
                     <h3 data-i18n="service2_title">Cross & Hybrid</h3>
                     <p data-i18n="service2_desc">25m synthetic turf for sled work, assault bikes, Concept2 rowers, and a professional gymnastics rig.</p>
                 </div>
-                <div class="card">
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
                     <h3 data-i18n="service3_title">Recovery</h3>
                     <p data-i18n="service3_desc">Programmable ice immersion tubs and percussion massage guns, free to use in the locker rooms.</p>
                 </div>
@@ -87,9 +161,9 @@
         </section>
  
         <section id="plans">
-            <h2 class="section-title" data-i18n="plans_title">Invest in Your Biology</h2>
+            <h2 class="section-title" data-i18n="plans_title" data-aos="fade-up">Invest in Your Biology</h2>
             <div class="grid-planes">
-                <div class="plan-card">
+                <div class="plan-card" data-aos="fade-up">
                     <div>
                         <h3 data-i18n="plan_base_title">Base Plan</h3>
                         <div class="precio">$35<span data-i18n="per_month">/mo</span></div>
@@ -102,7 +176,7 @@
                     <a href="#contact" class="cta-button" data-plan="base" data-i18n="plan_base_cta" style="background-color: #334155;">Select Base</a>
                 </div>
  
-                <div class="plan-card vip">
+                <div class="plan-card vip" data-aos="fade-up" data-aos-delay="150">
                     <div class="badge-vip" data-i18n="plan_vip_badge">Recommended</div>
                     <div>
                         <h3 data-i18n="plan_vip_title">Total VIP Plan</h3>
@@ -120,7 +194,7 @@
         </section>
  
         <section id="contact">
-            <div class="form-container">
+            <div class="form-container" data-aos="fade-up">
                 <h2 class="section-title" style="margin-bottom: 1rem;" data-i18n="contact_title">Claim Your Free Pass Today</h2>
                 <p style="text-align: center; color: var(--text-muted); margin-bottom: 2.5rem;" data-i18n="contact_subtitle">Enter your details and we'll email you your access pass.</p>
                 <!-- EN: Explicit notice that this is a portfolio demo and no real personal data
@@ -180,12 +254,35 @@
                                 para que el mínimo no se comunique solo por color (accesibilidad y claridad). -->
                         <div class="feedback-counter"><span id="comment-char-count">0</span> / 1000 <span data-i18n="form_comment_chars">characters</span> <span id="comment-min-hint" data-i18n="form_comment_min_hint">(min. 200)</span></div>
                     </div>
+                    <!-- EN: Turnstile widget — renders itself (script in <head>), shows a
+                            checkbox/challenge only if Cloudflare thinks it's needed (often
+                            fully invisible for real visitors in "Managed" mode). It creates a
+                            hidden input named "cf-turnstile-response" inside this div once
+                            solved; script.js reads that value and sends it to /api/lead, which
+                            verifies it server-side before accepting the lead.
+                            data-sitekey is the PUBLIC key — safe to have here in the HTML.
+                       ES: Widget de Turnstile — se renderiza solo (script en el <head>), muestra
+                            un checkbox/desafío solo si Cloudflare cree que hace falta (a menudo
+                            totalmente invisible para visitantes reales en modo "Managed"). Crea
+                            un input oculto llamado "cf-turnstile-response" dentro de este div una
+                            vez resuelto; script.js lee ese valor y lo manda a /api/lead, que lo
+                            verifica del lado servidor antes de aceptar el lead.
+                            data-sitekey es la clave PÚBLICA — está bien que esté acá en el HTML. -->
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAADvRe6FetZaglr7o" data-theme="auto"></div>
                     <button type="submit" class="cta-button" id="btn-submit" data-i18n="form_submit" style="width: 100%;">
                         Generate My Pass
                     </button>
                 </form>
  
-                <p id="lead-limit-info" class="limit-info"></p>
+                <!-- EN: aria-live="polite" — this text changes on its own (submission
+                        count, then a live countdown) without the visitor ever focusing
+                        this element. Without aria-live, a screen reader user would never
+                        hear these updates at all.
+                   ES: aria-live="polite" — este texto cambia solo (cantidad de envíos,
+                        después una cuenta regresiva en vivo) sin que el visitante enfoque
+                        este elemento. Sin aria-live, alguien usando lector de pantalla
+                        nunca se enteraría de estas actualizaciones. -->
+                <p id="lead-limit-info" class="limit-info" aria-live="polite"></p>
  
                 <div class="form-success" id="form-success">
                     <div class="success-icon">✅</div>
@@ -243,4 +340,5 @@
  
 </body>
 </html>
+
 
