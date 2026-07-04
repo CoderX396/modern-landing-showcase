@@ -38,6 +38,55 @@ function isValidPhone(raw) {
   return digits.length >= 7 && digits.length <= 15;
 }
  
+// EN: CLOUDFLARE TURNSTILE — server-side verification.
+//     The widget in index.html gets a token from the visitor's browser; that
+//     token means nothing on its own — anyone could fake a random string.
+//     This function is what actually asks Cloudflare "is this token real and
+//     did it come from this site", using the SECRET key (never the site key).
+//     The secret key is NOT written here — it's read from env.TURNSTILE_SECRET_KEY,
+//     which you set once in the Cloudflare Pages dashboard:
+//     Workers & Pages -> your project -> Settings -> Variables and secrets ->
+//     Add variable -> name it exactly TURNSTILE_SECRET_KEY, paste the secret
+//     key as the value, mark it as "Secret" (encrypted), save, and redeploy.
+//     That keeps it out of the GitHub repo entirely.
+// ES: CLOUDFLARE TURNSTILE — verificación del lado servidor.
+//     El widget en index.html le da al visitante un token desde su navegador;
+//     ese token no significa nada por sí solo — cualquiera podría inventar un
+//     string al azar. Esta función es la que realmente le pregunta a
+//     Cloudflare "¿este token es real y vino de este sitio?", usando la clave
+//     SECRETA (nunca la clave del sitio). La clave secreta NO está escrita
+//     acá — se lee desde env.TURNSTILE_SECRET_KEY, que configurás una vez en
+//     el dashboard de Cloudflare Pages: Workers & Pages -> tu proyecto ->
+//     Settings -> Variables and secrets -> Add variable -> nombre exacto
+//     TURNSTILE_SECRET_KEY, pegás la clave secreta como valor, la marcás como
+//     "Secret" (encriptada), guardás, y redesplegás. Así queda totalmente
+//     fuera del repo de GitHub.
+const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+ 
+async function verifyTurnstile(token, secret, ip) {
+  if (!token || !secret) return false;
+  try {
+    const verifyRes = await fetch(TURNSTILE_VERIFY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret, response: token, remoteip: ip }),
+    });
+    const result = await verifyRes.json();
+    return result.success === true;
+  } catch {
+    // EN: if Cloudflare's verify endpoint itself fails/times out, treat it as
+    //     a failed check (fail closed) rather than letting the lead through —
+    //     this endpoint is very reliable, a failure here is more likely a
+    //     real problem than legitimate traffic.
+    // ES: si el endpoint de verificación de Cloudflare falla/da timeout, se
+    //     trata como verificación fallida (fail closed) en vez de dejar
+    //     pasar el lead — este endpoint es muy confiable, una falla acá es
+    //     más probable que sea un problema real que tráfico legítimo.
+    return false;
+  }
+}
+ 
+ 
 // GET /api/lead -> solo consulta el estado (no gasta intento).
 // Lo usa el frontend al cargar la página para mostrar "te quedan X".
 export async function onRequestGet(context) {
@@ -81,6 +130,17 @@ export async function onRequestPost(context) {
     body = await request.json();
   } catch {
     return json({ error: 'bad_request' }, 400);
+  }
+ 
+  // EN: Turnstile check happens first, before spending a rate-limit slot or
+  //     validating any other field — if the token doesn't check out, nothing
+  //     else about this request matters.
+  // ES: La verificacion de Turnstile va primero, antes de gastar un intento
+  //     de rate-limit o validar cualquier otro campo — si el token no es
+  //     valido, nada mas de este request importa.
+  const turnstileOk = await verifyTurnstile(body.turnstileToken, env.TURNSTILE_SECRET_KEY, ip);
+  if (!turnstileOk) {
+    return json({ error: 'captcha_failed' }, 400);
   }
  
   // EN: firstName/lastName are the source of truth now; "name" is only kept
@@ -138,4 +198,5 @@ function json(data, status = 200) {
     headers: { 'Content-Type': 'application/json' },
   });
 }
+
  
