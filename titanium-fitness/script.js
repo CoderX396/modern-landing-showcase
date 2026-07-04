@@ -60,6 +60,7 @@ const translations = {
         plan_vip_cta: "Select VIP",
         contact_title: "Claim Your Free Pass Today",
         contact_subtitle: "Enter your details and we'll email you your access pass.",
+        contact_demo_notice: "This is a portfolio demo — feel free to use fictional data, no need to enter anything real.",
         form_name_ph: "Full name",
         form_firstname_ph: "First name",
         form_lastname_ph: "Last name",
@@ -132,6 +133,7 @@ const translations = {
         plan_vip_cta: "Elegir VIP",
         contact_title: "Reclama Tu Pase Gratis Hoy",
         contact_subtitle: "Ingresa tus datos y te enviaremos tu pase de acceso por correo electrónico.",
+        contact_demo_notice: "Esto es un demo de portfolio — podés usar datos ficticios, no hace falta que sean reales.",
         form_name_ph: "Nombre completo",
         form_firstname_ph: "Nombre",
         form_lastname_ph: "Apellido",
@@ -487,7 +489,18 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         });
 
         const rateData = await rateRes.clone().json().catch(() => null);
-        if (rateData) renderLimitInfo(rateData.remaining, rateData.resetAt);
+        // EN: BUG FIX — only render the counter/countdown when the response
+        //     actually carries numeric remaining/resetAt. A validation error
+        //     (400) has no such fields, and calling renderLimitInfo with
+        //     undefined values used to produce "You can try again in NaNs."
+        // ES: FIX DEL BUG — solo renderizar el contador/cuenta regresiva
+        //     cuando la respuesta trae remaining/resetAt numéricos de
+        //     verdad. Un error de validación (400) no tiene esos campos, y
+        //     llamar a renderLimitInfo con valores undefined generaba
+        //     "You can try again in NaNs."
+        if (rateData && typeof rateData.remaining === 'number') {
+            renderLimitInfo(rateData.remaining, rateData.resetAt);
+        }
 
         if (rateRes.status === 429) {
             showLeadError(translations[currentLang].form_submit_rate_limited, formContainer, formSuccess);
