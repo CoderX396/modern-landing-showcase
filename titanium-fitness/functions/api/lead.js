@@ -18,14 +18,25 @@ const MAX_COMMENT_CHARS = 1000;
 const MIN_COMMENT_CHARS = 200;
 const MAX_STORED_LEADS = 200;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-// EN: Accepts the auto-formatted "(XXX) XXX-XXXX" from script.js as well as
-//     a plain 7-15 digit number (with optional +, spaces, dashes) in case a
-//     lead comes in through a different client (e.g. a raw API call).
-// ES: Acepta el "(XXX) XXX-XXXX" autoformateado desde script.js, además de
-//     un número plano de 7 a 15 dígitos (con +, espacios o guiones
-//     opcionales) por si un lead llega desde otro cliente (ej. una llamada
-//     directa a la API).
-const PHONE_RE = /^[+\d][\d\s()-]{6,19}\d$/;
+// EN: BUG FIX — the old PHONE_RE required the string to START with a digit
+//     or "+", but script.js auto-formats the phone as "(555) 123-4567",
+//     which starts with "(". That regex NEVER matched, so every submission
+//     was silently rejected as invalid_phone (see onRequestPost below) —
+//     that's also why the rate-limit counter never seemed to increment.
+//     Fix: strip everything but digits and just check the digit COUNT,
+//     so it doesn't care about parentheses, dashes, spaces, or "+".
+// ES: FIX DEL BUG — el PHONE_RE anterior exigía que el string EMPIECE con
+//     un dígito o "+", pero script.js formatea el teléfono como
+//     "(555) 123-4567", que empieza con "(". Ese regex NUNCA matcheaba,
+//     entonces todo envío se rechazaba en silencio como invalid_phone (ver
+//     onRequestPost más abajo) — por eso también parecía que el contador de
+//     límite nunca se incrementaba.
+//     Fix: se descarta todo lo que no sea dígito y se valida la CANTIDAD
+//     de dígitos, así no importa si hay paréntesis, guiones, espacios o "+".
+function isValidPhone(raw) {
+  const digits = raw.replace(/\D/g, '');
+  return digits.length >= 7 && digits.length <= 15;
+}
 
 // GET /api/lead -> solo consulta el estado (no gasta intento).
 // Lo usa el frontend al cargar la página para mostrar "te quedan X".
@@ -91,7 +102,7 @@ export async function onRequestPost(context) {
   if (!EMAIL_RE.test(email)) {
     return json({ error: 'invalid_email' }, 400);
   }
-  if (!PHONE_RE.test(phone)) {
+  if (!isValidPhone(phone)) {
     return json({ error: 'invalid_phone' }, 400);
   }
   if (comment.length < MIN_COMMENT_CHARS) {
@@ -127,3 +138,4 @@ function json(data, status = 200) {
     headers: { 'Content-Type': 'application/json' },
   });
 }
+
