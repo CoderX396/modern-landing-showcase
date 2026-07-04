@@ -60,7 +60,7 @@ const translations = {
         plan_vip_cta: "Select VIP",
         contact_title: "Claim Your Free Pass Today",
         contact_subtitle: "Enter your details and we'll email you your access pass.",
-        contact_demo_notice: "This is a portfolio demo — feel free to use fictional data, no need to enter anything real.",
+        contact_demo_notice: "This is a portfolio demo — every field is optional to fill with fictional data, except your email, which we use to actually send you the test pass.",
         form_name_ph: "Full name",
         form_firstname_ph: "First name",
         form_lastname_ph: "Last name",
@@ -76,6 +76,8 @@ const translations = {
         form_submit_error: "Error: Could not send. Try again.",
         form_submit_network_error: "Network error. Check connection.",
         form_submit_rate_limited: "You've reached the submission limit for now. Please try again later, or reach us directly on WhatsApp.",
+        form_captcha_missing: "Please wait a moment for the security check to finish, then try again.",
+        form_captcha_failed: "Security check failed. Please reload the page and try again.",
         lead_attempts_left: "You have {n} submission(s) left today.",
         lead_reset_in: "You can try again in {time}.",
         form_comment_ph: "What do you think of this page, or is there anything you'd like to tell us?",
@@ -133,7 +135,7 @@ const translations = {
         plan_vip_cta: "Elegir VIP",
         contact_title: "Reclama Tu Pase Gratis Hoy",
         contact_subtitle: "Ingresa tus datos y te enviaremos tu pase de acceso por correo electrónico.",
-        contact_demo_notice: "Esto es un demo de portfolio — podés usar datos ficticios, no hace falta que sean reales.",
+        contact_demo_notice: "Esto es un demo de portfolio — todos los campos podés completarlos con datos ficticios, menos el correo, que usamos para mandarte de verdad el pase de prueba.",
         form_name_ph: "Nombre completo",
         form_firstname_ph: "Nombre",
         form_lastname_ph: "Apellido",
@@ -149,6 +151,8 @@ const translations = {
         form_submit_error: "Error: No se pudo enviar. Intenta de nuevo.",
         form_submit_network_error: "Error de red. Revisa tu conexión.",
         form_submit_rate_limited: "Alcanzaste el límite de envíos por ahora. Intenta más tarde, o escríbenos directo por WhatsApp.",
+        form_captcha_missing: "Esperá un momento a que termine la verificación de seguridad e intentá de nuevo.",
+        form_captcha_failed: "Falló la verificación de seguridad. Recargá la página e intentá de nuevo.",
         lead_attempts_left: "Te quedan {n} envío(s) hoy.",
         lead_reset_in: "Podrás intentar de nuevo en {time}.",
         form_comment_ph: "¿Qué te pareció esta página, o hay algo que quieras contarnos?",
@@ -485,6 +489,27 @@ document.getElementById('lead-form').addEventListener('submit', async function (
     const firstName = document.getElementById('firstName').value.trim();
     const lastName  = document.getElementById('lastName').value.trim();
  
+    // EN: Turnstile injects a hidden input named "cf-turnstile-response" inside
+    //     the .cf-turnstile div once the visitor passes the challenge (often
+    //     automatically, with no visible interaction). We read its value and
+    //     send it to the API, which verifies it against Cloudflare before
+    //     accepting the lead — see functions/api/lead.js.
+    // ES: Turnstile inyecta un input oculto llamado "cf-turnstile-response"
+    //     dentro del div .cf-turnstile una vez que el visitante pasa el
+    //     desafío (a menudo automático, sin interacción visible). Leemos su
+    //     valor y lo mandamos a la API, que lo verifica contra Cloudflare
+    //     antes de aceptar el lead — ver functions/api/lead.js.
+    const turnstileTokenEl = document.querySelector('[name="cf-turnstile-response"]');
+    const turnstileToken = turnstileTokenEl ? turnstileTokenEl.value : '';
+ 
+    if (!turnstileToken) {
+        showLeadError(translations[currentLang].form_captcha_missing, formContainer, formSuccess);
+        btn.textContent = originalBtnText;
+        btn.classList.remove('btn-loading');
+        btn.disabled = false;
+        return;
+    }
+ 
     const params = {
         firstName: firstName,
         lastName:  lastName,
@@ -496,6 +521,14 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         comment:   comment,
     };
  
+    // EN: turnstileToken travels as a separate top-level field (not inside
+    //     `params`) because `params` is also what gets sent to EmailJS —
+    //     EmailJS doesn't need the captcha token, only /api/lead does.
+    // ES: turnstileToken viaja como campo separado (no dentro de `params`)
+    //     porque `params` es también lo que se manda a EmailJS — EmailJS no
+    //     necesita el token del captcha, solo lo necesita /api/lead.
+    const leadPayload = { ...params, turnstileToken };
+ 
     // Paso 1: chequeo de rate-limit server-side (3 envíos / 24h por IP,
     // ver functions/api/lead.js). Esto evita que alguien gaste la cuota
     // mensual de EmailJS mandando el formulario en loop — el navegador
@@ -504,7 +537,7 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         const rateRes = await fetch('/api/lead', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(params),
+            body: JSON.stringify(leadPayload),
         });
  
         const rateData = await rateRes.clone().json().catch(() => null);
@@ -523,6 +556,26 @@ document.getElementById('lead-form').addEventListener('submit', async function (
  
         if (rateRes.status === 429) {
             showLeadError(translations[currentLang].form_submit_rate_limited, formContainer, formSuccess);
+            btn.textContent = originalBtnText;
+            btn.classList.remove('btn-loading');
+            btn.disabled = false;
+            return;
+        }
+ 
+        // EN: A failed captcha check is the one 400 we can't just "let through" —
+        //     doing so would defeat the whole point of adding Turnstile, since
+        //     the email would still get sent via EmailJS below regardless of
+        //     the server rejecting it. Every other 400 (redundant validation
+        //     already covered by client-side checks) still falls through on
+        //     purpose, per the comment below.
+        // ES: Un captcha fallido es el único 400 que no podemos simplemente
+        //     "dejar pasar" — hacerlo anularía el sentido de haber agregado
+        //     Turnstile, porque el email se mandaría igual por EmailJS más
+        //     abajo aunque el servidor lo haya rechazado. Cualquier otro 400
+        //     (validación redundante ya cubierta del lado cliente) sigue de
+        //     largo a propósito, según el comentario de abajo.
+        if (rateData && rateData.error === 'captcha_failed') {
+            showLeadError(translations[currentLang].form_captcha_failed, formContainer, formSuccess);
             btn.textContent = originalBtnText;
             btn.classList.remove('btn-loading');
             btn.disabled = false;
@@ -602,5 +655,32 @@ document.querySelectorAll('[data-plan]').forEach(button => {
         }
     });
 });
+ 
+// =====================
+// AOS (ANIMATE ON SCROLL) — INIT
+// =====================
+// EN: `once: true` — each element animates the first time it enters view and
+//     then stays put; re-scrolling past it doesn't replay the animation
+//     (replaying on every scroll up/down gets distracting fast).
+//     `disable: 'reduced-motion'` — respects the visitor's OS-level
+//     "reduce motion" accessibility setting by turning animations off
+//     entirely for them, instead of forcing motion on people who asked
+//     their system not to show it.
+// ES: `once: true` — cada elemento se anima la primera vez que entra en
+//     vista y después queda quieto; volver a scrollear no repite la
+//     animación (repetirla en cada scroll arriba/abajo cansa rápido).
+//     `disable: 'reduced-motion'` — respeta la configuración de accesibilidad
+//     "reducir movimiento" del sistema operativo del visitante, apagando las
+//     animaciones por completo para esas personas, en vez de forzar
+//     movimiento a quien le pidió a su sistema que no lo muestre.
+if (typeof AOS !== 'undefined') {
+    AOS.init({
+        duration: 600,
+        easing: 'ease-out',
+        once: true,
+        offset: 60,
+        disable: 'reduced-motion',
+    });
+}
 
 
