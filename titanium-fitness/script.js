@@ -5,14 +5,14 @@
    3. EmailJS lead form (comment field, min/max length, phone auto-format,
       split first/last name, server-side rate-limit with a live countdown)
    4. Auto-fill plan from pricing cards
-
+ 
    EN: Comments throughout this file are bilingual (EN/ES) for the GitHub
        portfolio so any reader can follow the "why", not just the "what".
    ES: Los comentarios de este archivo son bilingües (EN/ES) para el
        portfolio de GitHub, así cualquiera puede seguir el "por qué" y no
        solo el "qué".
    ============================================ */
-
+ 
 // =====================
 // 1. TRANSLATIONS (EN / ES)
 // =====================
@@ -20,7 +20,7 @@ const html = document.documentElement;
 const themeBtn = document.getElementById('btn-tema');
 const langBtn = document.getElementById('btn-idioma');
 const waLink = document.querySelector('.whatsapp-float');
-
+ 
 const translations = {
     en: {
         page_title: "Titanium Fitness | Forge Your Absolute Power",
@@ -169,13 +169,13 @@ const translations = {
         fiverr_header_aria: "Ver mis servicios en Fiverr",
     }
 };
-
+ 
 function applyTranslations(lang) {
     const t = translations[lang];
-
+ 
     html.lang = lang;
     document.title = t.page_title;
-
+ 
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (t[key] !== undefined) el.textContent = t[key];
@@ -200,17 +200,17 @@ function applyTranslations(lang) {
         const key = el.getAttribute('data-i18n-title');
         if (t[key] !== undefined) el.title = t[key];
     });
-
+ 
     // Theme button label depends on the language AND the active theme
     const isDark = html.getAttribute('data-theme') === 'dark';
     themeBtn.textContent = isDark ? t.theme_light : t.theme_dark;
-
+ 
     // Language button always shows the language you'd switch TO
     langBtn.textContent = lang === 'en' ? '🌐 ES' : '🌐 EN';
-
+ 
     // WhatsApp deep-link message follows the active language too
     if (waLink) waLink.href = `https://wa.me/15550123456?text=${encodeURIComponent(t.whatsapp_message)}`;
-
+ 
     // Update new buttons
     const fiverrBtn = document.getElementById('fiverr-btn');
     const githubBtn = document.getElementById('github-btn');
@@ -218,26 +218,26 @@ function applyTranslations(lang) {
     if (fiverrBtn) fiverrBtn.textContent = t.fiverr_button;
     if (githubBtn) githubBtn.textContent = t.github_button;
     if (livedemoBtn) livedemoBtn.textContent = t.livedemo_button;
-
+ 
     // The CSS for nav a (min-width, text-align) should handle layout stability.
     // No need for inline styles here.
 }
-
+ 
 let currentLang = localStorage.getItem('titanium_lang') || 'en';
-
+ 
 langBtn.addEventListener('click', () => {
     currentLang = currentLang === 'en' ? 'es' : 'en';
     localStorage.setItem('titanium_lang', currentLang);
     applyTranslations(currentLang);
 });
-
+ 
 // =====================
 // 2. DARK / LIGHT TOGGLE
 // =====================
 const savedTheme = localStorage.getItem('titanium_theme') || 'dark';
-
+ 
 html.setAttribute('data-theme', savedTheme);
-
+ 
 themeBtn.addEventListener('click', () => {
     const current = html.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
@@ -245,19 +245,19 @@ themeBtn.addEventListener('click', () => {
     localStorage.setItem('titanium_theme', next);
     applyTranslations(currentLang); // re-apply so the button label stays in the active language
 });
-
+ 
 // First paint, now that the theme attribute + DOM refs are ready
 applyTranslations(currentLang);
-
+ 
 // =====================
 // 3. EMAILJS (ARQUITECTURA UNIFICADA)
 // =====================
 const EMAILJS_PUBLIC_KEY  = 'RDMUeLcSb6keXwqhG';
 const EMAILJS_SERVICE_ID  = 'service_93mh7mj';
 const EMAILJS_TEMPLATE_ID = 'template_hh14ehp'; // Ya trae admin notification + auto-reply al cliente
-
+ 
 emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-
+ 
 const MAX_COMMENT_CHARS = 1000;
 // EN: Minimum length so the comment is actually useful feedback and not a stray
 //     keystroke. Adjust this single constant if a different floor is wanted.
@@ -267,9 +267,22 @@ const MIN_COMMENT_CHARS = 200;
 const commentInput = document.getElementById('comment');
 const commentCharCount = document.getElementById('comment-char-count');
 const commentMinHint = document.getElementById('comment-min-hint');
-
+ 
 if (commentInput) {
-    commentInput.addEventListener('input', () => {
+    // EN: BUG FIX — this used to only run on the 'input' event, so if the
+    //     browser restored a previously-typed comment on reload (form
+    //     autofill / back-forward cache), the counter still showed "0"
+    //     until the visitor typed a new character. Pulling the logic into
+    //     a named function and calling it once immediately fixes that: the
+    //     counter now always reflects whatever is actually in the box.
+    // ES: FIX DEL BUG — esto antes solo corría en el evento 'input', así
+    //     que si el navegador restauraba un comentario ya escrito al
+    //     recargar (autocompletado del form / back-forward cache), el
+    //     contador seguía mostrando "0" hasta que el visitante tipeaba un
+    //     caracter nuevo. Sacar la lógica a una función con nombre y
+    //     llamarla una vez de entrada arregla esto: el contador ahora
+    //     siempre refleja lo que realmente hay en la caja.
+    const updateCommentCounter = () => {
         const chars = commentInput.value.trim().length;
         commentCharCount.textContent = chars;
         // EN: red once over the max, amber while under the min, default color in between.
@@ -288,9 +301,15 @@ if (commentInput) {
         if (commentMinHint) {
             commentMinHint.style.display = chars >= MIN_COMMENT_CHARS ? 'none' : '';
         }
-    });
+    };
+ 
+    commentInput.addEventListener('input', updateCommentCounter);
+    // EN: run once on load — covers the browser-restored-value case above.
+    // ES: se ejecuta una vez al cargar — cubre el caso de valor restaurado
+    //     por el navegador de arriba.
+    updateCommentCounter();
 }
-
+ 
 // =====================
 // PHONE AUTO-FORMAT — (XXX) XXX-XXXX WHILE TYPING
 // =====================
@@ -308,7 +327,7 @@ function formatPhoneInput(value) {
     const digits = value.replace(/\D/g, '').slice(0, 10);
     const rest = value.replace(/\D/g, '').slice(10);
     const len = digits.length;
-
+ 
     let formatted;
     if (len === 0) {
         formatted = '';
@@ -321,7 +340,7 @@ function formatPhoneInput(value) {
     }
     return rest ? `${formatted} ${rest}` : formatted;
 }
-
+ 
 const phoneInput = document.getElementById('phone');
 if (phoneInput) {
     phoneInput.addEventListener('input', () => {
@@ -337,7 +356,7 @@ if (phoneInput) {
         }
     });
 }
-
+ 
 function showLeadError(message, formContainer, formSuccess) {
     const existing = formContainer.querySelector('.form-error-message');
     if (existing) existing.remove();
@@ -349,12 +368,12 @@ function showLeadError(message, formContainer, formSuccess) {
     errorDiv.textContent = message;
     formContainer.insertBefore(errorDiv, formSuccess);
 }
-
+ 
 // =====================
 // CONTADOR DE INTENTOS RESTANTES
 // =====================
 let countdownInterval = null;
-
+ 
 function formatTimeLeft(ms) {
     // EN: BUG FIX — this used to floor everything to whole minutes (ms / 60000),
     //     so seconds never appeared no matter how long the reset window was.
@@ -368,27 +387,27 @@ function formatTimeLeft(ms) {
     const h = Math.floor(totalSeconds / 3600);
     const m = Math.floor((totalSeconds % 3600) / 60);
     const s = totalSeconds % 60;
-
+ 
     if (h > 0) return `${h}h ${m}m`;
     if (m > 0) return `${m}m ${s}s`;
     return `${s}s`;
 }
-
+ 
 function renderLimitInfo(remaining, resetAt) {
     const el = document.getElementById('lead-limit-info');
     if (!el) return;
-
+ 
     if (countdownInterval) {
         clearInterval(countdownInterval);
         countdownInterval = null;
     }
-
+ 
     if (remaining > 0) {
         el.textContent = translations[currentLang].lead_attempts_left.replace('{n}', remaining);
         el.classList.remove('limit-warning');
         return;
     }
-
+ 
     // remaining === 0: cuenta regresiva en vivo
     el.classList.add('limit-warning');
     const update = () => {
@@ -410,30 +429,30 @@ function renderLimitInfo(remaining, resetAt) {
     //     que el último minuto de la cuenta regresiva se vea realmente en vivo.
     countdownInterval = setInterval(update, 1000);
 }
-
+ 
 // Consulta el estado al cargar la página (no gasta intento)
 fetch('/api/lead')
     .then(res => res.json())
     .then(data => renderLimitInfo(data.remaining, data.resetAt))
     .catch(() => {}); // si falla, simplemente no se muestra el contador
-
+ 
 document.getElementById('lead-form').addEventListener('submit', async function (e) {
     e.preventDefault();
-
+ 
     const btn = document.getElementById('btn-submit');
     const formSuccess = document.getElementById('form-success');
     const formContainer = document.querySelector('.form-container'); // Use formContainer to show error below it
     const originalBtnText = translations[currentLang].form_submit;
-
+ 
     // Remove any previous error messages
     const existingError = formContainer.querySelector('.form-error-message');
     if (existingError) {
         existingError.remove();
     }
-
+ 
     const commentEl = document.getElementById('comment');
     const comment = commentEl.value.trim();
-
+ 
     if (!comment) {
         showLeadError(translations[currentLang].form_comment_error_missing, formContainer, formSuccess);
         return;
@@ -449,11 +468,11 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         showLeadError(translations[currentLang].form_comment_error_too_long, formContainer, formSuccess);
         return;
     }
-
+ 
     btn.textContent = translations[currentLang].form_submit_sending;
     btn.classList.add('btn-loading');
     btn.disabled = true;
-
+ 
     // EN: firstName/lastName travel separately (so an EmailJS template can address
     //     the lead by first name only) plus a combined "name" for templates/logs
     //     that still expect one full-name string. Update your EmailJS template
@@ -465,7 +484,7 @@ document.getElementById('lead-form').addEventListener('submit', async function (
     //     directamente si querés eso.
     const firstName = document.getElementById('firstName').value.trim();
     const lastName  = document.getElementById('lastName').value.trim();
-
+ 
     const params = {
         firstName: firstName,
         lastName:  lastName,
@@ -476,7 +495,7 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         goal:      document.getElementById('goal').value,
         comment:   comment,
     };
-
+ 
     // Paso 1: chequeo de rate-limit server-side (3 envíos / 24h por IP,
     // ver functions/api/lead.js). Esto evita que alguien gaste la cuota
     // mensual de EmailJS mandando el formulario en loop — el navegador
@@ -487,7 +506,7 @@ document.getElementById('lead-form').addEventListener('submit', async function (
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(params),
         });
-
+ 
         const rateData = await rateRes.clone().json().catch(() => null);
         // EN: BUG FIX — only render the counter/countdown when the response
         //     actually carries numeric remaining/resetAt. A validation error
@@ -501,7 +520,7 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         if (rateData && typeof rateData.remaining === 'number') {
             renderLimitInfo(rateData.remaining, rateData.resetAt);
         }
-
+ 
         if (rateRes.status === 429) {
             showLeadError(translations[currentLang].form_submit_rate_limited, formContainer, formSuccess);
             btn.textContent = originalBtnText;
@@ -519,7 +538,7 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         // problema de infraestructura ajeno al visitante.
         console.warn('Lead rate-limit check failed, proceeding anyway:', rateError);
     }
-
+ 
     try {
         await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
         document.getElementById('lead-form').style.display = 'none';
@@ -527,7 +546,7 @@ document.getElementById('lead-form').addEventListener('submit', async function (
     } catch (error) {
         console.error('EmailJS error:', error);
         let errorMessage = translations[currentLang].form_submit_error;
-
+ 
         // Quota exceeded (EmailJS free plan: 200/month)
         if (error && (error.status === 429 || (error.text && error.text.toLowerCase().includes('limit')))) {
             errorMessage = currentLang === 'es'
@@ -540,8 +559,8 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         } else if (error && error.text) {
             errorMessage += ` (${error.text})`;
         }
-
-
+ 
+ 
         // Display error message to the user
         const errorDiv = document.createElement('div');
         errorDiv.className = 'form-error-message';
@@ -550,13 +569,13 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         errorDiv.style.marginTop = '1rem';
         errorDiv.textContent = errorMessage;
         formContainer.insertBefore(errorDiv, formSuccess); // Insert before success message
-
+ 
         btn.textContent = originalBtnText; // Revert to original text
         btn.classList.remove('btn-loading');
         btn.disabled = false;
     }
 });
-
+ 
 // =====================
 // 6. AUTO-FILL PLAN FROM PRICING CARDS
 // =====================
@@ -566,7 +585,7 @@ document.querySelectorAll('[data-plan]').forEach(button => {
     button.addEventListener('click', () => {
         const planField = document.getElementById('plan');
         planField.value = button.getAttribute('data-plan');
-
+ 
         // Restart the highlight animation even on a repeat click
         // (double rAF instead of reading offsetWidth — avoids a forced synchronous reflow)
         planField.classList.remove('campo-autocompletado');
@@ -575,7 +594,7 @@ document.querySelectorAll('[data-plan]').forEach(button => {
                 planField.classList.add('campo-autocompletado');
             });
         });
-
+ 
         // Smooth scroll to the contact form
         const contactSection = document.getElementById('contact');
         if (contactSection) {
@@ -583,4 +602,5 @@ document.querySelectorAll('[data-plan]').forEach(button => {
         }
     });
 });
+
 
