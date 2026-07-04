@@ -8,17 +8,17 @@
     <meta property="og:title" content="Titanium Fitness | Forge Your Absolute Power">
     <meta property="og:description" content="Premium fitness facilities for serious athletes.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%92%AA</text></svg>">
-
+ 
     <!-- Preconnect: acelera la primera conexión a los orígenes externos críticos -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-
+ 
     <link rel="stylesheet" href="styles.css">
     <!-- defer: deja de bloquear el parseo del HTML; se ejecuta en orden junto a script.js -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
 </head>
 <body>
-
+ 
     <header>
         <div class="nav-container">
             <a href="#hero" class="logo">TITANIUM<span>FIT</span></a>
@@ -34,7 +34,7 @@
             </div>
         </div>
     </header>
-
+ 
     <main>
         <section id="hero">
             <div>
@@ -54,7 +54,7 @@
                     loading="eager">
             </div>
         </section>
-
+ 
         <section id="video">
             <h2 class="section-title" data-i18n="video_title">See Titanium Fitness in Action</h2>
             <div class="video-wrapper">
@@ -67,7 +67,7 @@
                 </video>
             </div>
         </section>
-
+ 
         <section id="services">
             <h2 class="section-title" data-i18n="services_title">Physical Engineering</h2>
             <div class="grid-servicios">
@@ -85,7 +85,7 @@
                 </div>
             </div>
         </section>
-
+ 
         <section id="plans">
             <h2 class="section-title" data-i18n="plans_title">Invest in Your Biology</h2>
             <div class="grid-planes">
@@ -101,7 +101,7 @@
                     </div>
                     <a href="#contact" class="cta-button" data-plan="base" data-i18n="plan_base_cta" style="background-color: #334155;">Select Base</a>
                 </div>
-
+ 
                 <div class="plan-card vip">
                     <div class="badge-vip" data-i18n="plan_vip_badge">Recommended</div>
                     <div>
@@ -118,12 +118,19 @@
                 </div>
             </div>
         </section>
-
+ 
         <section id="contact">
             <div class="form-container">
                 <h2 class="section-title" style="margin-bottom: 1rem;" data-i18n="contact_title">Claim Your Free Pass Today</h2>
                 <p style="text-align: center; color: var(--text-muted); margin-bottom: 2.5rem;" data-i18n="contact_subtitle">Enter your details and we'll email you your access pass.</p>
-
+                <!-- EN: Explicit notice that this is a portfolio demo and no real personal data
+                        is required — addresses the fact that the form does collect and email
+                        whatever a visitor types in, even in demo mode.
+                   ES: Aviso explícito de que esto es un demo de portfolio y no hace falta ingresar
+                        datos reales — atiende el hecho de que el form sí recolecta y envía por
+                        mail lo que el visitante escriba, incluso en modo demo. -->
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: -1.75rem; margin-bottom: 2rem; font-style: italic;" data-i18n="contact_demo_notice">This is a portfolio demo — feel free to use fictional data, no need to enter anything real.</p>
+ 
                 <form id="lead-form">
                     <!-- EN: First/last name split into two fields so EmailJS templates can greet
                             the lead by first name only ("Hi, {{firstName}}") instead of the full string.
@@ -177,9 +184,9 @@
                         Generate My Pass
                     </button>
                 </form>
-
+ 
                 <p id="lead-limit-info" class="limit-info"></p>
-
+ 
                 <div class="form-success" id="form-success">
                     <div class="success-icon">✅</div>
                     <p class="success-title" data-i18n="success_title">Pass generated!</p>
@@ -188,18 +195,31 @@
             </div>
         </section>
     </main>
-
+ 
     <footer>
         <p data-i18n-html="footer_text">© 2026 <span>TitaniumFit</span>. All rights reserved. — Built by <span>ArielSyncLabs</span></p>
-
+ 
         <!-- New Portfolio Buttons -->
+        <!-- EN: Each of these 3 links is independent — change the href to point wherever you
+                want. #livedemo-btn currently points straight at this project's live Cloudflare
+                URL; if later you build a general portfolio hub page (one page listing all your
+                projects, each linking out to its own live demo), just change #livedemo-btn's
+                href here to point at that hub page instead of directly at this demo. Same idea
+                applies to #github-btn/#fiverr-btn if those destinations ever change.
+           ES: Estos 3 links son independientes — cambiá el href para que apunte a donde quieras.
+                #livedemo-btn ahora mismo apunta directo a la URL en vivo de este proyecto en
+                Cloudflare; si más adelante armás una página general de portfolio (una página que
+                liste todos tus proyectos, cada uno con su propio link a su demo en vivo), solo
+                cambiá el href de #livedemo-btn acá para que apunte a esa página hub en vez de
+                directo a este demo. La misma idea aplica a #github-btn/#fiverr-btn si esos
+                destinos cambian alguna vez. -->
         <div class="portfolio-buttons">
             <a href="https://es.fiverr.com/s/qDE81rd" id="fiverr-btn" target="_blank" rel="noopener" class="portfolio-button fiverr-btn" data-i18n="fiverr_button">Hire Me on Fiverr</a>
             <a href="https://github.com/CoderX396/modern-landing-showcase" id="github-btn" target="_blank" rel="noopener" class="portfolio-button github-btn" data-i18n="github_button">View GitHub Portfolio</a>
             <a href="https://titanium-fitness.pages.dev/" id="livedemo-btn" target="_blank" rel="noopener" class="portfolio-button livedemo-btn" data-i18n="livedemo_button">Live Demo (Cloudflare)</a>
         </div>
     </footer>
-
+ 
     <!--
         WHATSAPP BUTTON
         This number is a clearly fake placeholder for the portfolio demo
@@ -218,9 +238,9 @@
             <path fill="#ffffff" d="M12.001 2C6.478 2 2 6.478 2 12c0 1.865.505 3.62 1.386 5.128L2 22l4.977-1.363C8.435 21.472 10.166 22 12.001 22c5.523 0 10.001-4.477 10.001-10S17.524 2 12.001 2zm0 18.199c-1.638 0-3.187-.443-4.53-1.246l-.323-.19-3.4.918.923-3.345-.209-.343C3.53 14.596 3.08 13.322 3.08 12c0-4.925 4.004-8.93 8.921-8.93 4.917 0 8.921 4.005 8.921 8.93 0 4.925-4.004 8.199-8.921 8.199z"/>
         </svg>
     </a>
-
+ 
     <script src="script.js" defer></script>
-
+ 
 </body>
 </html>
 
