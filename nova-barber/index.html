@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Nova Barber Studio is a fictional, bilingual, responsive barber landing page concept with direct contact CTAs."
+    />
+    <meta name="author" content="Ariel FyB Labs" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="theme-color" content="#0e172a" />
+    <title>Nova Barber Studio | Basic Landing Page Demo</title>
+
+    <!-- ES: URL pública prevista para Cloudflare Pages. EN: Expected public Cloudflare Pages URL. -->
+    <link rel="canonical" href="https://nova-barber.pages.dev/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nova-barber.pages.dev/" />
+    <meta property="og:title" content="Nova Barber Studio | Basic Landing Page Demo" />
+    <meta property="og:description" content="A fictional bilingual barber landing page with direct booking CTAs, responsive design and custom-coded interactions." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1622287162716-f311baa1a2b8?auto=format&fit=crop&w=1200&q=85" />
+    <meta property="og:image:alt" content="Barber giving a precision haircut in a modern studio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_ES" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nova Barber Studio | Basic Landing Page Demo" />
+    <meta name="twitter:description" content="A fictional bilingual barber landing page with direct booking CTAs and custom-coded interactions." />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1622287162716-f311baa1a2b8?auto=format&fit=crop&w=1200&q=85" />
+
+    <!-- ES: SEO básico y estructura semántica; Basic no incluye formulario ni backend.
+         EN: Basic SEO and semantic structure; Basic includes no form or backend. -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <!-- ES: AOS se guarda localmente para funcionar sin conexión ni CDN.
+         EN: AOS is stored locally so it works without a connection or CDN. -->
+    <link rel="stylesheet" href="assets/aos/aos.css" />
+
+    <!-- ES: Aplicar el tema antes del primer render para evitar parpadeos.
+         EN: Apply the theme before the first render to prevent a flash. -->
+    <script>
+      (() => {
+        let preference = "auto";
+        try {
+          preference = localStorage.getItem("nova-barber-theme") || preference;
+        } catch (error) {
+          /* ES: Algunos navegadores bloquean localStorage al usar file://.
+             EN: Some browsers block localStorage when using file://. */
+        }
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+        document.documentElement.dataset.theme = preference === "auto" ? systemTheme : preference;
+        document.documentElement.dataset.themePreference = preference;
+      })();
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Nova Barber Studio | Basic Landing Page Demo",
+        "description": "A fictional bilingual barber landing page concept with direct contact CTAs.",
+        "url": "https://nova-barber.pages.dev/",
+        "inLanguage": ["en", "es"],
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Nova Barber Studio",
+          "url": "https://nova-barber.pages.dev/"
+        },
+        "creator": {
+          "@type": "Organization",
+          "name": "Ariel FyB Labs",
+          "url": "https://github.com/CoderX396/modern-landing-showcase"
+        }
+      }
+    </script>
+    <script src="assets/aos/aos.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container nav-bar">
+        <a class="brand" href="#home" aria-label="Nova Barber Studio home">
+          <span class="brand-mark" aria-hidden="true">N</span>
+          <span>NOVA</span><span class="brand-accent">BARBER</span>
+        </a>
+
+        <nav id="site-navigation" class="site-nav" aria-label="Main navigation">
+          <a href="#home" data-i18n="navHome">Home</a>
+          <a href="#services" data-i18n="navServices">Services</a>
+          <a href="#booking" data-i18n="navBooking">Book now</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button
+            id="language-toggle"
+            class="utility-button language-button"
+            type="button"
+            aria-label="Switch language"
+          >
+            <span aria-hidden="true">◉</span><span class="language-label">ES</span>
+          </button>
+          <button
+            id="theme-toggle"
+            class="utility-button theme-button"
+            type="button"
+            aria-label="Change theme"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true" class="theme-icon">◐</span><span class="theme-label">Auto</span>
+          </button>
+          <a
+            class="fiverr-header-link"
+            href="https://es.fiverr.com/s/6YlPaRB"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="headerFiverr"
+          >
+            Hire on Fiverr
+          </a>
+          <button
+            class="menu-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="site-navigation"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ES: Sección 1/3: hero y llamadas a contacto directo.
+           EN: Section 1/3: hero and direct-contact calls to action. -->
+      <section id="home" class="hero section">
+        <div class="container hero-grid">
+          <div class="hero-copy" data-aos="fade-up">
+            <p class="eyebrow" data-i18n="heroEyebrow" data-i18n-stable>Fictional barber studio · Portfolio concept</p>
+            <h1 data-i18n-html="heroTitle" data-i18n-stable>Sharp cuts.<br /><span>Zero guesswork.</span></h1>
+            <p class="intro" data-i18n="heroText" data-i18n-stable>
+              A focused neighborhood studio for clean fades, precise beard work, and an appointment that starts on time.
+            </p>
+            <div class="hero-actions">
+              <a
+                class="button button-primary"
+                href="https://wa.me/15550123456?text=Hi%20Nova%20Barber%2C%20I%20would%20like%20to%20book%20an%20appointment."
+                target="_blank"
+                rel="noopener noreferrer"
+                data-i18n-html="heroWhatsApp"
+              >
+                Book on WhatsApp <span aria-hidden="true">↗</span>
+              </a>
+              <a
+                class="button button-secondary"
+                href="mailto:hello@novabarber.example?subject=Appointment%20request"
+                data-i18n="heroEmail"
+              >
+                Email the studio
+              </a>
+            </div>
+            <ul class="quick-details" aria-label="Studio details">
+              <li data-i18n="detailLocation">📍 Brooklyn, NY</li>
+              <li data-i18n="detailHours">🕘 Mon–Sat</li>
+              <li data-i18n="detailWalkins">✂ Walk-ins welcome</li>
+            </ul>
+          </div>
+
+          <!-- ES: Reemplazar esta foto con una imagen aprobada/licenciada del cliente.
+               EN: Replace this photo with the client's approved/licensed image. -->
+          <div class="studio-visual" data-aos="fade-left" data-tilt role="img" aria-label="Barber studio photo">
+            <img
+              class="studio-photo"
+              src="https://images.unsplash.com/photo-1622287162716-f311baa1a2b8?auto=format&fit=crop&w=1200&q=85"
+              alt="Barber giving a precision haircut"
+              data-i18n-alt="visualAlt"
+            />
+            <span class="visual-scrim" aria-hidden="true"></span>
+            <div class="visual-topline">
+              <span class="visual-logo"><span>NOVA</span><span class="brand-accent">BARBER</span></span>
+              <span class="visual-badge" data-i18n="visualBadge">Studio 01</span>
+            </div>
+            <div class="visual-copy">
+              <span class="visual-kicker" data-i18n="visualKicker">Local barber studio</span>
+              <p data-i18n="visualTitle" data-i18n-stable>Precision in every detail</p>
+              <span data-i18n="visualText">Haircuts · Beard care · Full grooming</span>
+            </div>
+            <span class="visual-stamp" aria-hidden="true">NB</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ES: Sección 2/3: servicios presionables que llevan a la reserva.
+           EN: Section 2/3: clickable services that lead to booking. -->
+      <section id="services" class="services section">
+        <div class="container services-layout">
+          <div class="services-heading" data-aos="fade-up">
+            <p class="eyebrow" data-i18n="servicesEyebrow" data-i18n-stable>Signature services</p>
+            <h2 data-i18n-html="servicesTitle" data-i18n-stable>Everything you need.<br />Nothing you don’t.</h2>
+            <p data-i18n="servicesText" data-i18n-stable>
+              Clear service cards help visitors understand the offer before they contact the business.
+            </p>
+          </div>
+
+          <div class="service-list">
+            <div class="service-reveal" data-aos="fade-up" data-aos-delay="100">
+              <a class="service-card" href="#booking" data-tilt data-i18n-aria="serviceOneLink">
+                <span class="number" aria-hidden="true">01</span>
+                <div>
+                  <h3 data-i18n="serviceOneTitle" data-i18n-stable>Precision cut</h3>
+                  <p data-i18n="serviceOneText" data-i18n-stable>Consultation, tailored cut, styling, and finishing.</p>
+                </div>
+                <strong data-i18n="serviceOnePrice">From $35</strong>
+                <span class="service-arrow" aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <div class="service-reveal" data-aos="fade-up" data-aos-delay="200">
+              <a class="service-card" href="#booking" data-tilt data-i18n-aria="serviceTwoLink">
+                <span class="number" aria-hidden="true">02</span>
+                <div>
+                  <h3 data-i18n="serviceTwoTitle" data-i18n-stable>Fade + beard</h3>
+                  <p data-i18n="serviceTwoText" data-i18n-stable>Clean fade, beard shaping, and a precise line-up.</p>
+                </div>
+                <strong data-i18n="serviceTwoPrice">From $55</strong>
+                <span class="service-arrow" aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <div class="service-reveal" data-aos="fade-up" data-aos-delay="300">
+              <a class="service-card" href="#booking" data-tilt data-i18n-aria="serviceThreeLink">
+                <span class="number" aria-hidden="true">03</span>
+                <div>
+                  <h3 data-i18n="serviceThreeTitle" data-i18n-stable>Express clean-up</h3>
+                  <p data-i18n="serviceThreeText" data-i18n-stable>Neckline, edges, and beard detail between cuts.</p>
+                </div>
+                <strong data-i18n="serviceThreePrice">From $25</strong>
+                <span class="service-arrow" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ES: Sección 3/3: CTA directo; sin formulario, CAPTCHA, comentarios ni backend.
+           EN: Section 3/3: direct CTA; no form, CAPTCHA, comments or backend. -->
+      <section id="booking" class="booking section">
+        <div class="container booking-panel" data-aos="fade-up">
+          <div class="booking-intro">
+            <p class="eyebrow" data-i18n="bookingEyebrow" data-i18n-stable>Direct contact</p>
+            <h2 data-i18n="bookingTitle" data-i18n-stable>Ready when you are.</h2>
+            <p data-i18n="bookingText" data-i18n-stable>
+              Choose the contact channel that works for you. This Basic demo keeps booking direct: WhatsApp, email, and social links.
+            </p>
+          </div>
+          <div class="booking-side">
+            <div class="booking-actions">
+              <a
+                class="button button-primary"
+                href="https://wa.me/15550123456?text=Hi%20Nova%20Barber%2C%20I%20would%20like%20to%20book%20an%20appointment."
+                target="_blank"
+                rel="noopener noreferrer"
+                data-i18n-html="bookingWhatsApp"
+              >
+                Message on WhatsApp <span aria-hidden="true">↗</span>
+              </a>
+              <a class="text-link" href="mailto:hello@novabarber.example?subject=Appointment%20request">hello@novabarber.example</a>
+              <div class="social-links" aria-label="Example social links">
+                <a href="#booking" aria-label="Example Instagram profile">IG</a>
+                <a href="#booking" aria-label="Example Facebook profile">FB</a>
+                <a href="#booking" aria-label="Example TikTok profile">TK</a>
+              </div>
+            </div>
+            <div class="location-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="location-heading">
+                <div>
+                  <p class="eyebrow" data-i18n="locationEyebrow">Visit the studio</p>
+                  <h3 data-i18n="locationTitle" data-i18n-stable>A simple route to a sharper look.</h3>
+                </div>
+                <span class="location-pin" aria-hidden="true">⌖</span>
+              </div>
+              <p class="location-note" data-i18n="locationText" data-i18n-stable>Demo location in Santo Domingo. Replace the map and address with the client's real details.</p>
+              <div class="map-frame">
+                <iframe
+                  title="Demo barber studio location in Brooklyn, New York"
+                  src="https://www.google.com/maps?q=40.6782,-73.9442&z=14&output=embed"
+                  loading="lazy"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                ></iframe>
+                <span class="map-label" data-i18n="mapLabel">Fictional demo location</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container video-showcase" data-aos="fade-up" data-aos-delay="150">
+          <div class="video-copy">
+            <p class="eyebrow" data-i18n="videoEyebrow">Barbershop atmosphere</p>
+            <h3 data-i18n="videoTitle" data-i18n-stable>Real barbering. Just press play.</h3>
+            <p data-i18n="videoText" data-i18n-stable>A real barbershop B-roll video with music gives the page a stronger sense of place than a static banner.</p>
+            <span class="video-note" data-i18n="videoNote" data-i18n-stable>Replace this embed with a licensed video supplied by the client.</span>
+          </div>
+          <div class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/W18jsNa8KmA?rel=0&modestbranding=1&playsinline=1"
+              title="Cinematic barbershop B-roll video"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              data-i18n-title="videoLabel"
+            ></iframe>
+            <div class="video-local-panel">
+              <strong data-i18n="videoLocalTitle">Local preview detected</strong>
+              <span data-i18n="videoLocalText">YouTube needs a web origin to load inside an iframe.</span>
+              <a class="button button-primary" href="https://www.youtube.com/watch?v=W18jsNa8KmA" target="_blank" rel="noopener noreferrer" data-i18n="videoOpen">Open video on YouTube ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <a class="brand" href="#home" aria-label="Nova Barber Studio home">
+            <span class="brand-mark" aria-hidden="true">N</span>
+            <span>NOVA</span><span class="brand-accent">BARBER</span>
+          </a>
+          <p data-i18n="footerCopy" data-i18n-stable>
+            Fictional portfolio concept by Ariel FyB Labs. Basic scope: 3 sections, responsive design, direct-contact CTAs, social links, basic on-page SEO, and clean source code.
+          </p>
+        </div>
+        <div class="creator-links" aria-label="Ariel FyB Labs links">
+          <a class="creator-fiverr" href="https://es.fiverr.com/s/6YlPaRB" target="_blank" rel="noopener noreferrer" data-i18n="footerFiverr">Hire on Fiverr</a>
+          <a class="creator-github" href="https://github.com/CoderX396/modern-landing-showcase" target="_blank" rel="noopener noreferrer" data-i18n="footerGitHub">View GitHub Portfolio</a>
+          <a class="creator-cloudflare" href="https://titanium-fitness.pages.dev/" target="_blank" rel="noopener noreferrer" data-i18n="footerCloudflare">Cloudflare Demo</a>
+        </div>
+      </div>
+    </footer>
+
+    <a
+      class="floating-whatsapp"
+      href="https://wa.me/15550123456?text=Hi%20Nova%20Barber%2C%20I%20would%20like%20to%20book%20an%20appointment."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Book through WhatsApp"
+      data-i18n-aria="floatingWhatsApp"
+    >
+      <svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.84L3.8 20.5l4.3-.9A8.5 8.5 0 1 0 12 3.5Z"></path>
+        <path d="M8.7 8.2c.3-.4.8-.4 1.2-.1l1.1.9c.4.3.4.8.2 1.2l-.5.8a6.6 6.6 0 0 0 2.9 2.9l.8-.5c.4-.2.9-.2 1.2.2l.9 1.1c.3.4.3.9-.1 1.2l-.7.7c-.4.4-1 .5-1.5.3a10.8 10.8 0 0 1-6-6c-.2-.5-.1-1.1.3-1.5l.7-.7Z"></path>
+      </svg>
+    </a>
+  </body>
+</html>
