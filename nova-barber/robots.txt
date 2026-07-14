@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# ES/EN: Replace this URL if Cloudflare assigns a different Pages domain.
+Sitemap: https://nova-barber.pages.dev/sitemap.xml
