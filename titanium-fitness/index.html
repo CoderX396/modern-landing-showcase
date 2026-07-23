@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titanium Fitness | Forge Your Absolute Power</title>
+    <meta name="description" content="High-performance gym facilities, 5,000kg in free weights and certified coaches ready to break your plateau.">
+ 
+    <!-- EN: Open Graph / Twitter Card — controls the preview card shown when this
+            link is shared on WhatsApp, X, LinkedIn, etc. Without og:image, most
+            platforms show no thumbnail at all, which reads as unfinished for a
+            portfolio piece. Reusing the hero photo at a wide crop (1200x630 is
+            the standard OG size) instead of a separate asset to keep this simple.
+       ES: Open Graph / Twitter Card — controla la tarjeta de preview que se
+            muestra al compartir este link por WhatsApp, X, LinkedIn, etc. Sin
+            og:image, la mayoría de las plataformas no muestran ninguna miniatura,
+            lo cual se lee como incompleto para una pieza de portfolio. Reutilizo
+            la foto del hero en un recorte ancho (1200x630 es el tamaño estándar
+            de OG) en vez de un asset aparte, para mantener esto simple. -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Titanium Fitness | Forge Your Absolute Power">
+    <meta property="og:description" content="Premium fitness facilities for serious athletes.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=1200&h=630&q=80">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://titanium-fitness.pages.dev/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Titanium Fitness | Forge Your Absolute Power">
+    <meta name="twitter:description" content="Premium fitness facilities for serious athletes.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=1200&h=630&q=80">
+ 
+    <!-- EN: Canonical URL — tells Google "this is the one true address for this
+            page", avoiding duplicate-content confusion if it's ever reachable
+            from more than one URL (e.g. with/without trailing slash, a custom
+            domain later, etc). Update this if you ever move off *.pages.dev.
+       ES: URL canónica — le dice a Google "esta es la única dirección real de
+            esta página", evitando confusión de contenido duplicado si alguna vez
+            queda accesible desde más de una URL (con/sin barra final, un dominio
+            propio más adelante, etc). Actualizala si en algún momento te vas de
+            *.pages.dev. -->
+    <link rel="canonical" href="https://titanium-fitness.pages.dev/">
+ 
+    <!-- EN: Favicon (inline SVG, no extra file) + a real apple-touch-icon PNG for
+            when someone adds this page to their iPhone home screen — iOS ignores
+            SVG favicons for that specific use, it needs a PNG.
+       ES: Favicon (SVG inline, sin archivo aparte) + un apple-touch-icon PNG de
+            verdad para cuando alguien agrega esta página a la pantalla de inicio
+            del iPhone — iOS ignora los favicons SVG para ese uso puntual,
+            necesita un PNG. -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%92%AA</text></svg>">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+ 
+    <!-- Preconnect: acelera la primera conexión a los orígenes externos críticos -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preconnect" href="https://challenges.cloudflare.com" crossorigin>
+ 
+    <link rel="stylesheet" href="styles.css">
+ 
+    <!-- EN: AOS (Animate On Scroll) — small (~4kb gzipped) scroll-triggered
+            animation library. Elements with data-aos="..." fade/slide in once
+            as they enter the viewport; nothing animates until scrolled to, so
+            it doesn't add ongoing CPU/GPU cost. Used sparingly here (section
+            titles, cards, plan cards) — over-animating starts to look like a
+            generic template instead of a considered choice.
+       ES: AOS (Animate On Scroll) — librería chica (~4kb gzipped) de animaciones
+            al hacer scroll. Los elementos con data-aos="..." aparecen con
+            fade/slide una sola vez al entrar en el viewport; nada se anima hasta
+            que se scrollea hasta ahí, así que no suma costo de CPU/GPU
+            permanente. Usada con moderación acá (títulos de sección, tarjetas,
+            tarjetas de planes) — abusar de esto empieza a verse como plantilla
+            genérica en vez de una elección pensada. -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+ 
+    <!-- EN: Cloudflare Turnstile — bot/spam protection for the lead form. The
+            sitekey used below (see the .cf-turnstile div near the form) is
+            PUBLIC by design, meant to be visible in page source — it only
+            identifies which widget config to use. The matching SECRET key lives
+            only in Google Apps Script Properties and is never sent to the browser.
+       ES: Cloudflare Turnstile — protección anti-bot/spam para el form de leads.
+            La sitekey usada abajo (ver el div .cf-turnstile cerca del form) es
+            PÚBLICA a propósito, está pensada para verse en el código fuente —
+            solo identifica qué config de widget usar. La clave SECRETA vive
+            únicamente en las Propiedades del Script de Google Apps Script y
+            nunca se envía al navegador. -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+ 
+    <!-- defer: deja de bloquear el parseo del HTML; se ejecuta en orden junto a script.js -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
+</head>
+<body>
+ 
+    <header>
+        <div class="nav-container">
+            <a href="#hero" class="logo">TITANIUM<span>FIT</span></a>
+            <div class="nav-links">
+                <nav>
+                    <a href="#services" data-i18n="nav_equipment">Equipment</a>
+                    <a href="#plans" data-i18n="nav_plans">Memberships</a>
+                    <a href="#contact" data-i18n="nav_contact">Free Pass</a>
+                </nav>
+                <button id="btn-idioma" aria-label="Switch language" data-i18n-aria="lang_btn_aria">🌐 ES</button>
+                <button id="btn-tema" aria-label="Toggle theme" data-i18n-aria="theme_btn_aria">🌙 Dark</button>
+                <a href="https://es.fiverr.com/s/qDE81rd" id="btn-fiverr-header" target="_blank" rel="noopener" data-i18n-aria="fiverr_header_aria" aria-label="Ver mis servicios en Fiverr" data-i18n="fiverr_header_button">Fiverr</a>
+            </div>
+        </div>
+    </header>
+ 
+    <main>
+        <section id="hero">
+            <div data-aos="fade-right" data-aos-duration="700">
+                <h1 data-i18n-html="hero_title">Forge Your<br><span>Absolute Power</span></h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">High-performance facilities, 5,000kg in free weights, and certified coaches ready to break your plateau.</p>
+                <a href="#contact" class="cta-button" data-i18n="hero_cta">Claim Your Free Day Pass</a>
+            </div>
+            <div class="hero-photo" data-aos="fade-left" data-aos-duration="700" data-aos-delay="150">
+                <img
+                    src="https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=650&q=80"
+                    srcset="https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=650&q=80 650w,
+                            https://images.unsplash.com/photo-1734630341082-0fec0e10126c?auto=format&fit=crop&w=1300&q=80 1300w"
+                    sizes="(max-width: 768px) 100vw, 560px"
+                    alt="Rack of dumbbells in a modern gym"
+                    data-i18n-alt="hero_img_alt"
+                    fetchpriority="high"
+                    loading="eager">
+            </div>
+        </section>
+ 
+        <section id="video">
+            <h2 class="section-title" data-i18n="video_title" data-aos="fade-up">See Titanium Fitness in Action</h2>
+            <div class="video-wrapper">
+                <video
+                    controls
+                    loop
+                    preload="metadata"
+                    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:1rem;">
+                    <source src="Video/Video_Fit.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+ 
+        <section id="services">
+            <h2 class="section-title" data-i18n="services_title" data-aos="fade-up">Physical Engineering</h2>
+            <div class="grid-servicios">
+                <div class="card" data-aos="fade-up" data-aos-delay="0">
+                    <h3 data-i18n="service1_title">Strength Zone</h3>
+                    <p data-i18n="service1_desc">Olympic-calibrated power racks, dumbbells up to 60kg, and impact-absorbing lifting platforms.</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
+                    <h3 data-i18n="service2_title">Cross & Hybrid</h3>
+                    <p data-i18n="service2_desc">25m synthetic turf for sled work, assault bikes, Concept2 rowers, and a professional gymnastics rig.</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <h3 data-i18n="service3_title">Recovery</h3>
+                    <p data-i18n="service3_desc">Programmable ice immersion tubs and percussion massage guns, free to use in the locker rooms.</p>
+                </div>
+            </div>
+        </section>
+ 
+        <section id="plans">
+            <h2 class="section-title" data-i18n="plans_title" data-aos="fade-up">Invest in Your Biology</h2>
+            <div class="grid-planes">
+                <div class="plan-card" data-aos="fade-up">
+                    <div>
+                        <h3 data-i18n="plan_base_title">Base Plan</h3>
+                        <div class="precio">$35<span data-i18n="per_month">/mo</span></div>
+                        <ul class="lista-beneficios">
+                            <li data-i18n="plan_base_f1">Access 6:00 AM – 4:00 PM</li>
+                            <li data-i18n="plan_base_f2">Weights and cardio area</li>
+                            <li data-i18n="plan_base_f3">Showers and lockers</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="cta-button" data-plan="base" data-i18n="plan_base_cta" style="background-color: #334155;">Select Base</a>
+                </div>
+ 
+                <div class="plan-card vip" data-aos="fade-up" data-aos-delay="150">
+                    <div class="badge-vip" data-i18n="plan_vip_badge">Recommended</div>
+                    <div>
+                        <h3 data-i18n="plan_vip_title">Total VIP Plan</h3>
+                        <div class="precio">$55<span data-i18n="per_month">/mo</span></div>
+                        <ul class="lista-beneficios">
+                            <li data-i18n="plan_vip_f1">24/7 access with biometric scan</li>
+                            <li data-i18n="plan_vip_f2">All group classes included</li>
+                            <li data-i18n="plan_vip_f3">1 InBody body scan per month</li>
+                            <li data-i18n="plan_vip_f4">Guest pass every Friday</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="cta-button" data-plan="vip" data-i18n="plan_vip_cta">Select VIP</a>
+                </div>
+            </div>
+        </section>
+ 
+        <section id="contact">
+            <div class="form-container" data-aos="fade-up">
+                <h2 class="section-title" style="margin-bottom: 1rem;" data-i18n="contact_title">Claim Your Free Pass Today</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2.5rem;" data-i18n="contact_subtitle">Enter your details and we'll email you your access pass.</p>
+                <!-- EN: Explicit notice that this is a portfolio demo and no real personal data
+                        is required — addresses the fact that the form does collect and email
+                        whatever a visitor types in, even in demo mode.
+                   ES: Aviso explícito de que esto es un demo de portfolio y no hace falta ingresar
+                        datos reales — atiende el hecho de que el form sí recolecta y envía por
+                        mail lo que el visitante escriba, incluso en modo demo. -->
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: -1.75rem; margin-bottom: 2rem; font-style: italic;" data-i18n="contact_demo_notice">This is a portfolio demo — feel free to use fictional data, no need to enter anything real.</p>
+ 
+                <form id="lead-form">
+                    <!-- Honeypot: hidden from people, commonly filled by simple form bots. -->
+                    <div class="website-field" aria-hidden="true">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+                    <!-- EN: First and last names travel separately to the secure backend so the
+                            autoresponder can greet the lead by first name.
+                       ES: Nombre y apellido viajan separados al backend seguro para que el
+                            autorrespondedor pueda saludar al contacto por su nombre. -->
+                    <div class="form-group form-row">
+                        <input type="text" id="firstName" name="firstName" placeholder="First name" data-i18n-placeholder="form_firstname_ph" required>
+                        <input type="text" id="lastName" name="lastName" placeholder="Last name" data-i18n-placeholder="form_lastname_ph" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your email address" data-i18n-placeholder="form_email_ph" required>
+                    </div>
+                    <div class="form-group">
+                        <!-- EN: type="tel" + inputmode keeps the numeric keypad on mobile; JS auto-formats
+                                as (XXX) XXX-XXXX while typing (see script.js formatPhoneInput()).
+                           ES: type="tel" + inputmode mantiene el teclado numérico en móvil; el JS
+                                formatea automáticamente a (XXX) XXX-XXXX mientras se escribe (ver
+                                formatPhoneInput() en script.js). -->
+                        <input type="tel" id="phone" name="phone" inputmode="tel" placeholder="WhatsApp number" data-i18n-placeholder="form_phone_ph" maxlength="20" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="plan" name="plan" required>
+                            <option value="" disabled selected data-i18n="form_plan_ph">Which plan interests you?</option>
+                            <option value="base" data-i18n="plan_base_title">Base Plan</option>
+                            <option value="vip" data-i18n="plan_vip_title">Total VIP Plan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="goal" name="goal" required>
+                            <option value="" disabled selected data-i18n="form_goal_ph">What's your main goal?</option>
+                            <option value="fat_loss" data-i18n="form_goal_fatloss">Body recomposition (Fat loss)</option>
+                            <option value="muscle" data-i18n="form_goal_muscle">Hypertrophy (Build muscle)</option>
+                            <option value="health" data-i18n="form_goal_health">Aerobic capacity / General health</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="comment" name="comment" rows="4" minlength="200" maxlength="1000" data-i18n-placeholder="form_comment_ph" placeholder="What do you think of this page, or is there anything you'd like to tell us?" required></textarea>
+                        <!-- EN: id="comment-char-count" is updated live by script.js; the min/max
+                                thresholds (200 / 1000) live in the MIN_COMMENT_CHARS / MAX_COMMENT_CHARS
+                                constants there, change them in one place, not here. The "(min. 200)"
+                                text is a deliberate second signal alongside the amber color, so the
+                                minimum isn't only communicated by color (accessibility + clarity).
+                           ES: id="comment-char-count" se actualiza en vivo desde script.js; los
+                                umbrales min/max (200 / 1000) viven en las constantes MIN_COMMENT_CHARS /
+                                MAX_COMMENT_CHARS de ese archivo, cambialos ahí, no acá. El texto
+                                "(mín. 200)" es una segunda señal deliberada junto con el color ámbar,
+                                para que el mínimo no se comunique solo por color (accesibilidad y claridad). -->
+                        <div class="feedback-counter"><span id="comment-char-count">0</span> / 1000 <span data-i18n="form_comment_chars">characters</span> <span id="comment-min-hint" data-i18n="form_comment_min_hint">(min. 200)</span></div>
+                    </div>
+                    <!-- EN: Turnstile widget — renders itself (script in <head>), shows a
+                            checkbox/challenge only if Cloudflare thinks it's needed (often
+                            fully invisible for real visitors in "Managed" mode). It creates a
+                            hidden input named "cf-turnstile-response" inside this div once
+                            solved; script.js reads that value and sends it to /api/lead, which
+                            verifies it server-side before accepting the lead.
+                            data-sitekey is the PUBLIC key — safe to have here in the HTML.
+                       ES: Widget de Turnstile — se renderiza solo (script en el <head>), muestra
+                            un checkbox/desafío solo si Cloudflare cree que hace falta (a menudo
+                            totalmente invisible para visitantes reales en modo "Managed"). Crea
+                            un input oculto llamado "cf-turnstile-response" dentro de este div una
+                            vez resuelto; script.js lee ese valor y lo manda a /api/lead, que lo
+                            verifica del lado servidor antes de aceptar el lead.
+                            data-sitekey es la clave PÚBLICA — está bien que esté acá en el HTML. -->
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAADvRe6FetZaglr7o" data-theme="auto"></div>
+                    <button type="submit" class="cta-button" id="btn-submit" data-i18n="form_submit" style="width: 100%;">
+                        Generate My Pass
+                    </button>
+                </form>
+ 
+                <!-- EN: aria-live="polite" — this text changes on its own (submission
+                        count, then a live countdown) without the visitor ever focusing
+                        this element. Without aria-live, a screen reader user would never
+                        hear these updates at all.
+                   ES: aria-live="polite" — este texto cambia solo (cantidad de envíos,
+                        después una cuenta regresiva en vivo) sin que el visitante enfoque
+                        este elemento. Sin aria-live, alguien usando lector de pantalla
+                        nunca se enteraría de estas actualizaciones. -->
+                <p id="lead-limit-info" class="limit-info" aria-live="polite"></p>
+ 
+                <div class="form-success" id="form-success">
+                    <div class="success-icon">✅</div>
+                    <p class="success-title" data-i18n="success_title">Pass generated!</p>
+                    <p class="success-sub" data-i18n="success_sub">Check your email — we've sent your access details. See you at the gym.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+ 
+    <footer>
+        <p data-i18n-html="footer_text">© 2026 <span>TitaniumFit</span>. All rights reserved. — Built by <span>ArielSyncLabs</span></p>
+ 
+        <!-- New Portfolio Buttons -->
+        <!-- EN: Each of these 3 links is independent — change the href to point wherever you
+                want. #livedemo-btn currently points straight at this project's live Cloudflare
+                URL; if later you build a general portfolio hub page (one page listing all your
+                projects, each linking out to its own live demo), just change #livedemo-btn's
+                href here to point at that hub page instead of directly at this demo. Same idea
+                applies to #github-btn/#fiverr-btn if those destinations ever change.
+           ES: Estos 3 links son independientes — cambiá el href para que apunte a donde quieras.
+                #livedemo-btn ahora mismo apunta directo a la URL en vivo de este proyecto en
+                Cloudflare; si más adelante armás una página general de portfolio (una página que
+                liste todos tus proyectos, cada uno con su propio link a su demo en vivo), solo
+                cambiá el href de #livedemo-btn acá para que apunte a esa página hub en vez de
+                directo a este demo. La misma idea aplica a #github-btn/#fiverr-btn si esos
+                destinos cambian alguna vez. -->
+        <div class="portfolio-buttons">
+            <a href="https://es.fiverr.com/s/qDE81rd" id="fiverr-btn" target="_blank" rel="noopener" class="portfolio-button fiverr-btn" data-i18n="fiverr_button">Hire Me on Fiverr</a>
+            <a href="https://github.com/CoderX396/modern-landing-showcase" id="github-btn" target="_blank" rel="noopener" class="portfolio-button github-btn" data-i18n="github_button">View GitHub Portfolio</a>
+            <a href="https://ariel-fyb-labs.pages.dev/" id="livedemo-btn" target="_blank" rel="noopener" class="portfolio-button livedemo-btn" data-i18n="livedemo_button">Live Demo (Cloudflare)</a>
+        </div>
+    </footer>
+ 
+    <!--
+        WHATSAPP BUTTON
+        This number is a clearly fake placeholder for the portfolio demo
+        (555 = fictional in US numbering). For a real client, replace it
+        with THEIR business WhatsApp number — never your own personal one.
+    -->
+    <a
+        class="whatsapp-float"
+        href="https://wa.me/15550123456?text=Hi!%20I'd%20like%20to%20know%20more%20about%20Titanium%20Fitness"
+        target="_blank"
+        rel="noopener"
+        aria-label="Chat on WhatsApp"
+        data-i18n-aria="whatsapp_aria">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path fill="#ffffff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path fill="#ffffff" d="M12.001 2C6.478 2 2 6.478 2 12c0 1.865.505 3.62 1.386 5.128L2 22l4.977-1.363C8.435 21.472 10.166 22 12.001 22c5.523 0 10.001-4.477 10.001-10S17.524 2 12.001 2zm0 18.199c-1.638 0-3.187-.443-4.53-1.246l-.323-.19-3.4.918.923-3.345-.209-.343C3.53 14.596 3.08 13.322 3.08 12c0-4.925 4.004-8.93 8.921-8.93 4.917 0 8.921 4.005 8.921 8.93 0 4.925-4.004 8.199-8.921 8.199z"/>
+        </svg>
+    </a>
+ 
+    <script src="script.js" defer></script>
+ 
+</body>
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  EN: This is a one-page site, so there's only one <url> entry — the sections
+      (#services, #plans, #contact, etc.) are anchors on this same page, not
+      separate pages, so they don't get their own sitemap entries.
+      If the future "general portfolio hub" page happens, add a new <url>
+      block here pointing at it too.
+  ES: Este es un sitio de una sola página, así que hay una sola entrada
+      <url> — las secciones (#services, #plans, #contact, etc.) son anclas
+      dentro de esta misma página, no páginas separadas, así que no llevan
+      su propia entrada en el sitemap.
+      Si en el futuro se hace esa página general de portfolio/hub, agregá un
+      bloque <url> nuevo acá apuntando también a esa página.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://titanium-fitness.pages.dev/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
