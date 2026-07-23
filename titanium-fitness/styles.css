@@ -535,4 +535,12 @@ footer span { color: var(--accent); }
 .limit-info.limit-warning { color: #ef4444; }
 
  
+/* Bot honeypot: remains in the form DOM but outside the visible viewport. */
+.website-field {
+    position: absolute !important;
+    left: -10000px !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+}
 

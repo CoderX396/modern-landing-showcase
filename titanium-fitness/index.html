@@ -76,19 +76,16 @@
             sitekey used below (see the .cf-turnstile div near the form) is
             PUBLIC by design, meant to be visible in page source — it only
             identifies which widget config to use. The matching SECRET key lives
-            only server-side, as an environment variable in Cloudflare Pages —
-            see functions/api/lead.js. Never put the secret key here.
+            only in Google Apps Script Properties and is never sent to the browser.
        ES: Cloudflare Turnstile — protección anti-bot/spam para el form de leads.
             La sitekey usada abajo (ver el div .cf-turnstile cerca del form) es
             PÚBLICA a propósito, está pensada para verse en el código fuente —
-            solo identifica qué config de widget usar. La clave SECRETA que la
-            acompaña vive solo del lado servidor, como variable de entorno en
-            Cloudflare Pages — ver functions/api/lead.js. Nunca pongas la clave
-            secreta acá. -->
+            solo identifica qué config de widget usar. La clave SECRETA vive
+            únicamente en las Propiedades del Script de Google Apps Script y
+            nunca se envía al navegador. -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
  
     <!-- defer: deja de bloquear el parseo del HTML; se ejecuta en orden junto a script.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
 </head>
 <body>
@@ -206,10 +203,15 @@
                 <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: -1.75rem; margin-bottom: 2rem; font-style: italic;" data-i18n="contact_demo_notice">This is a portfolio demo — feel free to use fictional data, no need to enter anything real.</p>
  
                 <form id="lead-form">
-                    <!-- EN: First/last name split into two fields so EmailJS templates can greet
-                            the lead by first name only ("Hi, {{firstName}}") instead of the full string.
-                       ES: Nombre y apellido separados en dos campos para que las plantillas de EmailJS
-                            puedan saludar solo con el nombre ("Hola, {{firstName}}") en vez del string completo. -->
+                    <!-- Honeypot: hidden from people, commonly filled by simple form bots. -->
+                    <div class="website-field" aria-hidden="true">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+                    <!-- EN: First and last names travel separately to the secure backend so the
+                            autoresponder can greet the lead by first name.
+                       ES: Nombre y apellido viajan separados al backend seguro para que el
+                            autorrespondedor pueda saludar al contacto por su nombre. -->
                     <div class="form-group form-row">
                         <input type="text" id="firstName" name="firstName" placeholder="First name" data-i18n-placeholder="form_firstname_ph" required>
                         <input type="text" id="lastName" name="lastName" placeholder="Last name" data-i18n-placeholder="form_lastname_ph" required>
@@ -340,5 +342,3 @@
  
 </body>
 </html>
-
-

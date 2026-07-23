@@ -2,7 +2,7 @@
    TITANIUM FITNESS — MAIN SCRIPT
    1. Translations (EN/ES)
    2. Dark/Light toggle
-   3. EmailJS lead form (comment field, min/max length, phone auto-format,
+   3. Secure lead form (comment field, min/max length, phone auto-format,
       split first/last name, server-side rate-limit with a live countdown)
    4. Auto-fill plan from pricing cards
  
@@ -254,20 +254,22 @@ themeBtn.addEventListener('click', () => {
 applyTranslations(currentLang);
  
 // =====================
-// 3. EMAILJS (ARQUITECTURA UNIFICADA)
+// 3. SECURE LEAD FORM / FORMULARIO SEGURO
 // =====================
-const EMAILJS_PUBLIC_KEY  = 'RDMUeLcSb6keXwqhG';
-const EMAILJS_SERVICE_ID  = 'service_93mh7mj';
-const EMAILJS_TEMPLATE_ID = 'template_hh14ehp'; // Ya trae admin notification + auto-reply al cliente
- 
-emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
- 
 const MAX_COMMENT_CHARS = 1000;
 // EN: Minimum length so the comment is actually useful feedback and not a stray
 //     keystroke. Adjust this single constant if a different floor is wanted.
 // ES: Longitud mínima para que el comentario sea feedback útil y no una tecla
 //     suelta. Ajustá esta única constante si se quiere otro piso.
 const MIN_COMMENT_CHARS = 200;
+let pendingSubmissionId = null;
+
+function createSubmissionId() {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+        return window.crypto.randomUUID();
+    }
+    return `${Date.now()}-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`;
+}
 const commentInput = document.getElementById('comment');
 const commentCharCount = document.getElementById('comment-char-count');
 const commentMinHint = document.getElementById('comment-min-hint');
@@ -437,7 +439,11 @@ function renderLimitInfo(remaining, resetAt) {
 // Consulta el estado al cargar la página (no gasta intento)
 fetch('/api/lead')
     .then(res => res.json())
-    .then(data => renderLimitInfo(data.remaining, data.resetAt))
+    .then(data => {
+        if (typeof data.remaining === 'number') {
+            renderLimitInfo(data.remaining, data.resetAt);
+        }
+    })
     .catch(() => {}); // si falla, simplemente no se muestra el contador
  
 document.getElementById('lead-form').addEventListener('submit', async function (e) {
@@ -477,15 +483,10 @@ document.getElementById('lead-form').addEventListener('submit', async function (
     btn.classList.add('btn-loading');
     btn.disabled = true;
  
-    // EN: firstName/lastName travel separately (so an EmailJS template can address
-    //     the lead by first name only) plus a combined "name" for templates/logs
-    //     that still expect one full-name string. Update your EmailJS template
-    //     to use {{firstName}} / {{lastName}} directly if you want that.
-    // ES: firstName/lastName viajan separados (para que una plantilla de EmailJS
-    //     pueda saludar solo con el nombre) más un "name" combinado para
-    //     plantillas/logs que todavía esperan un string de nombre completo.
-    //     Actualizá tu plantilla de EmailJS para usar {{firstName}} / {{lastName}}
-    //     directamente si querés eso.
+    // EN: Keep first/last name separate for the Apps Script email templates,
+    //     while retaining a combined name for backwards compatibility.
+    // ES: Nombre y apellido se mantienen separados para las plantillas de Apps
+    //     Script, conservando el nombre completo por compatibilidad.
     const firstName = document.getElementById('firstName').value.trim();
     const lastName  = document.getElementById('lastName').value.trim();
  
@@ -510,120 +511,61 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         return;
     }
  
-    const params = {
+    if (!pendingSubmissionId) pendingSubmissionId = createSubmissionId();
+
+    const leadPayload = {
+        submissionId: pendingSubmissionId,
         firstName: firstName,
         lastName:  lastName,
-        name:      `${firstName} ${lastName}`.trim(),
         email:     document.getElementById('email').value,
         phone:     document.getElementById('phone').value,
         plan:      document.getElementById('plan').value,
         goal:      document.getElementById('goal').value,
         comment:   comment,
+        website:   document.getElementById('website').value,
+        turnstileToken,
     };
- 
-    // EN: turnstileToken travels as a separate top-level field (not inside
-    //     `params`) because `params` is also what gets sent to EmailJS —
-    //     EmailJS doesn't need the captcha token, only /api/lead does.
-    // ES: turnstileToken viaja como campo separado (no dentro de `params`)
-    //     porque `params` es también lo que se manda a EmailJS — EmailJS no
-    //     necesita el token del captcha, solo lo necesita /api/lead.
-    const leadPayload = { ...params, turnstileToken };
- 
-    // Paso 1: chequeo de rate-limit server-side (3 envíos / 24h por IP,
-    // ver functions/api/lead.js). Esto evita que alguien gaste la cuota
-    // mensual de EmailJS mandando el formulario en loop — el navegador
-    // solo no puede aplicar este límite de forma confiable.
+
+    // EN: /api/lead is the only submission channel. It relays the request to
+    //     Google Apps Script, where Turnstile, rate limiting, validation and
+    //     email delivery are handled. No provider key exists in the browser.
+    // ES: /api/lead es el único canal de envío. Reenvía la solicitud a Google
+    //     Apps Script, donde se gestionan Turnstile, el límite, la validación y
+    //     los correos. No existe ninguna clave del proveedor en el navegador.
     try {
-        const rateRes = await fetch('/api/lead', {
+        const leadRes = await fetch('/api/lead', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(leadPayload),
         });
- 
-        const rateData = await rateRes.clone().json().catch(() => null);
-        // EN: BUG FIX — only render the counter/countdown when the response
-        //     actually carries numeric remaining/resetAt. A validation error
-        //     (400) has no such fields, and calling renderLimitInfo with
-        //     undefined values used to produce "You can try again in NaNs."
-        // ES: FIX DEL BUG — solo renderizar el contador/cuenta regresiva
-        //     cuando la respuesta trae remaining/resetAt numéricos de
-        //     verdad. Un error de validación (400) no tiene esos campos, y
-        //     llamar a renderLimitInfo con valores undefined generaba
-        //     "You can try again in NaNs."
-        if (rateData && typeof rateData.remaining === 'number') {
-            renderLimitInfo(rateData.remaining, rateData.resetAt);
+
+        const leadData = await leadRes.json().catch(() => null);
+        if (leadData && typeof leadData.remaining === 'number') {
+            renderLimitInfo(leadData.remaining, leadData.resetAt);
         }
- 
-        if (rateRes.status === 429) {
-            showLeadError(translations[currentLang].form_submit_rate_limited, formContainer, formSuccess);
-            btn.textContent = originalBtnText;
-            btn.classList.remove('btn-loading');
-            btn.disabled = false;
-            return;
+
+        if (!leadRes.ok || !leadData || leadData.success !== true) {
+            let message = translations[currentLang].form_submit_error;
+            if (leadRes.status === 429 || leadData?.error === 'rate_limited') {
+                message = translations[currentLang].form_submit_rate_limited;
+            } else if (leadData?.error === 'captcha_failed') {
+                message = translations[currentLang].form_captcha_failed;
+            }
+            throw Object.assign(new Error('lead_submission_failed'), { userMessage: message });
         }
- 
-        // EN: A failed captcha check is the one 400 we can't just "let through" —
-        //     doing so would defeat the whole point of adding Turnstile, since
-        //     the email would still get sent via EmailJS below regardless of
-        //     the server rejecting it. Every other 400 (redundant validation
-        //     already covered by client-side checks) still falls through on
-        //     purpose, per the comment below.
-        // ES: Un captcha fallido es el único 400 que no podemos simplemente
-        //     "dejar pasar" — hacerlo anularía el sentido de haber agregado
-        //     Turnstile, porque el email se mandaría igual por EmailJS más
-        //     abajo aunque el servidor lo haya rechazado. Cualquier otro 400
-        //     (validación redundante ya cubierta del lado cliente) sigue de
-        //     largo a propósito, según el comentario de abajo.
-        if (rateData && rateData.error === 'captcha_failed') {
-            showLeadError(translations[currentLang].form_captcha_failed, formContainer, formSuccess);
-            btn.textContent = originalBtnText;
-            btn.classList.remove('btn-loading');
-            btn.disabled = false;
-            return;
-        }
-        // Si /api/lead devuelve otro error (400, etc.) igual seguimos:
-        // el problema más probable ahí es de validación server-side
-        // redundante, no queremos perder un lead real por eso.
-    } catch (rateError) {
-        // Si el endpoint no responde (caída puntual de la Function),
-        // dejamos pasar el envío: preferimos arriesgarnos a perder el
-        // rate-limit por un rato antes que perder un lead real por un
-        // problema de infraestructura ajeno al visitante.
-        console.warn('Lead rate-limit check failed, proceeding anyway:', rateError);
-    }
- 
-    try {
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+
         document.getElementById('lead-form').style.display = 'none';
         formSuccess.classList.add('visible');
+        pendingSubmissionId = null;
     } catch (error) {
-        console.error('EmailJS error:', error);
-        let errorMessage = translations[currentLang].form_submit_error;
- 
-        // Quota exceeded (EmailJS free plan: 200/month)
-        if (error && (error.status === 429 || (error.text && error.text.toLowerCase().includes('limit')))) {
-            errorMessage = currentLang === 'es'
-                ? 'El formulario ha alcanzado su límite mensual. Contáctanos directamente por WhatsApp.'
-                : 'The contact form has reached its monthly limit. Please reach us directly via WhatsApp.';
-        } else if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-            errorMessage = translations[currentLang].form_submit_network_error;
-        } else if (error && error.status) {
-            errorMessage += ` (Status: ${error.status})`;
-        } else if (error && error.text) {
-            errorMessage += ` (${error.text})`;
-        }
- 
- 
-        // Display error message to the user
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'form-error-message';
-        errorDiv.style.color = 'red';
-        errorDiv.style.textAlign = 'center';
-        errorDiv.style.marginTop = '1rem';
-        errorDiv.textContent = errorMessage;
-        formContainer.insertBefore(errorDiv, formSuccess); // Insert before success message
- 
-        btn.textContent = originalBtnText; // Revert to original text
+        console.error('Lead submission error:', error);
+        const errorMessage = error.userMessage
+            || (error instanceof TypeError
+                ? translations[currentLang].form_submit_network_error
+                : translations[currentLang].form_submit_error);
+        showLeadError(errorMessage, formContainer, formSuccess);
+        if (window.turnstile) window.turnstile.reset();
+        btn.textContent = originalBtnText;
         btn.classList.remove('btn-loading');
         btn.disabled = false;
     }
@@ -682,5 +624,3 @@ if (typeof AOS !== 'undefined') {
         disable: 'reduced-motion',
     });
 }
-
-
