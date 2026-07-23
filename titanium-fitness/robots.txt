@@ -1,8 +1,0 @@
-# EN: Allows all search engine crawlers to index the whole site, and points
-#     them at the sitemap below so they discover pages faster.
-# ES: Permite que todos los crawlers de buscadores indexen todo el sitio, y
-#     les indica el sitemap de abajo para que descubran páginas más rápido.
-User-agent: *
-Allow: /
-
-Sitemap: https://titanium-fitness.pages.dev/sitemap.xml
