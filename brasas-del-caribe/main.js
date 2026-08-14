@@ -207,12 +207,12 @@
       });
       if (!valid) return;
 
-      // Simulate UI state
+      // Update button text cleanly
       submitBtn.disabled = true;
       const originalText = submitBtn.querySelector('.btn-text');
       const lang = currentLang;
       if (originalText) {
-        originalText.textContent = lang === 'es' ? 'Procesando reserva…' : 'Processing reservation…';
+        originalText.textContent = lang === 'es' ? 'Procesando reserva...' : 'Processing reservation...';
       }
 
       // Generate WhatsApp message
@@ -235,7 +235,11 @@
             if (val !== undefined) el.textContent = val;
           });
         }
-      }, 900);
+        // Auto open WhatsApp in new tab
+        try {
+          window.open(waUrl, '_blank', 'noopener,noreferrer');
+        } catch (_) {}
+      }, 700);
     });
   }
 
