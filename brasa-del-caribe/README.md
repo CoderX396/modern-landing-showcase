@@ -1,4 +1,4 @@
-# Brasa del Caribe — Restaurant & Grill Landing Demo
+# Brasas del Caribe — Restaurant & Grill Landing Demo
 
 Demo de landing page premium para restaurante de mariscos y brasa caribeña, desarrollada por **Ariel FyB Labs**.
 
