@@ -6,16 +6,19 @@ Demo de landing page premium para restaurante de mariscos y brasa caribeña, des
 
 ```text
 brasas-del-caribe/
-├── index.html          # Estructura semántica + Schema.org / SEO
-├── style.css           # Sistema de diseño, temas y animaciones fluidas
-├── main.js             # Theme toggle, i18n (ES/EN anti-rebote), FAB y reservas
-├── robots.txt          # Configuración de rastreo para buscadores
-├── sitemap.xml         # Mapa de sitio optimizado
-├── hero.jpg            # Fotografía principal del restaurante
-├── dish-lobster.jpg    # Langosta a la brasa
-├── dish-ceviche.jpg    # Ceviche marinero
-├── dish-octopus.jpg    # Pulpo a la plancha
-└── dish-fish.jpg       # Pescado del día
+├── index.html                      # Estructura semántica + Schema.org / SEO
+├── style.css                       # Sistema de diseño, temas y animaciones fluidas
+├── main.js                         # Theme toggle, i18n (ES/EN anti-rebote), FAB y reservas
+├── google9c41d89a0c874875.html     # Verificación de Google Search Console
+├── robots.txt                      # Configuración de rastreo para buscadores
+├── sitemap.xml                     # Mapa de sitio optimizado
+├── README.md                       # Documentación de la demo
+└── img/                            # Fotografías de alta resolución
+    ├── hero.jpg                    # Fotografía principal del restaurante
+    ├── dish-lobster.jpg            # Langosta a la brasa
+    ├── dish-ceviche.jpg            # Ceviche marinero
+    ├── dish-octopus.jpg            # Pulpo a la plancha
+    └── dish-fish.jpg               # Pescado del día
 ```
 
 ## Características
