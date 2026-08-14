@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brasas-del-caribe.pages.dev/sitemap.xml

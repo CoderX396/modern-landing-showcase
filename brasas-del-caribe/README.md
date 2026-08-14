@@ -5,7 +5,7 @@ Demo de landing page premium para restaurante de mariscos y brasa caribeña, des
 ## Estructura
 
 ```text
-brasa-del-caribe/
+brasas-del-caribe/
 ├── index.html          # Estructura semántica + Schema.org / SEO
 ├── style.css           # Sistema de diseño, temas y animaciones fluidas
 ├── main.js             # Theme toggle, i18n (ES/EN anti-rebote), FAB y reservas
