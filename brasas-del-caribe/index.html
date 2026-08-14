@@ -3,12 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Brasas del Caribe | Mariscos Premium</title>
+  <title>Brasas del Caribe | Mariscos Premium &amp; Brasa Artesanal</title>
+  
+  <!-- SEO & Verification -->
   <link rel="sitemap" type="application/xml" href="sitemap.xml" />
-  <meta name="description" content="Mariscos frescos del Caribe, brasa artesanal y sabores auténticos. Reserva tu mesa en Brasas del Caribe." />
+  <meta name="description" content="Mariscos frescos del Caribe, brasa artesanal y sabores auténticos. Reserva tu mesa en Brasas del Caribe, Santo Domingo." />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28' fill='none'%3E%3Cpath d='M14 3C9 3 5 7 5 12c0 3.5 2 6.5 5 8l-1 5h10l-1-5c3-1.5 5-4.5 5-8 0-5-4-9-9-9z' stroke='%23d4a853' stroke-width='2' fill='none'/%3E%3Cpath d='M10 13 Q14 9 18 13' stroke='%23d4a853' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" />
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="restaurant.restaurant" />
+  <meta property="og:title" content="Brasas del Caribe | Mariscos Premium &amp; Brasa Artesanal" />
+  <meta property="og:description" content="Mariscos frescos del Caribe, brasa artesanal y sabores auténticos. Reserva tu mesa online." />
+  <meta property="og:image" content="https://brasas-del-caribe.pages.dev/img/hero.jpg" />
+  <meta property="og:url" content="https://brasas-del-caribe.pages.dev/" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Brasas del Caribe | Mariscos Premium" />
+  <meta name="twitter:description" content="Mariscos frescos del Caribe, brasa artesanal y sabores auténticos." />
+  <meta name="twitter:image" content="https://brasas-del-caribe.pages.dev/img/hero.jpg" />
+
+  <!-- Schema.org JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Brasas del Caribe",
+    "image": "https://brasas-del-caribe.pages.dev/img/hero.jpg",
+    "description": "Mariscos frescos del Caribe, brasa artesanal y sabores auténticos en Santo Domingo.",
+    "servesCuisine": ["Seafood", "Caribbean", "Grill"],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. del Mar 120",
+      "addressLocality": "Santo Domingo",
+      "addressCountry": "DO"
+    },
+    "telephone": "+18090000000",
+    "openingHours": "Mo-Su 12:00-23:00",
+    "priceRange": "$$",
+    "url": "https://brasas-del-caribe.pages.dev/"
+  }
+  </script>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -27,6 +70,7 @@
       <div class="nav-center">
         <a href="#menu" class="nav-link" data-es="Menú" data-en="Menu">Menú</a>
         <a href="#historia" class="nav-link" data-es="Historia" data-en="Story">Historia</a>
+        <a href="#delivery" class="nav-link" data-es="Delivery" data-en="Delivery">Delivery</a>
         <a href="#reserva" class="nav-link" data-es="Reservar" data-en="Reserve">Reservar</a>
       </div>
 
@@ -61,6 +105,7 @@
     <div class="mobile-menu" id="mobile-menu" hidden>
       <a href="#menu" class="mobile-link" data-es="Menú" data-en="Menu">Menú</a>
       <a href="#historia" class="mobile-link" data-es="Historia" data-en="Story">Historia</a>
+      <a href="#delivery" class="mobile-link" data-es="Delivery" data-en="Delivery">Delivery</a>
       <a href="#reserva" class="mobile-link" data-es="Reservar" data-en="Reserve">Reservar</a>
     </div>
   </nav>
@@ -111,7 +156,7 @@
 
       <!-- Hero image -->
       <div class="hero-illustration" aria-hidden="true">
-        <img src="img/hero.jpg" alt="" width="520" height="380" style="width:min(520px,90vw);height:auto;border-radius:1.5rem;object-fit:cover;opacity:0.88;box-shadow:0 32px 80px rgba(0,0,0,0.55);" loading="eager" decoding="async" />
+        <img src="img/hero.jpg" alt="Plato gourmet de langosta a la brasa en Brasas del Caribe" width="520" height="380" style="width:min(520px,90vw);height:auto;border-radius:1.5rem;object-fit:cover;opacity:0.92;box-shadow:0 32px 80px rgba(0,0,0,0.55);" loading="eager" decoding="async" />
       </div>
     </section>
 
@@ -129,8 +174,8 @@
 
           <!-- Dish 1: Langosta a la brasa -->
           <article class="dish-card" data-reveal data-reveal-delay="0">
-            <div class="dish-illustration" aria-hidden="true">
-              <img src="img/dish-lobster.jpg" alt="" loading="lazy" decoding="async" />
+            <div class="dish-illustration">
+              <img src="img/dish-lobster.jpg" alt="Langosta entera a la brasa con mantequilla de ajo y limón" loading="lazy" decoding="async" />
             </div>
             <div class="dish-info">
               <div class="dish-header">
@@ -146,8 +191,8 @@
 
           <!-- Dish 2: Ceviche marinero -->
           <article class="dish-card" data-reveal data-reveal-delay="100">
-            <div class="dish-illustration" aria-hidden="true">
-              <img src="img/dish-ceviche.jpg" alt="" loading="lazy" decoding="async" />
+            <div class="dish-illustration">
+              <img src="img/dish-ceviche.jpg" alt="Ceviche marinero fresco con pescado blanco, camarones y pulpo" loading="lazy" decoding="async" />
             </div>
             <div class="dish-info">
               <div class="dish-header">
@@ -163,8 +208,8 @@
 
           <!-- Dish 3: Pulpo a la plancha -->
           <article class="dish-card" data-reveal data-reveal-delay="200">
-            <div class="dish-illustration" aria-hidden="true">
-              <img src="img/dish-octopus.jpg" alt="" loading="lazy" decoding="async" />
+            <div class="dish-illustration">
+              <img src="img/dish-octopus.jpg" alt="Pulpo a la plancha con chimichurri de hierbas y papas al romero" loading="lazy" decoding="async" />
             </div>
             <div class="dish-info">
               <div class="dish-header">
@@ -180,8 +225,8 @@
 
           <!-- Dish 4: Pescado del día -->
           <article class="dish-card" data-reveal data-reveal-delay="300">
-            <div class="dish-illustration" aria-hidden="true">
-              <img src="img/dish-fish.jpg" alt="" loading="lazy" decoding="async" />
+            <div class="dish-illustration">
+              <img src="img/dish-fish.jpg" alt="Pescado fresco del día a la brasa con guarnición de temporada" loading="lazy" decoding="async" />
             </div>
             <div class="dish-info">
               <div class="dish-header">
@@ -255,36 +300,43 @@
         <div class="delivery-text">
           <p class="section-eyebrow" data-es="A tu puerta" data-en="At your door">A tu puerta</p>
           <hr class="section-divider" style="margin-inline:0" />
-          <span class="badge-soon" data-es="Próximamente" data-en="Coming soon">Próximamente</span>
-          <h2 class="section-title" data-es="Delivery en camino" data-en="Delivery on the way">Delivery en camino</h2>
-          <p data-es="Estamos integrando delivery directo para que disfrutes de Brasas del Caribe desde casa. Pronto disponible en las principales plataformas." data-en="We are integrating direct delivery so you can enjoy Brasas del Caribe from home. Coming soon on the main platforms.">Estamos integrando delivery directo para que disfrutes de Brasas del Caribe desde casa. Pronto disponible en las principales plataformas.</p>
+          <span class="badge-soon" data-es="Disponible &amp; Próximamente" data-en="Available &amp; Coming soon">Disponible &amp; Próximamente</span>
+          <h2 class="section-title" data-es="Delivery &amp; Pedidos Online" data-en="Delivery &amp; Online Orders">Delivery &amp; Pedidos Online</h2>
+          <p data-es="Disfruta de Brasas del Caribe desde la comodidad de tu hogar. Puedes ordenar por WhatsApp directo o a través de las principales plataformas." data-en="Enjoy Brasas del Caribe from the comfort of your home. You can order directly via WhatsApp or through major platforms.">Disfruta de Brasas del Caribe desde la comodidad de tu hogar. Puedes ordenar por WhatsApp directo o a través de las principales plataformas.</p>
+          
           <div class="delivery-apps">
-            <button class="delivery-app-btn" aria-label="PedidosYa" type="button">
-              <div class="app-icon" style="background:#ff4f1f22;">🛵</div>
-              <div class="app-text">
-                <span class="app-name">PedidosYa</span>
-                <span class="app-sub" data-es="Disponible muy pronto" data-en="Available very soon">Disponible muy pronto</span>
-              </div>
-              <svg class="app-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </button>
-            <button class="delivery-app-btn" aria-label="Uber Eats" type="button">
-              <div class="app-icon" style="background:#00c17222;">🍔</div>
-              <div class="app-text">
-                <span class="app-name">Uber Eats</span>
-                <span class="app-sub" data-es="En proceso de registro" data-en="Registration in progress">En proceso de registro</span>
-              </div>
-              <svg class="app-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </button>
-            <button class="delivery-app-btn" aria-label="WhatsApp Directo" type="button">
+            <!-- WhatsApp Directo -->
+            <a href="https://wa.me/18090000000?text=Hola%2C%20deseo%20hacer%20un%20pedido%20a%20domicilio%20en%20Brasas%20del%20Caribe" target="_blank" rel="noopener noreferrer" class="delivery-app-btn" aria-label="Pedir por WhatsApp">
               <div class="app-icon" style="background:#25d36622;">📱</div>
               <div class="app-text">
                 <span class="app-name">WhatsApp Directo</span>
-                <span class="app-sub" data-es="Pedidos por WhatsApp ya disponibles" data-en="WhatsApp orders available now">Pedidos por WhatsApp ya disponibles</span>
+                <span class="app-sub" data-es="Pedidos inmediatos y atención personalizada" data-en="Instant orders &amp; custom attention">Pedidos inmediatos y atención personalizada</span>
               </div>
               <svg class="app-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </button>
+            </a>
+
+            <!-- PedidosYa -->
+            <a href="https://www.pedidosya.com.do/" target="_blank" rel="noopener noreferrer" class="delivery-app-btn" aria-label="PedidosYa">
+              <div class="app-icon" style="background:#ff4f1f22;">🛵</div>
+              <div class="app-text">
+                <span class="app-name">PedidosYa</span>
+                <span class="app-sub" data-es="Próximamente disponible en app" data-en="Coming soon on app">Próximamente disponible en app</span>
+              </div>
+              <svg class="app-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+
+            <!-- Uber Eats -->
+            <a href="https://www.ubereats.com/" target="_blank" rel="noopener noreferrer" class="delivery-app-btn" aria-label="Uber Eats">
+              <div class="app-icon" style="background:#00c17222;">🍔</div>
+              <div class="app-text">
+                <span class="app-name">Uber Eats</span>
+                <span class="app-sub" data-es="En proceso de integración" data-en="Integration in progress">En proceso de integración</span>
+              </div>
+              <svg class="app-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
           </div>
         </div>
+
         <div class="delivery-illustration" aria-hidden="true">
           <svg viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
             <!-- Scooter body -->
@@ -308,7 +360,7 @@
             <rect x="82" y="110" width="62" height="50" rx="6" stroke="currentColor" stroke-width="2" fill="none"/>
             <path d="M82 128 L144 128" stroke="currentColor" stroke-width="1" opacity="0.4"/>
             <!-- Branding on box -->
-            <text x="113" y="123" text-anchor="middle" font-size="7" fill="currentColor" opacity="0.6" font-family="serif">M&amp;B</text>
+            <text x="113" y="123" text-anchor="middle" font-size="7" fill="currentColor" opacity="0.75" font-family="'Cormorant Garamond', Georgia, serif" font-weight="bold">BDC</text>
             <!-- Steam from food -->
             <path d="M95 108 Q98 98 95 88 Q98 78 95 68" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.35"/>
             <path d="M110 108 Q114 96 110 85 Q114 74 110 63" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.35"/>
@@ -380,7 +432,11 @@
             <path d="M14 24 L21 31 L34 17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <h3 data-es="¡Reserva recibida!" data-en="Reservation received!">¡Reserva recibida!</h3>
-          <p data-es="Te contactaremos por WhatsApp en menos de 1 hora para confirmar tu mesa." data-en="We'll contact you via WhatsApp within 1 hour to confirm your table.">Te contactaremos por WhatsApp en menos de 1 hora para confirmar tu mesa.</p>
+          <p data-es="Hemos preparado los datos de tu reserva. Puedes confirmar directamente por WhatsApp con un solo clic:" data-en="We have prepared your reservation details. You can confirm directly on WhatsApp with one click:">Hemos preparado los datos de tu reserva. Puedes confirmar directamente por WhatsApp con un solo clic:</p>
+          <a href="#" id="whatsapp-confirm-link" target="_blank" rel="noopener noreferrer" class="btn-primary" style="margin-top:0.5rem;display:inline-flex;gap:0.5rem;align-items:center;">
+            <span>📱</span>
+            <span data-es="Enviar reserva a WhatsApp" data-en="Send reservation to WhatsApp">Enviar reserva a WhatsApp</span>
+          </a>
         </div>
       </div>
     </section>

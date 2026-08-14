@@ -1,6 +1,6 @@
 /* ============================================================
-   MAR & BRASA — main.js
-   Handles: theme, language, mobile menu, scroll reveal, form
+   BRASAS DEL CARIBE — main.js
+   Handles: theme, language, mobile menu, scroll reveal, form & WhatsApp
    ============================================================ */
 
 (function () {
@@ -9,7 +9,7 @@
   /* ── 1. THEME ── */
   const html        = document.documentElement;
   const themeBtn    = document.getElementById('theme-toggle');
-  const THEME_KEY   = 'mb-theme';
+  const THEME_KEY   = 'bdc-theme';
 
   function applyTheme(theme, animate) {
     const set = () => {
@@ -24,7 +24,7 @@
   }
 
   // Init from storage or system preference
-  const storedTheme = localStorage.getItem(THEME_KEY);
+  const storedTheme = localStorage.getItem(THEME_KEY) || localStorage.getItem('mb-theme');
   if (storedTheme === 'light' || storedTheme === 'dark') {
     applyTheme(storedTheme, false);
   } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
@@ -37,7 +37,7 @@
 
 
   /* ── 2. LANGUAGE ── */
-  const LANG_KEY  = 'mb-lang';
+  const LANG_KEY  = 'bdc-lang';
   const btnES     = document.getElementById('btn-es');
   const btnEN     = document.getElementById('btn-en');
   let currentLang = 'es';
@@ -91,7 +91,7 @@
   }
 
   // Init language
-  const storedLang = localStorage.getItem(LANG_KEY);
+  const storedLang = localStorage.getItem(LANG_KEY) || localStorage.getItem('mb-lang');
   if (storedLang === 'es' || storedLang === 'en') {
     applyLang(storedLang, false);
   } else {
@@ -150,9 +150,9 @@
   }
 
 
-  /* ── 5. NAVBAR SHADOW ON SCROLL ── */
-  const nav = document.getElementById('nav');
-  const fab = document.getElementById('fab-reserve');
+  /* ── 5. NAVBAR SHADOW ON SCROLL & FAB ── */
+  const nav  = document.getElementById('nav');
+  const fab  = document.getElementById('fab-reserve');
   const hero = document.getElementById('hero');
 
   if (nav || fab) {
@@ -167,15 +167,15 @@
       }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    // Run once on load
     onScroll();
   }
 
 
-  /* ── 6. RESERVATION FORM ── */
+  /* ── 6. RESERVATION FORM & WHATSAPP INTEGRATION ── */
   const form        = document.getElementById('reserva-form');
   const successBox  = document.getElementById('reserva-success');
   const submitBtn   = document.getElementById('submit-btn');
+  const waLink      = document.getElementById('whatsapp-confirm-link');
 
   if (form) {
     // Set min date to today
@@ -193,8 +193,13 @@
 
       // Basic validation
       let valid = true;
-      ['nombre', 'telefono', 'fecha', 'personas'].forEach(name => {
-        const field = form.elements[name];
+      const nombreVal   = form.elements['nombre']?.value.trim();
+      const telVal      = form.elements['telefono']?.value.trim();
+      const fechaVal    = form.elements['fecha']?.value.trim();
+      const personasVal = form.elements['personas']?.value.trim();
+      const notaVal     = form.elements['nota']?.value.trim() || '';
+
+      [form.elements['nombre'], form.elements['telefono'], form.elements['fecha'], form.elements['personas']].forEach(field => {
         if (!field || !field.value.trim()) {
           valid = false;
           field && field.focus();
@@ -202,28 +207,38 @@
       });
       if (!valid) return;
 
-      // Simulate sending (portfolio demo)
+      // Simulate UI state
       submitBtn.disabled = true;
       const originalText = submitBtn.querySelector('.btn-text');
       const lang = currentLang;
       if (originalText) {
-        originalText.textContent = lang === 'es' ? 'Enviando…' : 'Sending…';
+        originalText.textContent = lang === 'es' ? 'Procesando reserva…' : 'Processing reservation…';
+      }
+
+      // Generate WhatsApp message
+      const msgES = `Hola Brasas del Caribe, deseo confirmar una reserva:\n- Nombre: ${nombreVal}\n- Teléfono: ${telVal}\n- Personas: ${personasVal}\n- Fecha: ${fechaVal}${notaVal ? `\n- Nota: ${notaVal}` : ''}`;
+      const msgEN = `Hello Brasas del Caribe, I'd like to confirm a reservation:\n- Name: ${nombreVal}\n- Phone: ${telVal}\n- Guests: ${personasVal}\n- Date: ${fechaVal}${notaVal ? `\n- Note: ${notaVal}` : ''}`;
+      const finalMsg = lang === 'es' ? msgES : msgEN;
+      const waUrl = `https://wa.me/18090000000?text=${encodeURIComponent(finalMsg)}`;
+
+      if (waLink) {
+        waLink.href = waUrl;
       }
 
       setTimeout(() => {
-        form.hidden  = true;
-        if (successBox) successBox.hidden = false;
-
-        // Apply current language to success box
+        form.hidden = true;
         if (successBox) {
+          successBox.hidden = false;
+          // Apply current language
           successBox.querySelectorAll('[data-es]').forEach(el => {
             const val = el.dataset[lang];
             if (val !== undefined) el.textContent = val;
           });
         }
-      }, 1200);
+      }, 900);
     });
   }
+
 
   /* ── 7. PARTICLES ── */
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
