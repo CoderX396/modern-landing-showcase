@@ -72,6 +72,7 @@
         <a href="#historia" class="nav-link" data-es="Historia" data-en="Story">Historia</a>
         <a href="#delivery" class="nav-link" data-es="Delivery" data-en="Delivery">Delivery</a>
         <a href="#reserva" class="nav-link" data-es="Reservar" data-en="Reserve">Reservar</a>
+        <a href="#ubicacion" class="nav-link" data-es="Ubicación" data-en="Location">Ubicación</a>
       </div>
 
       <div class="nav-actions">
@@ -442,6 +443,77 @@
     </section>
 
   </main>
+
+    <!-- LOCATION / MAP -->
+    <section class="location-section" id="ubicacion">
+      <div class="container" data-reveal>
+        <div class="section-header">
+          <p class="section-eyebrow" data-es="Cómo llegar" data-en="How to find us">Cómo llegar</p>
+          <hr class="section-divider" />
+          <h2 class="section-title" data-es="Encuéntranos" data-en="Find us">Encuéntranos</h2>
+          <p class="section-desc" data-es="Estamos en el corazón de Santo Domingo, con fácil acceso y estacionamiento disponible." data-en="We are in the heart of Santo Domingo, with easy access and available parking.">Estamos en el corazón de Santo Domingo, con fácil acceso y estacionamiento disponible.</p>
+        </div>
+
+        <div class="location-grid">
+          <!-- Map embed -->
+          <div class="map-wrapper" aria-label="Mapa de ubicación de Brasas del Caribe">
+            <iframe
+              id="google-map-embed"
+              title="Ubicación Brasas del Caribe – Santo Domingo"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60717.96785628178!2d-69.98906684863281!3d18.486057399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea561c3f3f3f3f3%3A0x1!2sSanto%20Domingo%2C%20Rep%C3%BAblica%20Dominicana!5e0!3m2!1ses!2sdo!4v1700000000000!5m2!1ses!2sdo"
+              width="100%"
+              height="420"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+
+          <!-- Info cards -->
+          <div class="location-info">
+            <div class="loc-card" data-reveal>
+              <div class="loc-icon">📍</div>
+              <div class="loc-detail">
+                <h3 data-es="Dirección" data-en="Address">Dirección</h3>
+                <p data-es="Av. del Mar 120, Gazcue" data-en="Av. del Mar 120, Gazcue">Av. del Mar 120, Gazcue</p>
+                <p data-es="Santo Domingo, República Dominicana" data-en="Santo Domingo, Dominican Republic">Santo Domingo, República Dominicana</p>
+              </div>
+            </div>
+            <div class="loc-card" data-reveal>
+              <div class="loc-icon">🕐</div>
+              <div class="loc-detail">
+                <h3 data-es="Horario" data-en="Hours">Horario</h3>
+                <p data-es="Lunes – Jueves: 12 pm – 10 pm" data-en="Monday – Thursday: 12 pm – 10 pm">Lunes – Jueves: 12 pm – 10 pm</p>
+                <p data-es="Viernes – Domingo: 12 pm – 12 am" data-en="Friday – Sunday: 12 pm – 12 am">Viernes – Domingo: 12 pm – 12 am</p>
+              </div>
+            </div>
+            <div class="loc-card" data-reveal>
+              <div class="loc-icon">📞</div>
+              <div class="loc-detail">
+                <h3 data-es="Contacto" data-en="Contact">Contacto</h3>
+                <p>+1 809 000 0000</p>
+                <a href="https://wa.me/18090000000" target="_blank" rel="noopener noreferrer" class="loc-wa-btn">
+                  <span>💬</span>
+                  <span data-es="Escríbenos por WhatsApp" data-en="Message us on WhatsApp">Escríbenos por WhatsApp</span>
+                </a>
+              </div>
+            </div>
+            <a
+              href="https://www.google.com/maps/search/Santo+Domingo+Restaurante+Mariscos"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary"
+              id="open-maps-btn"
+              style="margin-top:0.5rem;justify-content:center;gap:0.5rem;"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span data-es="Abrir en Google Maps" data-en="Open in Google Maps">Abrir en Google Maps</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 
   <!-- FOOTER -->
   <footer class="footer">
