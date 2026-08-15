@@ -761,12 +761,15 @@ ul { list-style: none; }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-size: clamp(2.2rem, 8vw, 5.5rem);
   line-height: 1.05;
   font-weight: 700;
   color: var(--text);
   /* Stable height to prevent language-switch reflow */
   min-height: 2.2em;
+}
+@media (min-width: 480px) {
+  .hero-title { font-size: clamp(2.6rem, 7vw, 5.5rem); }
 }
 .hero-title em {
   display: block;
@@ -798,13 +801,26 @@ ul { list-style: none; }
 }
 .trust-sep { color: var(--gold); opacity: 0.5; }
 
-/* Hero illustration — SVG plate */
+/* Hero illustration — hidden on mobile to avoid text collision */
 .hero-illustration {
+  display: none;   /* hidden by default (mobile-first) */
   position: absolute;
   right: -2rem;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
+}
+/* Show only when there's enough horizontal space */
+@media (min-width: 700px) {
+  .hero-illustration {
+    display: block;
+    right: 1%;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-illustration {
+    right: 5%;
+  }
 }
 .hero-plate-svg {
   width: min(420px, 70vw);
@@ -813,8 +829,8 @@ ul { list-style: none; }
   opacity: 0.18;
   filter: drop-shadow(0 0 30px rgba(212,168,83,0.15));
 }
-@media (min-width: 768px)  { .hero-illustration { right: 2%; } .hero-plate-svg { opacity: 0.25; } }
-@media (min-width: 1024px) { .hero-illustration { right: 6%; } .hero-plate-svg { opacity: 0.35; width: min(480px, 45vw); } }
+@media (min-width: 768px)  { .hero-plate-svg { opacity: 0.25; } }
+@media (min-width: 1024px) { .hero-plate-svg { opacity: 0.35; width: min(480px, 45vw); } }
 
 /* ── BUTTONS ── */
 .btn-primary {
