@@ -259,6 +259,118 @@ ul { list-style: none; }
 .stat:nth-child(2) strong { animation-delay: 0.1s; }
 .stat:nth-child(3) strong { animation-delay: 0.2s; }
 
+/* ============================================================
+   SVG ILLUSTRATION ANIMATIONS
+   ============================================================ */
+
+/* ── Hero plate: gentle float ── */
+@keyframes plate-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.hero-plate-svg {
+  animation: plate-float 5s ease-in-out infinite;
+}
+
+/* ── Steam wisp rise & fade ── */
+@keyframes steam-rise {
+  0%   { opacity: 0;   transform: translateY(0) scaleY(0.7); }
+  20%  { opacity: 0.4; }
+  80%  { opacity: 0.12; }
+  100% { opacity: 0;   transform: translateY(-18px) scaleY(1.15); }
+}
+.steam {
+  opacity: 0;
+  animation: steam-rise 3.5s ease-in-out infinite;
+}
+.steam-1 { animation-delay: 0s; }
+.steam-2 { animation-delay: 1.2s; }
+.steam-3 { animation-delay: 2.4s; }
+
+/* ── Sparkle twinkle ── */
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0;   transform: scale(0.5); }
+  50%      { opacity: 0.5; transform: scale(1.2); }
+}
+.sparkle {
+  opacity: 0;
+  animation: sparkle-twinkle 2.8s ease-in-out infinite;
+}
+.sp-1 { animation-delay: 0s; }
+.sp-2 { animation-delay: 0.7s; }
+.sp-3 { animation-delay: 1.4s; }
+.sp-4 { animation-delay: 2.1s; }
+
+/* ── Flame flicker under plate ── */
+@keyframes flame-flicker {
+  0%, 100% { opacity: 0;   transform: translateY(0) scaleY(0.8); }
+  30%      { opacity: 0.3; transform: translateY(-3px) scaleY(1.1); }
+  70%      { opacity: 0.15; transform: translateY(-5px) scaleY(0.9); }
+}
+.flame {
+  opacity: 0;
+  animation: flame-flicker 2s ease-in-out infinite;
+}
+.fl-1 { animation-delay: 0s; }
+.fl-2 { animation-delay: 0.35s; }
+.fl-3 { animation-delay: 0.7s; }
+
+/* ── Lobster claw subtle open/close ── */
+@keyframes claw-breathe {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(-3deg); }
+}
+.claw-left  { transform-origin: 155px 178px; animation: claw-breathe 4s ease-in-out infinite; }
+.claw-right { transform-origin: 185px 178px; animation: claw-breathe 4s ease-in-out infinite 2s; }
+
+/* ── Antennae sway ── */
+@keyframes antenna-sway {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(4deg); }
+}
+.antenna-l { transform-origin: 158px 175px; animation: antenna-sway 3s ease-in-out infinite; }
+.antenna-r { transform-origin: 182px 175px; animation: antenna-sway 3s ease-in-out infinite 1.5s; }
+
+/* ── Story chef: gentle breathing float ── */
+@keyframes chef-breathe {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-6px) rotate(0.5deg); }
+}
+.story-illustration svg {
+  animation: chef-breathe 5s ease-in-out infinite;
+}
+
+/* ── Delivery scooter: bounce ride ── */
+@keyframes scooter-bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%      { transform: translateY(-4px) rotate(-0.5deg); }
+  75%      { transform: translateY(-2px) rotate(0.3deg); }
+}
+.delivery-illustration svg {
+  animation: scooter-bounce 3s ease-in-out infinite;
+}
+
+/* ── Scooter wheel spin ── */
+@keyframes wheel-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.delivery-illustration svg circle[cx="75"][r="12"]  { transform-origin: 75px 210px;  animation: wheel-spin 2s linear infinite; }
+.delivery-illustration svg circle[cx="225"][r="10"] { transform-origin: 225px 210px; animation: wheel-spin 1.8s linear infinite; }
+
+/* ── Delivery steam wiggle ── */
+@keyframes steam-wiggle {
+  0%, 100% { opacity: 0.35; transform: translateY(0); }
+  50%      { opacity: 0.15; transform: translateY(-6px); }
+}
+.delivery-illustration svg path[d*="Q98 98"],
+.delivery-illustration svg path[d*="Q114 96"],
+.delivery-illustration svg path[d*="Q129 98"] {
+  animation: steam-wiggle 3s ease-in-out infinite;
+}
+.delivery-illustration svg path[d*="Q114 96"] { animation-delay: 0.5s; }
+.delivery-illustration svg path[d*="Q129 98"] { animation-delay: 1s; }
+
 /* ── DELIVERY SECTION ── */
 .delivery-section {
   padding-block: 6rem;
@@ -675,7 +787,7 @@ ul { list-style: none; }
 }
 .trust-sep { color: var(--gold); opacity: 0.5; }
 
-/* Hero illustration — real photo, no gold tint */
+/* Hero illustration — SVG plate */
 .hero-illustration {
   position: absolute;
   right: -2rem;
@@ -683,8 +795,15 @@ ul { list-style: none; }
   transform: translateY(-50%);
   pointer-events: none;
 }
-@media (min-width: 768px)  { .hero-illustration { right: 4%; opacity: 0.22; } }
-@media (min-width: 1024px) { .hero-illustration { right: 8%; opacity: 0.28; } }
+.hero-plate-svg {
+  width: min(420px, 70vw);
+  height: auto;
+  color: var(--gold);
+  opacity: 0.18;
+  filter: drop-shadow(0 0 30px rgba(212,168,83,0.15));
+}
+@media (min-width: 768px)  { .hero-illustration { right: 2%; } .hero-plate-svg { opacity: 0.25; } }
+@media (min-width: 1024px) { .hero-illustration { right: 6%; } .hero-plate-svg { opacity: 0.35; width: min(480px, 45vw); } }
 
 /* ── BUTTONS ── */
 .btn-primary {
