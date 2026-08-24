@@ -1352,22 +1352,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   transform: translateY(-1px);
 }
 
-/* ─── Footer creator links ─── */
+/* ─── Footer creator links bar (full width horizontal row) ─── */
+.creator-links-bar {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 1rem 0;
+}
 .creator-links {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.75rem;
   align-items: center;
-  margin-top: 1rem;
+  justify-content: center;
 }
 .creator-links a {
   display: inline-flex;
   align-items: center;
-  padding: 0.45rem 1rem;
+  padding: 0.45rem 1.1rem;
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 700;
   text-decoration: none;
+  white-space: nowrap;
   transition: opacity 0.2s, transform 0.15s;
 }
 .creator-links a:hover {
