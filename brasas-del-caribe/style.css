@@ -1331,4 +1331,49 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   letter-spacing: 0.02em;
 }
 
+/* ─── Fiverr header button ─── */
+.fiverr-header-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background: #1dbf73;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
+}
+.fiverr-header-link:hover {
+  background: #17a862;
+  transform: translateY(-1px);
+}
 
+/* ─── Footer creator links ─── */
+.creator-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+.creator-links a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.creator-links a:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+.creator-fiverr     { background: #1dbf73; color: #fff; }
+.creator-github     { background: #24292e; color: #fff; }
+.creator-cloudflare { background: #f6821f; color: #fff; }
