@@ -1,6 +1,0 @@
-# Pagina central de demos — Ariel FyB Labs
-User-agent: *
-Allow: /
-
-Sitemap: https://ariel-fyb-labs-demos.pages.dev/sitemap.xml
-Sitemap: https://ariel-fyb-labs-demos.pages.dev/sitemap-index.xml

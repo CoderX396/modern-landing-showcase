@@ -1382,3 +1382,34 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .creator-fiverr     { background: #1dbf73; color: #fff; }
 .creator-github     { background: #24292e; color: #fff; }
 .creator-cloudflare { background: #f6821f; color: #fff; }
+
+
+/* ============================================
+   ENLACES LEGALES DEL PIE
+   Añadido junto con privacidad.html y terminos.html.
+   El formulario de reserva recoge datos personales, así
+   que el visitante necesita dónde leer qué pasa con ellos.
+   ============================================ */
+
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+}
+
+.footer-legal a {
+  color: var(--gold-light);
+  text-decoration: none;
+}
+
+.footer-legal a:hover {
+  color: var(--gold);
+  text-decoration: underline;
+}
+
+.footer-legal span {
+  color: var(--border);
+}

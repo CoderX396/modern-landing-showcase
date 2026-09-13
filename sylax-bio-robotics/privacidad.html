@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Política de Privacidad | SylaxBioRobotics</title>
+  <meta name="description" content="Política de privacidad de SylaxBioRobotics, proyecto académico ficticio. El formulario no envía datos a ningún servidor.">
+  <meta name="author" content="Ariel FyB Labs">
+  <meta name="theme-color" content="#1a365d">
+
+  <!-- Ver nota de INDEXACIÓN en index.html. Para publicar en Google
+       cambia esta línea a: content="index, follow, max-image-preview:large" -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="canonical" href="https://sylax-bio-robotics.pages.dev/privacidad.html">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%A7%AC</text></svg>">
+
+  <script>
+    (function () {
+      document.documentElement.classList.add('tema-cargando');
+      var guardado = localStorage.getItem('sylax_tema');
+      if (!guardado) {
+        guardado = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oscuro' : 'claro';
+      }
+      if (guardado === 'oscuro') {
+        document.documentElement.classList.add('modo-contraste');
+      }
+      window.addEventListener('DOMContentLoaded', function () {
+        document.documentElement.classList.remove('tema-cargando');
+      });
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <div class="aviso-ficcion" role="note">
+    <strong>PROYECTO ACADÉMICO.</strong> SylaxBioRobotics es una empresa ficticia.
+    Los productos, tratamientos y resultados descritos aquí son inventados y no
+    constituyen información médica.
+  </div>
+
+  <header class="sticky-top" role="banner">
+    <nav class="navbar navbar-expand-lg py-2" aria-label="Navegación principal">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <span class="logo-wrap">
+            <img src="img/logo-light.png" alt="" class="logo logo-for-light" width="72" height="72" fetchpriority="high" decoding="async">
+            <img src="img/logo-dark.png" alt="" class="logo logo-for-dark" width="72" height="72" fetchpriority="high" decoding="async">
+          </span>
+          <span class="marca-font">SylaxBioRobotics</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCore" aria-controls="navbarCore" aria-expanded="false" aria-label="Alternar navegación">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarCore">
+          <ul class="navbar-nav align-items-lg-center gap-lg-2">
+            <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="divisiones.html">Tecnología</a></li>
+            <li class="nav-item"><a class="nav-link" href="solicitudes.html">Solicitudes</a></li>
+            <li class="nav-item"><a class="nav-link" href="labs.html">Labs</a></li>
+            <li class="nav-item mt-2 mt-lg-0">
+              <button id="btn-tema" class="btn btn-outline-secondary btn-sm px-3" aria-pressed="false">Modo Oscuro</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="flex-grow-1" id="contenido">
+    <section class="py-5">
+      <div class="container contenedor-ancho py-4">
+        <h1 class="mb-3">Política de Privacidad</h1>
+        <p class="text-muted small mb-4">Última actualización: 13 de septiembre de 2026</p>
+
+        <div class="tarjeta-clinica p-4 mb-4">
+          <p class="mb-2"><strong>Esto es un trabajo de clase.</strong> SylaxBioRobotics
+          no existe como empresa. El sitio se hizo como práctica académica en Talendig.</p>
+          <p class="mb-0"><strong>El formulario no envía nada a ningún lado.</strong> Es la
+          parte más importante de esta página y por eso va primero.</p>
+        </div>
+
+        <h2 class="mt-5 mb-3">1. Quién hizo este sitio</h2>
+        <p class="text-muted">Ariel Pérez, bajo el nombre <strong>Ariel FyB Labs</strong>,
+        Santo Domingo Este, República Dominicana. Contacto:
+        <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>.</p>
+
+        <h2 class="mt-5 mb-3">2. Qué pasa con lo que escribes en Solicitudes</h2>
+        <p class="text-muted">El formulario te pide nombre y apellido, correo, división de
+        interés y un motivo. Con eso no hacemos nada, porque nunca nos llega:</p>
+        <ul class="text-muted">
+          <li>El formulario no tiene <code>action</code>: no se envía a ningún servidor.</li>
+          <li>No hay base de datos, ni hoja de cálculo, ni correo automático, ni backend.</li>
+          <li>La validación corre entera en tu navegador, en <code>app.js</code>.</li>
+          <li>Al pasar la validación solo se oculta el formulario y se muestra un mensaje
+              de éxito. Nada más.</li>
+        </ul>
+        <p class="text-muted">Si cierras la pestaña, esa información desaparece. Nunca
+        salió de tu equipo y nosotros nunca la vimos. Aun así, en el propio formulario
+        te pedimos que uses datos de prueba y no tu correo real: no hace falta.</p>
+
+        <h2 class="mt-5 mb-3">3. Cookies y almacenamiento local</h2>
+        <p class="text-muted"><strong>Este sitio no usa cookies.</strong> No hay analítica,
+        ni publicidad, ni seguimiento. No hay Google Analytics ni píxel de Facebook.</p>
+        <p class="text-muted">Sí se usa <code>localStorage</code> para una sola cosa:
+        recordar si prefieres el tema claro u oscuro, bajo la clave
+        <code>sylax_tema</code>. Eso se queda en tu navegador, no se envía a ningún lado
+        y no te identifica.</p>
+
+        <h2 class="mt-5 mb-3">4. Servicios de terceros</h2>
+        <p class="text-muted">La página carga Bootstrap desde jsDelivr y la tipografía
+        Orbitron desde Google Fonts. Al pedir esos archivos, tu navegador se conecta a esos
+        servidores y ellos ven tu dirección IP, como pasa con cualquier recurso externo de
+        cualquier web. No les mandamos ningún dato tuyo.</p>
+        <p class="text-muted">Si el sitio está publicado en Cloudflare Pages, Cloudflare
+        procesa tu IP para servirte la página. No tenemos acceso a registros individuales
+        de visitantes.</p>
+
+        <h2 class="mt-5 mb-3">5. Tus derechos</h2>
+        <p class="text-muted">Como no guardamos ningún dato tuyo, no hay nada que
+        consultar, corregir ni borrar. Si aun así tienes una duda, escribe a
+        <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>.</p>
+        <p class="text-muted">Aplica la <strong>Ley 172-13</strong> de protección de datos
+        personales de República Dominicana.</p>
+
+        <h2 class="mt-5 mb-3">6. Menores de edad</h2>
+        <p class="text-muted">Este sitio no está dirigido a menores de 18 años.</p>
+
+        <h2 class="mt-5 mb-3">7. Cambios</h2>
+        <p class="text-muted">Si cambia algo, cambia la fecha de arriba.</p>
+
+        <a href="index.html" class="btn btn-corporativo mt-4">Volver al inicio</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-4 text-center">
+    <div class="container">
+      <p class="text-muted small mb-2">
+        &copy; 2026 SylaxBioRobotics. Investigación y Desarrollo Biomecánico Aplicado.
+      </p>
+      <p class="text-muted small mb-2">
+        <a href="privacidad.html">Política de Privacidad</a> ·
+        <a href="terminos.html">Términos de Uso</a>
+      </p>
+      <p class="text-muted small mb-0">
+        Proyecto académico ficticio desarrollado por
+        <a href="https://ariel-fyb-labs.pages.dev/" target="_blank" rel="noopener">Ariel FyB Labs</a>.
+        Ninguna afirmación de esta página es real ni constituye consejo médico.
+      </p>
+    </div>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -23,13 +23,14 @@
 
 const CLAVE = '73138609b38ea93df41cb44185061624';
 
-// Cuando agregues un demo nuevo, agrégalo aquí también.
+// Solo los demos de ESTE repo. La pagina central vive en otro repo
+// y se avisa desde alli, con su propia clave.
+// Cuando agregues un demo nuevo, agregalo aqui tambien.
 const SITIOS = {
-  'ariel-fyb-labs-demos.pages.dev': ['/'],
   'nova-barber.pages.dev':          ['/', '/privacidad.html', '/terminos.html'],
   'titanium-fitness.pages.dev':     ['/', '/privacidad.html', '/terminos.html'],
   'brasas-del-caribe.pages.dev':    ['/', '/privacidad.html', '/terminos.html'],
-  'sylax-bio-robotics.pages.dev':   ['/', '/divisiones.html', '/labs.html', '/solicitudes.html'],
+  'sylax-bio-robotics.pages.dev':   ['/', '/divisiones.html', '/labs.html', '/solicitudes.html', '/privacidad.html', '/terminos.html'],
 };
 
 const PUNTO = 'https://api.indexnow.org/indexnow';
