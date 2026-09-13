@@ -1,0 +1,55 @@
+# =============================================================
+# SylaxBioRobotics — robots.txt
+# =============================================================
+#
+# OJO CON ESTO, es contraintuitivo:
+#
+# El sitio está en NOINDEX, pero aquí abajo el rastreo está
+# PERMITIDO. Es a propósito y es la forma correcta.
+#
+# Si bloquearas el rastreo con "Disallow: /", Google nunca llegaría
+# a leer la etiqueta <meta name="robots" content="noindex"> de las
+# páginas — porque para leerla tiene que entrar. Resultado: la URL
+# igual puede salir en los resultados, pero sin título ni
+# descripción, que es lo peor de los dos mundos.
+#
+# Entonces: se deja entrar al robot, y la etiqueta noindex de cada
+# página es la que le dice "no me guardes".
+#
+# -------------------------------------------------------------
+# PARA PUBLICARLO EN GOOGLE (cuando quieras):
+#   1. En las 4 páginas .html cambia
+#        <meta name="robots" content="noindex, nofollow">
+#      por
+#        <meta name="robots" content="index, follow, max-image-preview:large">
+#   2. Este archivo ya está listo, no hay que tocarlo.
+#   3. Sube el sitemap en Google Search Console
+#      (Indexación -> Sitemaps -> pega la URL de abajo).
+#   4. Pide indexación manual de la home con "Inspección de URLs".
+#      Eso es lo que la mete rápido; el sitemap solo la pone en cola.
+#
+#   El banner naranja de proyecto académico se queda puesto.
+# =============================================================
+
+User-agent: *
+Allow: /
+
+# Rastreadores de IA generativa: fuera. Es un trabajo de clase con
+# afirmaciones médicas inventadas; no hace falta que acabe de
+# material de entrenamiento.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+Sitemap: https://sylax-bio-robotics.pages.dev/sitemap.xml

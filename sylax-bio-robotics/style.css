@@ -1,0 +1,491 @@
+/* =============================================================
+   SylaxBioRobotics — hoja de estilos única
+   -------------------------------------------------------------
+   REGLA DE ORO: ninguna página debe tener su propio bloque
+   <style> con colores o tamaños. Todo vive aquí. Si metes un
+   <style> en una página, vuelves a romper el tema y el header
+   (que es exactamente lo que estaba pasando antes).
+
+   Estructura:
+     0. Tokens de color (claro / oscuro)
+     1. Anti-parpadeo al cargar
+     2. Base y tipografía
+     3. Mapeo de utilidades Bootstrap a tokens
+     4. Header universal (idéntico en las 4 páginas)
+     5. Logos
+     6. Componentes (tarjetas, botones, badges)
+     7. Formulario de solicitudes
+     8. Aviso de proyecto académico
+     9. Utilidades
+   ============================================================= */
+
+/* =============================================================
+   0. TOKENS DE COLOR
+   -------------------------------------------------------------
+   Un solo lugar donde cambian los colores. El modo oscuro solo
+   redefine estas variables — no persigue selectores uno por uno.
+   ============================================================= */
+:root {
+  --sx-bg:            #f8f9fa;
+  --sx-surface:       #ffffff;
+  --sx-surface-alt:   #eef1f5;
+  --sx-border:        #e2e8f0;
+  --sx-text:          #333333;
+  --sx-heading:       #1a365d;
+  --sx-muted:         #5a6672;
+
+  --sx-primary:       #1a365d;
+  --sx-primary-soft:  #2b6cb0;
+  --sx-success:       #1e7e4f;
+  --sx-militar:       #6b46c1;
+  --sx-accent:        #2b6cb0;
+
+  --sx-on-primary:    #ffffff;
+  --sx-shadow:        rgba(0, 0, 0, 0.05);
+  --sx-shadow-strong: rgba(0, 0, 0, 0.10);
+
+  /* Tamaños del header — se usan igual en las 4 páginas.
+     Antes esto vivía duplicado en cada <style> inline con
+     valores distintos (80px vs 60px) y por eso el header
+     cambiaba de tamaño entre páginas. */
+  --sx-logo-size:     72px;
+  --sx-logo-size-sm:  56px;
+  --sx-nav-height:    76px;
+  --sx-marca-size:    1.35rem;
+}
+
+html.modo-contraste {
+  --sx-bg:            #0f0f10;
+  --sx-surface:       #161616;
+  --sx-surface-alt:   #1c1c1e;
+  --sx-border:        #2b2b2b;
+  --sx-text:          #e6eef6;
+  --sx-heading:       #f5fbff;
+  --sx-muted:         #b3bcc4;
+
+  /* Versiones aclaradas: los tonos oscuros de la paleta clara
+     no alcanzan contraste AA sobre #161616. */
+  --sx-primary:       #7db3ee;
+  --sx-primary-soft:  #a8cdf5;
+  --sx-success:       #63d19a;
+  --sx-militar:       #bda4f0;
+  --sx-accent:        #00c6ff;
+
+  --sx-on-primary:    #07202a;
+  --sx-shadow:        rgba(0, 0, 0, 0.45);
+  --sx-shadow-strong: rgba(0, 0, 0, 0.60);
+}
+
+/* =============================================================
+   1. ANTI-PARPADEO
+   El script inline del <head> pone .tema-cargando en <html>
+   antes de pintar; aquí se matan las transiciones para que el
+   tema guardado no se vea "animar" al entrar.
+   ============================================================= */
+html.tema-cargando,
+html.tema-cargando * {
+  transition: none !important;
+}
+
+body,
+header,
+main,
+footer,
+.tarjeta-clinica,
+.card,
+.form-control,
+.form-select,
+.nav-link,
+.btn {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+/* =============================================================
+   2. BASE Y TIPOGRAFÍA
+   ============================================================= */
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--sx-bg);
+  color: var(--sx-text);
+}
+
+h1, h2, h3, h4, h5, h6,
+.marca-font {
+  font-family: 'Orbitron', 'Segoe UI', system-ui, sans-serif;
+  color: var(--sx-heading);
+}
+
+/* Escala tipográfica fija. Antes el <h1> del hero era un <h2>
+   con .display-4 y no había <h1> en ninguna página. */
+h1 { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.15; font-weight: 700; }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.25rem); line-height: 1.2;  font-weight: 700; }
+h3 { font-size: clamp(1.25rem, 2.4vw, 1.6rem); line-height: 1.3;  font-weight: 600; }
+h4 { font-size: 1.25rem; font-weight: 600; }
+h5 { font-size: 1.1rem;  font-weight: 600; }
+h6 { font-size: 1rem;    font-weight: 600; }
+
+p { line-height: 1.75; }
+
+a { color: var(--sx-accent); }
+a:hover { color: var(--sx-primary-soft); }
+
+/* Foco visible — accesibilidad de teclado. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--sx-accent);
+  outline-offset: 2px;
+}
+
+/* Salto al contenido para lectores de pantalla y teclado. */
+.saltar-contenido {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1080;
+  padding: 0.75rem 1.25rem;
+  background: var(--sx-primary);
+  color: var(--sx-on-primary);
+  border-radius: 0 0 6px 0;
+}
+.saltar-contenido:focus { left: 0; color: var(--sx-on-primary); }
+
+/* =============================================================
+   3. MAPEO DE UTILIDADES BOOTSTRAP A TOKENS
+   -------------------------------------------------------------
+   Bootstrap marca estas utilidades con !important, así que
+   aquí también hace falta. Pero se hace UNA vez y apuntando a
+   variables, no repartido por toda la hoja.
+   ============================================================= */
+.bg-white,
+.bg-body,
+.bg-light { background-color: var(--sx-surface) !important; }
+
+/* .bg-light se usa para alternar bandas de sección. */
+section.bg-light { background-color: var(--sx-surface-alt) !important; }
+
+.text-dark  { color: var(--sx-text) !important; }
+.text-muted { color: var(--sx-muted) !important; }
+.text-body  { color: var(--sx-text) !important; }
+
+/* Estos tres eran el bug real de contraste: en oscuro los h5 y
+   los títulos de tarjeta quedaban azul/verde/morado oscuro
+   sobre #161616. Ahora usan la variante aclarada. */
+.text-primary   { color: var(--sx-primary) !important; }
+.text-success   { color: var(--sx-success) !important; }
+.text-sylax-m   { color: var(--sx-militar) !important; }
+
+.border,
+.border-top,
+.border-bottom,
+.border-start,
+.border-end     { border-color: var(--sx-border) !important; }
+.border-primary { border-color: var(--sx-primary) !important; }
+.border-success { border-color: var(--sx-success) !important; }
+.border-sylax-m { border-color: var(--sx-militar) !important; }
+.border-light   { border-color: var(--sx-border) !important; }
+
+.shadow-sm { box-shadow: 0 2px 4px var(--sx-shadow) !important; }
+.shadow-lg { box-shadow: 0 10px 24px var(--sx-shadow-strong) !important; }
+
+/* =============================================================
+   4. HEADER UNIVERSAL
+   -------------------------------------------------------------
+   Mismo markup y mismas medidas en index, divisiones,
+   solicitudes y labs. Nada de esto se sobreescribe por página.
+   ============================================================= */
+header {
+  background-color: var(--sx-surface) !important;
+  border-bottom: 1px solid var(--sx-border);
+}
+
+header .navbar {
+  min-height: var(--sx-nav-height);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+header .navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* La marca NO cambia de tamaño al togglear el tema.
+   Antes .marca-font pasaba de fs-4 (1.5rem) a 1.18rem en oscuro
+   y por eso el header "se movía" al cambiar de modo. */
+.marca-font {
+  font-size: var(--sx-marca-size);
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+@media (max-width: 400px) {
+  .marca-font { font-size: 1.05rem; }
+}
+
+header .nav-link {
+  color: var(--sx-text) !important;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+}
+header .nav-link:hover,
+header .nav-link:focus { color: var(--sx-accent) !important; }
+header .nav-link.active {
+  color: var(--sx-accent) !important;
+  font-weight: 600;
+}
+
+header .navbar-toggler {
+  border-color: var(--sx-border);
+  color: var(--sx-text);
+}
+html.modo-contraste header .navbar-toggler-icon {
+  filter: invert(1) grayscale(1) brightness(1.6);
+}
+
+/* Botón de tema: ancho fijo para que el header no salte cuando
+   el texto cambia de "Modo Oscuro" a "Modo Claro". */
+#btn-tema {
+  min-width: 132px;
+  text-align: center;
+  color: var(--sx-text);
+  border-color: var(--sx-border);
+}
+#btn-tema:hover {
+  background-color: var(--sx-primary);
+  border-color: var(--sx-primary);
+  color: var(--sx-on-primary);
+}
+
+footer {
+  background-color: var(--sx-surface) !important;
+  border-top: 1px solid var(--sx-border);
+}
+footer a { color: var(--sx-muted); text-decoration: none; }
+footer a:hover { color: var(--sx-accent); text-decoration: underline; }
+
+/* =============================================================
+   5. LOGOS
+   -------------------------------------------------------------
+   Dos PNG apilados; se cruza la opacidad según el tema. Las
+   clases son .logo-for-light / .logo-for-dark — divisiones.html
+   tenía CSS para .logo-light / .logo-dark, que no existen en el
+   HTML, así que no hacía nada.
+   ============================================================= */
+.logo-wrap {
+  position: relative;
+  width: var(--sx-logo-size);
+  height: var(--sx-logo-size);
+  display: inline-block;
+  flex: 0 0 auto;
+}
+@media (max-width: 576px) {
+  .logo-wrap { width: var(--sx-logo-size-sm); height: var(--sx-logo-size-sm); }
+}
+
+.logo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.25s ease;
+}
+
+.logo-for-light { opacity: 1; }
+.logo-for-dark  { opacity: 0; }
+html.modo-contraste .logo-for-light { opacity: 0; }
+html.modo-contraste .logo-for-dark  { opacity: 1; }
+
+/* =============================================================
+   6. COMPONENTES
+   ============================================================= */
+.tarjeta-clinica {
+  background-color: var(--sx-surface);
+  border: 1px solid var(--sx-border);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px var(--sx-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+              background-color 0.3s ease, border-color 0.3s ease;
+}
+.tarjeta-clinica:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 18px var(--sx-shadow-strong);
+}
+
+.btn-corporativo {
+  background-color: var(--sx-primary);
+  color: var(--sx-on-primary);
+  border: 1px solid var(--sx-primary);
+  font-weight: 600;
+}
+.btn-corporativo:hover {
+  background-color: var(--sx-primary-soft);
+  border-color: var(--sx-primary-soft);
+  color: var(--sx-on-primary);
+}
+
+.btn-outline-primary {
+  color: var(--sx-primary) !important;
+  border-color: var(--sx-primary) !important;
+}
+.btn-outline-primary:hover {
+  background-color: var(--sx-primary) !important;
+  color: var(--sx-on-primary) !important;
+}
+
+.btn-outline-success {
+  color: var(--sx-success) !important;
+  border-color: var(--sx-success) !important;
+}
+.btn-outline-success:hover {
+  background-color: var(--sx-success) !important;
+  color: var(--sx-on-primary) !important;
+}
+
+.btn-outline-militar {
+  color: var(--sx-militar) !important;
+  border-color: var(--sx-militar) !important;
+}
+.btn-outline-militar:hover {
+  background-color: var(--sx-militar) !important;
+  color: var(--sx-on-primary) !important;
+}
+
+/* Badges: los de Bootstrap (bg-primary/secondary/dark) quedaban
+   ilegibles en oscuro. */
+.badge.bg-primary   { background-color: var(--sx-primary) !important;  color: var(--sx-on-primary) !important; }
+.badge.bg-secondary { background-color: var(--sx-muted) !important;    color: var(--sx-surface) !important; }
+.badge.bg-dark      { background-color: var(--sx-text) !important;     color: var(--sx-surface) !important; }
+
+.card {
+  background-color: var(--sx-surface);
+  border-color: var(--sx-border);
+  color: var(--sx-text);
+}
+
+.list-group-item {
+  background-color: var(--sx-surface);
+  border-color: var(--sx-border);
+  color: var(--sx-text);
+}
+
+hr { border-color: var(--sx-border); opacity: 1; }
+
+/* Imágenes y media */
+img, video { max-width: 100%; height: auto; }
+.img-maxheight-400 { max-height: 400px; width: 100%; object-fit: cover; }
+
+/* Compensa el header pegajoso al saltar a un ancla */
+.scroll-target { scroll-margin-top: calc(var(--sx-nav-height) + 24px); }
+
+/* =============================================================
+   7. FORMULARIO DE SOLICITUDES
+   ============================================================= */
+.form-control,
+.form-select,
+textarea.form-control {
+  background-color: var(--sx-surface);
+  color: var(--sx-text);
+  border: 1px solid var(--sx-border);
+}
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--sx-surface);
+  color: var(--sx-text);
+  border-color: var(--sx-accent);
+  box-shadow: 0 0 0 0.2rem rgba(43, 108, 176, 0.25);
+}
+.form-control::placeholder,
+textarea.form-control::placeholder {
+  color: var(--sx-muted);
+  opacity: 1;
+}
+.form-label,
+.form-check-label { color: var(--sx-text); }
+
+.form-text { color: var(--sx-muted); }
+
+.solicitud-form {
+  background-color: var(--sx-surface);
+  border: 1px solid var(--sx-border);
+  border-radius: 12px;
+}
+
+.form-check-input {
+  background-color: var(--sx-surface);
+  border-color: var(--sx-border);
+}
+.form-check-input:checked {
+  background-color: var(--sx-primary);
+  border-color: var(--sx-primary);
+}
+
+.alert-success {
+  background-color: var(--sx-surface-alt);
+  border-color: var(--sx-success);
+  color: var(--sx-text);
+}
+
+/* Contador de caracteres del textarea */
+#contador-caracteres { color: var(--sx-muted); font-size: 0.875rem; }
+#contador-caracteres.limite-cerca { color: #b7791f; font-weight: 600; }
+#contador-caracteres.limite-pasado { color: #c53030; font-weight: 600; }
+html.modo-contraste #contador-caracteres.limite-cerca  { color: #f0c674; }
+html.modo-contraste #contador-caracteres.limite-pasado { color: #ff8a80; }
+
+.campo-error {
+  border-color: #c53030 !important;
+}
+.mensaje-error {
+  color: #c53030;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+html.modo-contraste .mensaje-error { color: #ff8a80; }
+
+/* =============================================================
+   8. AVISO DE PROYECTO ACADÉMICO
+   -------------------------------------------------------------
+   Barra fija arriba del header. Este sitio describe una empresa
+   inventada con afirmaciones médicas inventadas; el aviso tiene
+   que ser visible en todas las páginas, no una nota al pie.
+   ============================================================= */
+.aviso-ficcion {
+  background-color: #7c2d12;
+  color: #fff7ed;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 2px solid #ea580c;
+}
+.aviso-ficcion strong { color: #ffedd5; letter-spacing: 0.02em; }
+
+/* =============================================================
+   9. UTILIDADES
+   ============================================================= */
+.contenedor-ancho {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}

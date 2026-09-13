@@ -266,6 +266,23 @@
                             vez resuelto; script.js lee ese valor y lo manda a /api/lead, que lo
                             verifica del lado servidor antes de aceptar el lead.
                             data-sitekey es la clave PÚBLICA — está bien que esté acá en el HTML. -->
+                    <!-- EN: Consent checkbox. The form really does send personal data
+                            (name, email, WhatsApp) to a real inbox via Apps Script, so the
+                            visitor has to opt in knowingly and has to be able to read what
+                            happens to it BEFORE sending. Validated in script.js — do not
+                            rely on `required` alone, the submit handler is JS-driven.
+                       ES: Casilla de consentimiento. El formulario sí manda datos personales
+                            (nombre, correo, WhatsApp) a una bandeja real vía Apps Script, así
+                            que el visitante tiene que aceptarlo a sabiendas y poder leer qué
+                            pasa con ellos ANTES de enviar. Se valida en script.js — no confíes
+                            solo en `required`, el submit lo maneja el JS. -->
+                    <div class="form-group form-consent">
+                        <label for="consent" class="consent-label">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <span data-i18n-html="form_consent">I have read and accept the <a href="privacidad.html" target="_blank" rel="noopener">Privacy Policy</a> and the <a href="terminos.html" target="_blank" rel="noopener">Terms of Use</a>, and I agree to be contacted about this enquiry.</span>
+                        </label>
+                    </div>
+
                     <div class="cf-turnstile" data-sitekey="0x4AAAAAADvRe6FetZaglr7o" data-theme="auto"></div>
                     <button type="submit" class="cta-button" id="btn-submit" data-i18n="form_submit" style="width: 100%;">
                         Generate My Pass
@@ -308,6 +325,14 @@
                 cambiá el href de #livedemo-btn acá para que apunte a esa página hub en vez de
                 directo a este demo. La misma idea aplica a #github-btn/#fiverr-btn si esos
                 destinos cambian alguna vez. -->
+        <!-- Legal links — required because this page collects personal data.
+             Enlaces legales — obligatorios porque esta página recoge datos personales. -->
+        <nav class="footer-legal" aria-label="Legal">
+            <a href="privacidad.html" data-i18n="footer_privacy">Privacy Policy</a>
+            <span aria-hidden="true">·</span>
+            <a href="terminos.html" data-i18n="footer_terms">Terms of Use</a>
+        </nav>
+
         <div class="portfolio-buttons">
             <a href="https://es.fiverr.com/s/qDE81rd" id="fiverr-btn" target="_blank" rel="noopener" class="portfolio-button fiverr-btn" data-i18n="fiverr_button">Hire Me on Fiverr</a>
             <a href="https://github.com/CoderX396/modern-landing-showcase" id="github-btn" target="_blank" rel="noopener" class="portfolio-button github-btn" data-i18n="github_button">View GitHub Portfolio</a>

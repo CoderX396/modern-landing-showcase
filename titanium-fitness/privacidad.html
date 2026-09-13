@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidad | Titanium Fitness</title>
+<meta name="description" content="Política de privacidad del sitio de demostración. Qué datos se recogen y qué se hace con ellos.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://titanium-fitness.pages.dev/privacidad.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%92%AA</text></svg>">
+<script>
+  (function () {
+    var t = 'dark';
+    try { t = localStorage.getItem('titanium_theme') || 'dark'; } catch (e) {}
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+<style>
+  :root { color-scheme: light dark; }
+  [data-theme="dark"]  { --lg-bg:#0f172a; --lg-surface:#1e293b; --lg-text:#f8fafc; --lg-muted:#94a3b8; --lg-border:#334155; --lg-accent:#f97316; }
+  [data-theme="light"] { --lg-bg:#f8fafc; --lg-surface:#ffffff; --lg-text:#0f172a; --lg-muted:#475569; --lg-border:#e2e8f0; --lg-accent:#ea580c; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--lg-bg);
+    color: var(--lg-text);
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.7;
+    padding: 0 1rem 4rem;
+  }
+  .lg-wrap { max-width: 760px; margin: 0 auto; }
+  header.lg-top {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    align-items: center; justify-content: space-between;
+    padding: 1.5rem 0; border-bottom: 1px solid var(--lg-border);
+    margin-bottom: 2.5rem;
+  }
+  .lg-marca { font-weight: 800; font-size: 1.15rem; letter-spacing: .02em; color: var(--lg-text); text-decoration: none; }
+  .lg-marca span { color: var(--lg-accent); }
+  .lg-acciones { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .lg-btn {
+    background: var(--lg-surface); color: var(--lg-text);
+    border: 1px solid var(--lg-border); border-radius: 999px;
+    padding: .4rem .9rem; font-size: .85rem; cursor: pointer;
+    text-decoration: none; display: inline-block; font-family: inherit;
+  }
+  .lg-btn:hover { border-color: var(--lg-accent); color: var(--lg-accent); }
+  h1 { font-size: clamp(1.7rem, 4vw, 2.3rem); line-height: 1.2; margin-bottom: .6rem; }
+  h2 { font-size: 1.2rem; margin: 2.2rem 0 .7rem; color: var(--lg-accent); }
+  h3 { font-size: 1rem; margin: 1.4rem 0 .4rem; }
+  p, li { margin-bottom: .8rem; color: var(--lg-text); }
+  ul, ol { padding-left: 1.4rem; margin-bottom: 1rem; }
+  a { color: var(--lg-accent); }
+  .lg-fecha { color: var(--lg-muted); font-size: .875rem; margin-bottom: 2rem; }
+  .lg-aviso {
+    background: var(--lg-surface); border: 1px solid var(--lg-accent);
+    border-left-width: 4px; border-radius: 8px;
+    padding: 1rem 1.2rem; margin: 1.5rem 0;
+  }
+  .lg-aviso p:last-child { margin-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .9rem; }
+  th, td { text-align: left; padding: .6rem .5rem; border-bottom: 1px solid var(--lg-border); vertical-align: top; }
+  th { color: var(--lg-muted); font-weight: 600; }
+  .lg-tabla-scroll { overflow-x: auto; }
+  footer.lg-pie {
+    margin-top: 3rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--lg-border);
+    color: var(--lg-muted); font-size: .85rem;
+  }
+  [data-lg-lang] { display: none; }
+  [data-lg-lang].lg-visible { display: block; }
+  code { background: var(--lg-surface); padding: .1rem .35rem; border-radius: 4px; font-size: .9em; }
+</style>
+</head>
+<body>
+<div class="lg-wrap">
+
+  <header class="lg-top">
+    <a class="lg-marca" href="index.html">TITANIUM<span>FIT</span></a>
+    <div class="lg-acciones">
+      <button class="lg-btn" id="lg-lang-btn" type="button">🌐 EN</button>
+      <a class="lg-btn" href="index.html" data-lg-t="volver">&larr; Volver al sitio</a>
+    </div>
+  </header>
+
+  <main>
+
+<div data-lg-lang="es">
+  <h1>Política de Privacidad</h1>
+  <p class="lg-fecha">Última actualización: 13 de septiembre de 2026</p>
+
+  <div class="lg-aviso">
+    <p><strong>Titanium Fitness es un gimnasio ficticio.</strong> Este sitio es una
+    pieza de portafolio creada por Ariel FyB Labs para mostrar trabajo de desarrollo
+    web. No existe tal gimnasio, no se vende ninguna membresía y ningún precio de
+    esta página es real.</p>
+    <p><strong>El formulario, en cambio, sí funciona de verdad.</strong> Si lo
+    envías, los datos que escribas salen de tu navegador y llegan a un correo real.
+    Por eso esta política existe: lo que recibimos es información tuya de verdad,
+    aunque el gimnasio no lo sea.</p>
+  </div>
+
+  <h2>1. Quién responde por tus datos</h2>
+  <p>El responsable es <strong>Ariel FyB Labs</strong>, un negocio de desarrollo web
+  independiente con base en Santo Domingo Este, República Dominicana.
+  Contacto: <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>.</p>
+  <p>«Titanium Fitness» es un nombre inventado. No hay ninguna empresa detrás de
+  ese nombre que reciba tus datos.</p>
+
+  <h2>2. Qué datos recogemos</h2>
+  <p>Solo lo que escribes tú en el formulario de contacto:</p>
+  <div class="lg-tabla-scroll">
+  <table>
+    <thead><tr><th>Dato</th><th>Para qué</th><th>¿Obligatorio?</th></tr></thead>
+    <tbody>
+      <tr><td>Nombre y apellido</td><td>Saludarte por tu nombre en la respuesta automática</td><td>Sí</td></tr>
+      <tr><td>Correo electrónico</td><td>Enviarte la respuesta y poder contestarte</td><td>Sí</td></tr>
+      <tr><td>Número de WhatsApp</td><td>Contacto alternativo</td><td>Sí</td></tr>
+      <tr><td>Plan y objetivo</td><td>Contexto de tu consulta</td><td>Sí</td></tr>
+      <tr><td>Comentario</td><td>Lo que quieras contarnos</td><td>Sí</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>No pedimos cédula, dirección, datos bancarios, ni información de salud.
+  <strong>No los escribas en el campo de comentario.</strong></p>
+
+  <h3>Datos técnicos que no pides tú</h3>
+  <p>Para frenar el spam usamos <strong>Cloudflare Turnstile</strong>. Turnstile
+  analiza señales de tu navegador y tu dirección IP para decidir si eres una
+  persona o un bot. Ese análisis lo hace Cloudflare, no nosotros, y nosotros solo
+  recibimos un «sí» o un «no». Cloudflare también procesa tu IP por el hecho de
+  alojar el sitio, como cualquier servidor web.</p>
+
+  <h2>3. Por dónde viajan tus datos</h2>
+  <p>Sin rodeos, esta es la ruta completa:</p>
+  <ol>
+    <li>Escribes el formulario en tu navegador.</li>
+    <li>Se envía a <code>/api/lead</code>, una función que corre en
+        <strong>Cloudflare Pages</strong>, en el mismo dominio de esta página.</li>
+    <li>Esa función lo reenvía a un script de <strong>Google Apps Script</strong>.</li>
+    <li>El script verifica el Turnstile, valida los campos y manda
+        <strong>dos correos</strong>: uno a <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>
+        con tu consulta, y otro a la dirección que escribiste, confirmándote que
+        la recibimos (la respuesta automática).</li>
+  </ol>
+  <div class="lg-aviso">
+    <p><strong>No hay base de datos.</strong> Tus datos no se guardan en ninguna
+    hoja de cálculo, ni CRM, ni servidor nuestro. Existen únicamente como un correo
+    en una bandeja de Gmail. Es la ruta completa, no hay copias en otro lado.</p>
+  </div>
+
+  <h2>4. Con quién se comparten</h2>
+  <p>Con nadie, en el sentido de que no vendemos, alquilamos ni cedemos tus datos a
+  terceros para publicidad ni para nada más.</p>
+  <p>Sí pasan por tres proveedores de infraestructura, porque es lo que hace que el
+  formulario funcione:</p>
+  <ul>
+    <li><strong>Cloudflare</strong> — aloja el sitio y ejecuta el anti-spam.</li>
+    <li><strong>Google (Apps Script y Gmail)</strong> — procesa el envío y guarda
+        el correo resultante.</li>
+    <li>Nadie más.</li>
+  </ul>
+  <p>Estos proveedores están fuera de República Dominicana, así que tus datos se
+  procesan en el extranjero.</p>
+
+  <h2>5. Cuánto tiempo los guardamos</h2>
+  <p>El correo con tu consulta se queda en la bandeja hasta que lo borremos.
+  Como norma, borramos las consultas de este demo <strong>a los 12 meses</strong>.
+  Si nos escribes pidiendo que borremos la tuya antes, lo hacemos.</p>
+
+  <h2>6. Tus derechos</h2>
+  <p>Puedes pedirnos en cualquier momento que te digamos qué tenemos tuyo, que lo
+  corrijamos o que lo borremos. Escribe a <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>
+  desde el mismo correo que usaste en el formulario (así sabemos que eres tú) y
+  respondemos en un máximo de 30 días.</p>
+  <p>Como somos un negocio dominicano, aplica la <strong>Ley 172-13</strong> de
+  protección de datos personales de República Dominicana.</p>
+
+  <h2>7. Cookies y almacenamiento local</h2>
+  <p><strong>Este sitio no usa cookies</strong> — ni de análisis, ni de publicidad,
+  ni de seguimiento. No hay Google Analytics ni píxel de Facebook.</p>
+  <p>Sí usamos <code>localStorage</code>, que es almacenamiento del propio
+  navegador, para recordar dos cosas: si prefieres el tema claro u oscuro, y si
+  prefieres español o inglés. Eso se queda en tu equipo, no se envía a ningún
+  lado y no te identifica.</p>
+  <p>Cloudflare Turnstile puede colocar un identificador temporal para su
+  verificación anti-bot.</p>
+
+  <h2>8. Menores de edad</h2>
+  <p>Este formulario no está dirigido a menores de 18 años. Si eres menor, no lo
+  envíes. Si nos damos cuenta de que recibimos datos de un menor, los borramos.</p>
+
+  <h2>9. Seguridad</h2>
+  <p>El sitio va por HTTPS, el envío pasa por verificación anti-bot, hay límite de
+  envíos por visitante para evitar abuso, y la función de servidor solo acepta
+  peticiones desde este mismo dominio. Dicho eso: ninguna transmisión por internet
+  es 100 % segura, y no podemos prometerte lo contrario.</p>
+
+  <h2>10. Cambios</h2>
+  <p>Si cambiamos esta política, cambiamos la fecha de arriba. Los cambios aplican
+  desde que se publican.</p>
+
+  <h2>11. Contacto</h2>
+  <p>Cualquier duda sobre tus datos: <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a></p>
+</div>
+
+<div data-lg-lang="en">
+  <h1>Privacy Policy</h1>
+  <p class="lg-fecha">Last updated: September 13, 2026</p>
+
+  <div class="lg-aviso">
+    <p><strong>Titanium Fitness is a fictional gym.</strong> This site is a
+    portfolio piece built by Ariel FyB Labs to demonstrate web development work.
+    No such gym exists, no membership is being sold, and no price on this page
+    is real.</p>
+    <p><strong>The form, however, genuinely works.</strong> If you submit it, what
+    you type leaves your browser and arrives in a real inbox. That is why this
+    policy exists: what we receive is real information about you, even if the
+    gym is not real.</p>
+  </div>
+
+  <h2>1. Who is responsible for your data</h2>
+  <p>The data controller is <strong>Ariel FyB Labs</strong>, an independent web
+  development business based in Santo Domingo Este, Dominican Republic.
+  Contact: <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>.</p>
+  <p>"Titanium Fitness" is an invented name. There is no company behind that name
+  receiving your data.</p>
+
+  <h2>2. What we collect</h2>
+  <p>Only what you type into the contact form:</p>
+  <div class="lg-tabla-scroll">
+  <table>
+    <thead><tr><th>Data</th><th>Why</th><th>Required?</th></tr></thead>
+    <tbody>
+      <tr><td>First and last name</td><td>To greet you by name in the auto-reply</td><td>Yes</td></tr>
+      <tr><td>Email address</td><td>To send the reply and to answer you</td><td>Yes</td></tr>
+      <tr><td>WhatsApp number</td><td>Alternative contact</td><td>Yes</td></tr>
+      <tr><td>Plan and goal</td><td>Context for your enquiry</td><td>Yes</td></tr>
+      <tr><td>Comment</td><td>Whatever you want to tell us</td><td>Yes</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>We do not ask for ID numbers, addresses, banking details or health
+  information. <strong>Please do not type those into the comment field.</strong></p>
+
+  <h3>Technical data you do not type</h3>
+  <p>To stop spam we use <strong>Cloudflare Turnstile</strong>. Turnstile analyses
+  browser signals and your IP address to decide whether you are a person or a bot.
+  Cloudflare performs that analysis, not us, and we only receive a yes or no.
+  Cloudflare also processes your IP simply by hosting the site, as any web server
+  does.</p>
+
+  <h2>3. Where your data travels</h2>
+  <p>Plainly, this is the full route:</p>
+  <ol>
+    <li>You fill in the form in your browser.</li>
+    <li>It is sent to <code>/api/lead</code>, a function running on
+        <strong>Cloudflare Pages</strong>, on this same domain.</li>
+    <li>That function forwards it to a <strong>Google Apps Script</strong>.</li>
+    <li>The script verifies Turnstile, validates the fields and sends
+        <strong>two emails</strong>: one to <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>
+        with your enquiry, and one to the address you entered, confirming we got
+        it (the auto-reply).</li>
+  </ol>
+  <div class="lg-aviso">
+    <p><strong>There is no database.</strong> Your data is not saved to any
+    spreadsheet, CRM or server of ours. It exists solely as an email in a Gmail
+    inbox. That is the whole route; there are no copies elsewhere.</p>
+  </div>
+
+  <h2>4. Who we share it with</h2>
+  <p>Nobody, in the sense that we do not sell, rent or hand your data to third
+  parties for advertising or anything else.</p>
+  <p>It does pass through three infrastructure providers, because that is what
+  makes the form work:</p>
+  <ul>
+    <li><strong>Cloudflare</strong> — hosts the site and runs the anti-spam check.</li>
+    <li><strong>Google (Apps Script and Gmail)</strong> — processes the submission
+        and stores the resulting email.</li>
+    <li>No one else.</li>
+  </ul>
+  <p>These providers are outside the Dominican Republic, so your data is processed
+  abroad.</p>
+
+  <h2>5. How long we keep it</h2>
+  <p>The email with your enquiry stays in the inbox until we delete it. As a rule
+  we delete enquiries from this demo <strong>after 12 months</strong>. If you write
+  asking us to delete yours sooner, we will.</p>
+
+  <h2>6. Your rights</h2>
+  <p>You can ask us at any time what we hold about you, to correct it, or to delete
+  it. Write to <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a> from the same address you used
+  in the form (so we know it is you) and we will respond within 30 days.</p>
+  <p>As a Dominican business we are subject to <strong>Law 172-13</strong> on the
+  protection of personal data of the Dominican Republic.</p>
+
+  <h2>7. Cookies and local storage</h2>
+  <p><strong>This site uses no cookies</strong> — no analytics, no advertising, no
+  tracking. There is no Google Analytics and no Facebook pixel.</p>
+  <p>We do use <code>localStorage</code>, which is your own browser's storage, to
+  remember two things: whether you prefer the light or dark theme, and whether you
+  prefer Spanish or English. That stays on your device, is never sent anywhere, and
+  does not identify you.</p>
+  <p>Cloudflare Turnstile may set a temporary identifier for its bot check.</p>
+
+  <h2>8. Minors</h2>
+  <p>This form is not intended for anyone under 18. If you are under 18, please do
+  not submit it. If we realise we have received a minor's data, we delete it.</p>
+
+  <h2>9. Security</h2>
+  <p>The site runs over HTTPS, submissions pass a bot check, there is a per-visitor
+  rate limit to prevent abuse, and the server function only accepts requests from
+  this same domain. That said: no transmission over the internet is 100% secure,
+  and we will not pretend otherwise.</p>
+
+  <h2>10. Changes</h2>
+  <p>If we change this policy we change the date above. Changes apply from the
+  moment they are published.</p>
+
+  <h2>11. Contact</h2>
+  <p>Any question about your data: <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a></p>
+</div>
+
+  </main>
+
+  <footer class="lg-pie">
+    <p>
+      Titanium Fitness es un proyecto de demostración de
+      <a href="https://ariel-fyb-labs.pages.dev/" target="_blank" rel="noopener">Ariel FyB Labs</a>.
+      Contacto: <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>
+    </p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  // Idioma: comparte la misma clave que el sitio principal para que
+  // la página legal se abra en el idioma que el visitante ya eligió.
+  var CLAVE_LANG = 'titanium_lang';
+  var bloques = document.querySelectorAll('[data-lg-lang]');
+  var btn = document.getElementById('lg-lang-btn');
+
+  function pintar(lang) {
+    bloques.forEach(function (b) {
+      b.classList.toggle('lg-visible', b.getAttribute('data-lg-lang') === lang);
+    });
+    document.documentElement.lang = lang;
+    if (btn) btn.textContent = lang === 'es' ? '🌐 EN' : '🌐 ES';
+  }
+
+  var lang = 'es';
+  if (CLAVE_LANG) {
+    try { lang = localStorage.getItem(CLAVE_LANG) || 'es'; } catch (e) {}
+  }
+  if (lang !== 'en' && lang !== 'es') lang = 'es';
+  pintar(lang);
+
+  if (btn) {
+    btn.addEventListener('click', function () {
+      lang = lang === 'es' ? 'en' : 'es';
+      if (CLAVE_LANG) { try { localStorage.setItem(CLAVE_LANG, lang); } catch (e) {} }
+      pintar(lang);
+    });
+  }
+})();
+</script>
+</body>
+</html>

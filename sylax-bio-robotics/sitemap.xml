@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SylaxBioRobotics — sitemap
+  ==========================
+  Las 4 páginas reales del sitio. Las anclas (#nanotecnologia,
+  #detalles-civil, #instalaciones...) NO llevan entrada propia:
+  son secciones dentro de una página, no páginas.
+
+  Si cambias el dominio, hay que cambiarlo en 4 sitios:
+    1. este archivo (los 4 <loc>)
+    2. robots.txt (la línea Sitemap:)
+    3. el <link rel="canonical"> de cada .html
+    4. las etiquetas og:url y og:image de cada .html
+
+  lastmod: ponlo a mano cuando edites una página de verdad.
+  Google lo ignora si ve que siempre pones la fecha de hoy.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://sylax-bio-robotics.pages.dev/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://sylax-bio-robotics.pages.dev/divisiones.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://sylax-bio-robotics.pages.dev/labs.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://sylax-bio-robotics.pages.dev/solicitudes.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>

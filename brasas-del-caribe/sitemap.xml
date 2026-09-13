@@ -37,6 +37,20 @@
     <priority>0.8</priority>
   </url>
 
+
+  <!-- Paginas legales. Prioridad baja: existen para que el visitante
+       (y Google) sepan que hay politica, no para posicionar. -->
+  <url>
+    <loc>https://brasas-del-caribe.pages.dev/privacidad.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://brasas-del-caribe.pages.dev/terminos.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>
 
 

@@ -1,0 +1,29 @@
+# =============================================================
+# Cloudflare Pages — cabeceras
+# -------------------------------------------------------------
+# Esto no es SEO directo, pero sí velocidad, y la velocidad sí
+# pesa en indexación (Core Web Vitals). Las imágenes y el CSS se
+# cachean fuerte; el HTML no, para que un cambio se vea al toque.
+# =============================================================
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# HTML: siempre revalidar, si no los cambios tardan en verse
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Imágenes y vídeo: cache larga. Si cambias una imagen, cámbiale
+# el nombre del archivo (o no verás el cambio hasta dentro de un año).
+/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS y JS: una semana. Súbelo a immutable cuando les pongas
+# versión en el nombre (style.v2.css, etc).
+/style.css
+  Cache-Control: public, max-age=604800
+/app.js
+  Cache-Control: public, max-age=604800

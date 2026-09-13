@@ -28,6 +28,10 @@ const translations = {
         nav_plans: "Memberships",
         nav_contact: "Free Pass",
         lang_btn_aria: "Switch language",
+        form_consent: 'I have read and accept the <a href="privacidad.html" target="_blank" rel="noopener">Privacy Policy</a> and the <a href="terminos.html" target="_blank" rel="noopener">Terms of Use</a>, and I agree to be contacted about this enquiry.',
+        form_consent_error: 'Please accept the Privacy Policy and Terms of Use before sending.',
+        footer_privacy: 'Privacy Policy',
+        footer_terms: 'Terms of Use',
         theme_btn_aria: "Toggle theme",
         theme_dark: "🌙 Dark",
         theme_light: "☀️ Light",
@@ -103,6 +107,10 @@ const translations = {
         nav_plans: "Membresías",
         nav_contact: "Pase Gratis",
         lang_btn_aria: "Cambiar idioma",
+        form_consent: 'He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a> y los <a href="terminos.html" target="_blank" rel="noopener">Términos de Uso</a>, y acepto que me contacten por esta consulta.',
+        form_consent_error: 'Acepta la Política de Privacidad y los Términos de Uso antes de enviar.',
+        footer_privacy: 'Política de Privacidad',
+        footer_terms: 'Términos de Uso',
         theme_btn_aria: "Cambiar tema",
         theme_dark: "🌙 Oscuro",
         theme_light: "☀️ Claro",
@@ -460,6 +468,14 @@ document.getElementById('lead-form').addEventListener('submit', async function (
         existingError.remove();
     }
  
+    // EN/ES: consent gate — nothing is sent until the visitor ticks the box.
+    const consentEl = document.getElementById('consent');
+    if (consentEl && !consentEl.checked) {
+        showLeadError(translations[currentLang].form_consent_error, formContainer, formSuccess);
+        consentEl.focus();
+        return;
+    }
+
     const commentEl = document.getElementById('comment');
     const comment = commentEl.value.trim();
  

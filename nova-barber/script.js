@@ -141,6 +141,8 @@ const copy = {
     mapLabel: "Fictional demo location",
     footerCopy: "Fictional portfolio concept by Ariel FyB Labs. Basic scope: 3 sections, responsive design, browser-only appointment selector, downloadable ticket, direct confirmation links, basic SEO, and clean source code.",
     footerFiverr: "Hire on Fiverr",
+    footerPrivacy: "Privacy Policy",
+    footerTerms: "Terms of Use",
     footerGitHub: "View GitHub Portfolio",
     // TODO PÁGINA CENTRAL: cambiar después este texto a "Main Portfolio" si corresponde.
     footerCloudflare: "Cloudflare Demo",
@@ -258,6 +260,8 @@ const copy = {
     mapLabel: "Ubicación ficticia del demo",
     footerCopy: "Concepto ficticio de portafolio por Ariel FyB Labs. Alcance Basic: 3 secciones, diseño responsive, reservador local, ticket descargable, confirmación directa, SEO básico y código fuente limpio.",
     footerFiverr: "Contrátame en Fiverr",
+    footerPrivacy: "Política de Privacidad",
+    footerTerms: "Términos de Uso",
     footerGitHub: "Ver portafolio en GitHub",
     // TODO PÁGINA CENTRAL: cambiar después este texto a "Portafolio central" si corresponde.
     footerCloudflare: "Demo en Cloudflare",

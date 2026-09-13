@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidad | Brasas del Caribe</title>
+<meta name="description" content="Política de privacidad del sitio de demostración. Qué datos se recogen y qué se hace con ellos.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://brasas-del-caribe.pages.dev/privacidad.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%A6%9E</text></svg>">
+
+<style>
+  :root { color-scheme: light dark; }
+  :root, [data-theme="dark"] { --lg-bg:#12100e; --lg-surface:#1c1917; --lg-text:#faf7f2; --lg-muted:#a8a29e; --lg-border:#3a3330; --lg-accent:#e8873a; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--lg-bg);
+    color: var(--lg-text);
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.7;
+    padding: 0 1rem 4rem;
+  }
+  .lg-wrap { max-width: 760px; margin: 0 auto; }
+  header.lg-top {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    align-items: center; justify-content: space-between;
+    padding: 1.5rem 0; border-bottom: 1px solid var(--lg-border);
+    margin-bottom: 2.5rem;
+  }
+  .lg-marca { font-weight: 800; font-size: 1.15rem; letter-spacing: .02em; color: var(--lg-text); text-decoration: none; }
+  .lg-marca span { color: var(--lg-accent); }
+  .lg-acciones { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .lg-btn {
+    background: var(--lg-surface); color: var(--lg-text);
+    border: 1px solid var(--lg-border); border-radius: 999px;
+    padding: .4rem .9rem; font-size: .85rem; cursor: pointer;
+    text-decoration: none; display: inline-block; font-family: inherit;
+  }
+  .lg-btn:hover { border-color: var(--lg-accent); color: var(--lg-accent); }
+  h1 { font-size: clamp(1.7rem, 4vw, 2.3rem); line-height: 1.2; margin-bottom: .6rem; }
+  h2 { font-size: 1.2rem; margin: 2.2rem 0 .7rem; color: var(--lg-accent); }
+  h3 { font-size: 1rem; margin: 1.4rem 0 .4rem; }
+  p, li { margin-bottom: .8rem; color: var(--lg-text); }
+  ul, ol { padding-left: 1.4rem; margin-bottom: 1rem; }
+  a { color: var(--lg-accent); }
+  .lg-fecha { color: var(--lg-muted); font-size: .875rem; margin-bottom: 2rem; }
+  .lg-aviso {
+    background: var(--lg-surface); border: 1px solid var(--lg-accent);
+    border-left-width: 4px; border-radius: 8px;
+    padding: 1rem 1.2rem; margin: 1.5rem 0;
+  }
+  .lg-aviso p:last-child { margin-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .9rem; }
+  th, td { text-align: left; padding: .6rem .5rem; border-bottom: 1px solid var(--lg-border); vertical-align: top; }
+  th { color: var(--lg-muted); font-weight: 600; }
+  .lg-tabla-scroll { overflow-x: auto; }
+  footer.lg-pie {
+    margin-top: 3rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--lg-border);
+    color: var(--lg-muted); font-size: .85rem;
+  }
+  [data-lg-lang] { display: none; }
+  [data-lg-lang].lg-visible { display: block; }
+  code { background: var(--lg-surface); padding: .1rem .35rem; border-radius: 4px; font-size: .9em; }
+</style>
+</head>
+<body>
+<div class="lg-wrap">
+
+  <header class="lg-top">
+    <a class="lg-marca" href="index.html">BRASAS<span> DEL CARIBE</span></a>
+    <div class="lg-acciones">
+      <button class="lg-btn" id="lg-lang-btn" type="button">🌐 EN</button>
+      <a class="lg-btn" href="index.html" data-lg-t="volver">&larr; Volver al sitio</a>
+    </div>
+  </header>
+
+  <main>
+
+<div data-lg-lang="es">
+  <h1>Política de Privacidad</h1>
+  <p class="lg-fecha">Última actualización: 13 de septiembre de 2026</p>
+
+  <div class="lg-aviso">
+    <p><strong>Brasas del Caribe es un restaurante ficticio.</strong> Este sitio es una pieza de
+    portafolio de Ariel FyB Labs. El negocio no existe, la dirección y el teléfono
+    son de relleno, y no se puede reservar nada de verdad.</p>
+    <p><strong>Lo importante de esta página:</strong> el formulario de este sitio
+    <strong>no envía tus datos a ningún servidor</strong>. Todo lo que escribes se
+    queda en tu navegador. Lo explicamos abajo.</p>
+  </div>
+
+  <h2>1. Quién responde por este sitio</h2>
+  <p><strong>Ariel FyB Labs</strong>, desarrollo web independiente, Santo Domingo
+  Este, República Dominicana. Contacto:
+  <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>.</p>
+
+  <h2>2. Qué pasa con lo que escribes en el formulario</h2>
+  <p>El formulario te pide nombre, teléfono, fecha, cantidad de personas y una nota opcional. Con eso <strong>no hacemos nada</strong>,
+  porque no nos llega:</p>
+  <ul>
+    <li>No hay envío a ningún servidor. No existe un <code>action</code> que mande
+        el formulario a ningún lado.</li>
+    <li>No hay base de datos, ni hoja de cálculo, ni correo automático.</li>
+    <li>Los datos se usan solo dentro de tu navegador, para armar el resumen que
+        ves en pantalla.</li>
+  </ul>
+  <p>Si cierras la pestaña sin hacer nada más, esa información desaparece. Nosotros
+  nunca la vimos.</p>
+
+  <h2>3. El botón de WhatsApp: aquí sí salen tus datos</h2>
+  <p>Al enviar el formulario, el sitio <strong>abre WhatsApp automáticamente</strong> en
+  una pestaña nueva, con un mensaje ya redactado con tus datos. Ojo: abrirse no es
+  enviarse. El mensaje queda escrito esperándote y <strong>no sale hasta que tú le
+  des a enviar dentro de WhatsApp</strong>. Ese es el único momento en que la
+  información sale de tu equipo.</p>
+  <p>A partir de ahí es una conversación normal de WhatsApp: aplican los términos y
+  la política de privacidad de <strong>WhatsApp (Meta)</strong>, no los nuestros.
+  El número al que apunta el botón es un número de relleno, así que en este demo el
+  mensaje no llega a ningún negocio real.</p>
+
+  <h2>4. Cookies y almacenamiento local</h2>
+  <p><strong>Este sitio no usa cookies.</strong> No hay analítica, ni publicidad, ni
+  seguimiento. No hay Google Analytics ni píxel de Facebook.</p>
+  <p>Puede usar <code>localStorage</code> del navegador para recordar tu preferencia
+  de tema o idioma. Eso se queda en tu equipo y no te identifica.</p>
+
+  <h2>5. Proveedores</h2>
+  <p>El sitio está alojado en <strong>Cloudflare Pages</strong>. Como cualquier
+  servidor web, Cloudflare procesa tu dirección IP para servirte la página. No
+  tenemos acceso a registros individuales de visitantes.</p>
+
+  <h2>6. Tus derechos</h2>
+  <p>Como no guardamos datos tuyos, no hay nada que consultar, corregir ni borrar.
+  Si aun así tienes una duda, escribe a <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>.</p>
+  <p>Aplica la <strong>Ley 172-13</strong> de protección de datos personales de
+  República Dominicana.</p>
+
+  <h2>7. Menores de edad</h2>
+  <p>Este sitio no está dirigido a menores de 18 años.</p>
+
+  <h2>8. Cambios</h2>
+  <p>Si cambiamos esta política, cambiamos la fecha de arriba.</p>
+
+  <h2>9. Contacto</h2>
+  <p><a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a></p>
+</div>
+
+<div data-lg-lang="en">
+  <h1>Privacy Policy</h1>
+  <p class="lg-fecha">Last updated: September 13, 2026</p>
+
+  <div class="lg-aviso">
+    <p><strong>Brasas del Caribe is a fictional restaurant.</strong> This site is a portfolio
+    piece by Ariel FyB Labs. The business does not exist, the address and phone
+    number are placeholders, and nothing can actually be booked.</p>
+    <p><strong>The key point of this page:</strong> the form on this site
+    <strong>does not send your data to any server</strong>. Everything you type
+    stays in your browser. We explain it below.</p>
+  </div>
+
+  <h2>1. Who is responsible for this site</h2>
+  <p><strong>Ariel FyB Labs</strong>, independent web development, Santo Domingo
+  Este, Dominican Republic. Contact:
+  <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>.</p>
+
+  <h2>2. What happens to what you type</h2>
+  <p>The form asks for your name, phone number, date, number of guests and an optional note. We do <strong>nothing</strong> with it, because
+  it never reaches us:</p>
+  <ul>
+    <li>There is no submission to any server. There is no <code>action</code>
+        sending the form anywhere.</li>
+    <li>There is no database, no spreadsheet and no automated email.</li>
+    <li>The data is used only inside your browser, to build the summary you see
+        on screen.</li>
+  </ul>
+  <p>If you close the tab without doing anything else, that information is gone.
+  We never saw it.</p>
+
+  <h2>3. The WhatsApp button: this is where your data does leave</h2>
+  <p>When you submit the form, the site <strong>opens WhatsApp automatically</strong> in
+  a new tab, with a message already drafted containing your details. Note: opening is
+  not sending. The message sits there waiting for you and <strong>does not go until
+  you press send inside WhatsApp</strong>. That is the only moment the information
+  leaves your device.</p>
+  <p>From then on it is an ordinary WhatsApp conversation: the terms and privacy
+  policy of <strong>WhatsApp (Meta)</strong> apply, not ours. The number the button
+  points at is a placeholder, so in this demo the message does not reach any real
+  business.</p>
+
+  <h2>4. Cookies and local storage</h2>
+  <p><strong>This site uses no cookies.</strong> No analytics, no advertising, no
+  tracking. No Google Analytics and no Facebook pixel.</p>
+  <p>It may use browser <code>localStorage</code> to remember your theme or language
+  preference. That stays on your device and does not identify you.</p>
+
+  <h2>5. Providers</h2>
+  <p>The site is hosted on <strong>Cloudflare Pages</strong>. As any web server
+  does, Cloudflare processes your IP address in order to serve you the page. We
+  have no access to individual visitor logs.</p>
+
+  <h2>6. Your rights</h2>
+  <p>Since we hold no data about you, there is nothing to access, correct or
+  delete. If you still have a question, write to
+  <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>.</p>
+  <p>Dominican Republic <strong>Law 172-13</strong> on personal data protection
+  applies.</p>
+
+  <h2>7. Minors</h2>
+  <p>This site is not intended for anyone under 18.</p>
+
+  <h2>8. Changes</h2>
+  <p>If we change this policy we change the date above.</p>
+
+  <h2>9. Contact</h2>
+  <p><a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a></p>
+</div>
+
+  </main>
+
+  <footer class="lg-pie">
+    <p>
+      Brasas del Caribe es un proyecto de demostración de
+      <a href="https://ariel-fyb-labs.pages.dev/" target="_blank" rel="noopener">Ariel FyB Labs</a>.
+      Contacto: <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>
+    </p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  // Idioma: comparte la misma clave que el sitio principal para que
+  // la página legal se abra en el idioma que el visitante ya eligió.
+  var CLAVE_LANG = 'brasas-lang';
+  var bloques = document.querySelectorAll('[data-lg-lang]');
+  var btn = document.getElementById('lg-lang-btn');
+
+  function pintar(lang) {
+    bloques.forEach(function (b) {
+      b.classList.toggle('lg-visible', b.getAttribute('data-lg-lang') === lang);
+    });
+    document.documentElement.lang = lang;
+    if (btn) btn.textContent = lang === 'es' ? '🌐 EN' : '🌐 ES';
+  }
+
+  var lang = 'es';
+  if (CLAVE_LANG) {
+    try { lang = localStorage.getItem(CLAVE_LANG) || 'es'; } catch (e) {}
+  }
+  if (lang !== 'en' && lang !== 'es') lang = 'es';
+  pintar(lang);
+
+  if (btn) {
+    btn.addEventListener('click', function () {
+      lang = lang === 'es' ? 'en' : 'es';
+      if (CLAVE_LANG) { try { localStorage.setItem(CLAVE_LANG, lang); } catch (e) {} }
+      pintar(lang);
+    });
+  }
+})();
+</script>
+</body>
+</html>

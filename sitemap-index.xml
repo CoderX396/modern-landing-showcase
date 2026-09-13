@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ESTO ES LO MAS PARECIDO A "UN ARCHIVO PARA TODAS" QUE EXISTE.
+  ========================================================================
+  Un indice de sitemaps: un solo archivo que apunta a los sitemaps de los
+  cuatro demos. Lo subes en Search Console UNA vez en vez de cuatro.
+
+  CONDICION IMPORTANTE (si no, Google lo ignora):
+  Un sitemap solo puede declarar URLs de OTRO dominio si tienes verificados
+  TODOS esos dominios en la misma cuenta de Search Console. O sea:
+
+    1. Verifica en Search Console, como propiedades separadas:
+         ariel-fyb-labs-demos.pages.dev
+         nova-barber.pages.dev
+         titanium-fitness.pages.dev
+         brasas-del-caribe.pages.dev
+         sylax-bio-robotics.pages.dev
+       (Con *.pages.dev la verificacion va por archivo HTML o meta tag,
+        no por DNS: el DNS de pages.dev no es tuyo.)
+
+    2. Recien ahi sube este archivo en una sola de las propiedades.
+
+  Si no has verificado los cinco, NO uses este archivo: sube el sitemap.xml
+  de cada demo dentro de su propia propiedad. Funciona igual, son 4 clics
+  mas una sola vez en la vida.
+-->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap><loc>https://ariel-fyb-labs-demos.pages.dev/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://nova-barber.pages.dev/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://titanium-fitness.pages.dev/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://brasas-del-caribe.pages.dev/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://sylax-bio-robotics.pages.dev/sitemap.xml</loc></sitemap>
+</sitemapindex>

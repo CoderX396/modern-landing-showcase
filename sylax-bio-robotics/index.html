@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>SylaxBioRobotics | Proyecto académico de bioingeniería y robótica</title>
+  <meta name="description" content="Proyecto académico ficticio. SylaxBioRobotics es una empresa inventada usada como práctica de maquetación web: bioingeniería y robótica aplicada.">
+  <meta name="author" content="Ariel FyB Labs">
+  <meta name="theme-color" content="#1a365d">
+
+  <!-- ===========================================================
+       INDEXACIÓN
+       -----------------------------------------------------------
+       Está en NOINDEX a propósito. Este sitio describe una empresa
+       inventada que dice curar enfermedades y reescribir el ADN;
+       indexado tal cual, Google lo trata como una clínica real.
+
+       ¿Quieres que sí aparezca en Google como pieza de portafolio?
+       Cambia las DOS líneas de abajo en las 4 páginas:
+         1) esta etiqueta  ->  content="index, follow, max-image-preview:large"
+         2) robots.txt     ->  quita la línea "Disallow: /"
+       El banner naranja de proyecto académico se queda puesto.
+       =========================================================== -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="canonical" href="https://sylax-bio-robotics.pages.dev/">
+
+  <!-- Tarjeta al compartir por WhatsApp / X / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_DO">
+  <meta property="og:site_name" content="SylaxBioRobotics (proyecto académico)">
+  <meta property="og:title" content="SylaxBioRobotics | Proyecto académico de bioingeniería y robótica">
+  <meta property="og:description" content="Proyecto académico ficticio: maquetación de un sitio corporativo de bioingeniería y robótica. Empresa inventada.">
+  <meta property="og:url" content="https://sylax-bio-robotics.pages.dev/">
+  <meta property="og:image" content="https://sylax-bio-robotics.pages.dev/img/logo-dark.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SylaxBioRobotics | Proyecto académico">
+  <meta name="twitter:description" content="Proyecto académico ficticio de bioingeniería y robótica. Empresa inventada.">
+  <meta name="twitter:image" content="https://sylax-bio-robotics.pages.dev/img/logo-dark.png">
+
+  <!-- Favicon inline: sin archivo extra, sin petición extra -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%A7%AC</text></svg>">
+
+  <!-- ===========================================================
+       TEMA: se aplica ANTES de pintar para que no parpadee.
+       Idéntico en las 4 páginas — no lo cambies en una sola.
+       =========================================================== -->
+  <script>
+    (function () {
+      document.documentElement.classList.add('tema-cargando');
+      var guardado = localStorage.getItem('sylax_tema');
+      if (!guardado) {
+        guardado = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oscuro' : 'claro';
+      }
+      if (guardado === 'oscuro') {
+        document.documentElement.classList.add('modo-contraste');
+      }
+      window.addEventListener('DOMContentLoaded', function () {
+        document.documentElement.classList.remove('tema-cargando');
+      });
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- style.css va DESPUÉS de Bootstrap y es la única fuente de
+       verdad visual. No agregues bloques <style> a esta página. -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Datos estructurados honestos: se declara como obra de
+       proyecto, NO como MedicalOrganization. Marcar esto como una
+       clínica real sería desinformación en el buscador. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "SylaxBioRobotics",
+    "alternateName": "SylaxBioRobotics — proyecto académico",
+    "url": "https://sylax-bio-robotics.pages.dev/",
+    "genre": "Ficción / trabajo académico",
+    "abstract": "Sitio corporativo ficticio creado como práctica académica de maquetación web. La empresa, los productos y las afirmaciones científicas son inventados.",
+    "creator": { "@type": "Organization", "name": "Ariel FyB Labs" },
+    "inLanguage": "es",
+    "isAccessibleForFree": true
+  }
+  </script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <!-- AVISO DE FICCIÓN — va en las 4 páginas, justo antes del header -->
+  <div class="aviso-ficcion" role="note">
+    <strong>PROYECTO ACADÉMICO.</strong> SylaxBioRobotics es una empresa ficticia.
+    Los productos, tratamientos y resultados descritos aquí son inventados y no
+    constituyen información médica.
+  </div>
+
+  <header class="sticky-top" role="banner">
+    <nav class="navbar navbar-expand-lg py-2" aria-label="Navegación principal">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <span class="logo-wrap">
+            <img src="img/logo-light.png" alt="" class="logo logo-for-light" width="72" height="72" fetchpriority="high" decoding="async">
+            <img src="img/logo-dark.png" alt="" class="logo logo-for-dark" width="72" height="72" fetchpriority="high" decoding="async">
+          </span>
+          <span class="marca-font">SylaxBioRobotics</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCore" aria-controls="navbarCore" aria-expanded="false" aria-label="Alternar navegación">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarCore">
+          <ul class="navbar-nav align-items-lg-center gap-lg-2">
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="divisiones.html">Tecnología</a></li>
+            <li class="nav-item"><a class="nav-link" href="solicitudes.html">Solicitudes</a></li>
+            <li class="nav-item"><a class="nav-link" href="labs.html">Labs</a></li>
+            <li class="nav-item mt-2 mt-lg-0">
+              <button id="btn-tema" class="btn btn-outline-secondary btn-sm px-3" aria-pressed="false">Modo Oscuro</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="flex-grow-1" id="contenido">
+
+    <section id="hero" class="py-5 border-bottom">
+      <div class="container text-center py-5">
+        <!-- Un solo <h1> por página. Antes el hero era un <h2> y la
+             página no tenía <h1> en absoluto. -->
+        <h1 class="mb-4">Trascendiendo el Diseño Original</h1>
+        <p class="lead text-muted mx-auto contenedor-ancho">
+          Erradicamos la obsolescencia biológica. SylaxBioRobotics es la respuesta
+          definitiva contra el deterioro celular y el inicio de la perfección
+          orgánica asistida.
+        </p>
+        <p class="small text-muted mt-4 mb-0">
+          <em>Narrativa ficticia con fines académicos.</em>
+        </p>
+      </div>
+    </section>
+
+    <section id="manifiesto" class="py-5 bg-light">
+      <div class="container text-center py-4">
+        <h2 class="mb-4">El Fin del Modelo del Dolor</h2>
+        <p class="fs-5 text-muted mx-auto contenedor-ancho">
+          Durante décadas, el conglomerado farmacéutico tradicional ha lucrado con la
+          fragilidad humana, convirtiendo la enfermedad neurodegenerativa y el
+          envejecimiento en un modelo de negocio prolongado. SylaxBioRobotics desmantela
+          este paradigma. No «tratamos» síntomas; alteramos el genoma e integramos
+          hardware robótico para hacer que la debilidad física y el dolor sean
+          biológicamente imposibles. La longevidad no es un tratamiento, es nuestro
+          estándar de fábrica.
+        </p>
+      </div>
+    </section>
+
+    <section id="metodologia" class="py-5 border-top border-bottom">
+      <div class="container py-4">
+        <h2 class="text-center mb-5">Metodología</h2>
+        <div class="row g-4">
+          <article class="col-md-6">
+            <div class="tarjeta-clinica p-5 h-100 text-center">
+              <h3 class="mb-3">Optimización Biológica</h3>
+              <p class="text-muted mb-0">
+                Nuestros sueros genéticos y bio-inyecciones patentadas reescriben el ADN
+                a nivel celular. Inducimos regeneración tisular hiperacelerada, inmunidad
+                de espectro completo y un incremento del 400 % en la densidad ósea basal,
+                preparando el organismo para la integración sintética.
+              </p>
+            </div>
+          </article>
+
+          <article class="col-md-6">
+            <div class="tarjeta-clinica p-5 h-100 text-center">
+              <h3 class="mb-3">Ingeniería Robótica</h3>
+              <p class="text-muted mb-0">
+                Desarrollamos exoesqueletos modulares y prótesis de aleación avanzada con
+                enlace neuronal directo. Nuestros sistemas multiplican la fuerza cinética
+                y proporcionan blindaje reactivo con latencia cero, integrando la máquina
+                de forma nativa al sistema nervioso central.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="equipo" class="py-5">
+      <div class="container py-4">
+        <h2 class="text-center mb-5">Dirección Ejecutiva</h2>
+        <div class="row align-items-center g-5">
+          <div class="col-md-6">
+            <img src="img/equipo-directivo.webp"
+                 alt="Ilustración conceptual del equipo directivo ficticio de SylaxBioRobotics"
+                 class="img-fluid rounded shadow-lg" width="800" height="600" loading="lazy" decoding="async">
+          </div>
+          <div class="col-md-6">
+            <h3 class="mb-3">Liderando la Evolución Humana</h3>
+            <p class="text-muted">
+              Nuestros investigadores principales lideran el campo de la biología
+              sintética y la robótica aplicada. Más que ingenieros, somos arquitectos de
+              la siguiente etapa evolutiva, comprometidos con la ética, la precisión y la
+              erradicación definitiva del deterioro físico humano.
+            </p>
+            <div class="mt-4">
+              <span class="badge bg-primary me-2">Investigación</span>
+              <span class="badge bg-secondary me-2">Bioingeniería</span>
+              <span class="badge bg-dark">Robótica</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="video-presentacion" class="py-5 border-top">
+      <div class="container contenedor-ancho">
+        <h2 class="text-center mb-4">Visión y Ejecución</h2>
+        <p class="text-center text-muted mb-5">
+          Un recorrido por los fundamentos técnicos de SylaxBioRobotics.
+        </p>
+
+        <!-- loading="lazy" no existe en <video> (era un atributo
+             inválido); lo correcto es preload="none" + poster. -->
+        <div class="ratio ratio-16x9 shadow-lg rounded overflow-hidden border">
+          <video controls preload="none" title="Presentación SylaxBioRobotics" width="640" height="360">
+            <source src="img/presentacion-sylax.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento <code>video</code>.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta" class="py-5 bg-light border-top">
+      <div class="container text-center py-4">
+        <h2 class="mb-3">¿Quieres formar parte del programa?</h2>
+        <p class="text-muted mb-4 contenedor-ancho">
+          Envía tu solicitud de evaluación y nuestro equipo te contactará.
+        </p>
+        <a href="solicitudes.html" class="btn btn-corporativo btn-lg px-4">Enviar solicitud</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="py-4 text-center">
+    <div class="container">
+      <p class="text-muted small mb-2">
+        &copy; 2026 SylaxBioRobotics. Investigación y Desarrollo Biomecánico Aplicado.
+      </p>
+      <p class="text-muted small mb-0">
+        Proyecto académico ficticio desarrollado por
+        <a href="https://ariel-fyb-labs.pages.dev/" target="_blank" rel="noopener">Ariel FyB Labs</a>.
+        Ninguna afirmación de esta página es real ni constituye consejo médico.
+      </p>
+    </div>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
