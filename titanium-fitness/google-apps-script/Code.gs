@@ -12,7 +12,7 @@
 const SETTINGS = Object.freeze({
   ADMIN_EMAIL: 'fyblabs.web@gmail.com',
   SENDER_NAME: 'Titanium Fit | Ariel FyB Labs',
-  CENTRAL_PORTFOLIO_URL: 'https://ariel-fyb-labs.pages.dev/',
+  CENTRAL_PORTFOLIO_URL: 'https://arielfyblabs.com.do/',
   GITHUB_URL: 'https://github.com/CoderX396/modern-landing-showcase',
   FIVERR_URL: 'https://es.fiverr.com/s/qDE81rd',
   MAX_REQUEST_BYTES: 15000,

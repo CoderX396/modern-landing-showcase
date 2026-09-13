@@ -97,7 +97,7 @@ const translations = {
         whatsapp_message: "Hi! I'd like to know more about Titanium Fitness",
         fiverr_button: "Hire Me on Fiverr",
         github_button: "View GitHub Portfolio",
-        livedemo_button: "Live Demo (Cloudflare)",
+        livedemo_button: "Visit my site",
         fiverr_header_button: "Fiverr",
         fiverr_header_aria: "See my services on Fiverr",
     },
@@ -176,7 +176,7 @@ const translations = {
         whatsapp_message: "¡Hola! Me gustaría saber más sobre Titanium Fitness",
         fiverr_button: "Contrátame en Fiverr",
         github_button: "Ver Portafolio en GitHub",
-        livedemo_button: "Demo en Vivo (Cloudflare)",
+        livedemo_button: "Ver mi sitio",
         fiverr_header_button: "Fiverr",
         fiverr_header_aria: "Ver mis servicios en Fiverr",
     }

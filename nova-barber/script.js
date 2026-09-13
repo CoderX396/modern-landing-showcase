@@ -145,7 +145,7 @@ const copy = {
     footerTerms: "Terms of Use",
     footerGitHub: "View GitHub Portfolio",
     // TODO PÁGINA CENTRAL: cambiar después este texto a "Main Portfolio" si corresponde.
-    footerCloudflare: "Cloudflare Demo",
+    footerCloudflare: "Visit my site",
     floatingBooking: "Open appointment selector",
     openMenu: "Open navigation",
     closeMenu: "Close navigation",
@@ -264,7 +264,7 @@ const copy = {
     footerTerms: "Términos de Uso",
     footerGitHub: "Ver portafolio en GitHub",
     // TODO PÁGINA CENTRAL: cambiar después este texto a "Portafolio central" si corresponde.
-    footerCloudflare: "Demo en Cloudflare",
+    footerCloudflare: "Ver mi sitio",
     floatingBooking: "Abrir el reservador",
     openMenu: "Abrir navegación",
     closeMenu: "Cerrar navegación",
