@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alern DevTech | Cursos</title>
+    <meta name="description" content="Cursos de desarrollo de software por nivel, duración, modalidad e inversión. Demo de portafolio con academia ficticia.">
+    <link rel="canonical" href="https://alern-devtech.pages.dev/cursos.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- CDN de Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } };</script>
+    <style>
+        /* En pantallas pequeñas, cada fila de la tabla se ve como una tarjeta */
+        @media (max-width: 767px) {
+            .tabla-cursos thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+            .tabla-cursos, .tabla-cursos tbody, .tabla-cursos tr, .tabla-cursos th, .tabla-cursos td { display: block; }
+            .tabla-cursos tr { margin: 0 0 12px; border: 1px solid #e5e7eb !important; border-radius: 12px; background: #fff; padding: 4px 16px; }
+            .tabla-cursos th, .tabla-cursos td { display: flex; justify-content: space-between; gap: 12px; text-align: right !important; padding: 10px 0 !important; border-bottom: 1px solid #f3f4f6; }
+            .tabla-cursos [data-etiqueta]::before { content: attr(data-etiqueta); color: #6b7280; font-weight: 400; text-align: left; }
+            .tabla-cursos td:last-child { border-bottom: 0; }
+            .tabla-cursos td:last-child a { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+    <header class="sticky top-0 z-20 bg-white/95 shadow-sm backdrop-blur">
+        <nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3" aria-label="Principal">
+            <a href="index.html" class="flex items-center gap-2 text-xl font-extrabold text-blue-600">
+                <span class="grid h-9 w-9 place-items-center rounded-lg bg-blue-600 text-sm text-white" aria-hidden="true">&lt;/&gt;</span>
+                Alern DevTech
+            </a>
+            <button id="boton-menu" type="button" class="rounded-lg border border-gray-300 px-3 py-2 text-sm font-semibold md:hidden" aria-expanded="false" aria-controls="menu">Menú</button>
+            <ul id="menu" class="hidden w-full flex-col gap-1 font-semibold md:flex md:w-auto md:flex-row md:items-center md:gap-6">
+                <li><a href="index.html" class="block rounded-lg px-2 py-2 hover:text-blue-500">Inicio</a></li>
+                <li><a href="cursos.html" class="block rounded-lg px-2 py-2 text-blue-600" aria-current="page">Cursos</a></li>
+                <li><a href="contacto.html" class="block rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Inscripción</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-12">
+        <section>
+            <h1 class="mb-2 text-3xl font-bold md:text-4xl">Nuestros cursos</h1>
+            <p class="mb-8 text-gray-600">Filtra por nivel o busca por nombre. Toca "Inscribirme" y el curso queda escogido en el formulario.</p>
+
+            <div class="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div id="filtros-nivel" class="flex flex-wrap gap-2" role="group" aria-label="Filtrar por nivel">
+                    <button type="button" data-nivel="Todos" aria-pressed="true" class="rounded-full border border-gray-300 px-4 py-1.5 text-sm font-semibold aria-pressed:border-blue-600 aria-pressed:bg-blue-600 aria-pressed:text-white">Todos</button>
+                    <button type="button" data-nivel="Principiante" aria-pressed="false" class="rounded-full border border-gray-300 px-4 py-1.5 text-sm font-semibold aria-pressed:border-blue-600 aria-pressed:bg-blue-600 aria-pressed:text-white">Principiante</button>
+                    <button type="button" data-nivel="Intermedio" aria-pressed="false" class="rounded-full border border-gray-300 px-4 py-1.5 text-sm font-semibold aria-pressed:border-blue-600 aria-pressed:bg-blue-600 aria-pressed:text-white">Intermedio</button>
+                    <button type="button" data-nivel="Avanzado" aria-pressed="false" class="rounded-full border border-gray-300 px-4 py-1.5 text-sm font-semibold aria-pressed:border-blue-600 aria-pressed:bg-blue-600 aria-pressed:text-white">Avanzado</button>
+                </div>
+                <label class="block md:w-72">
+                    <span class="sr-only">Buscar curso</span>
+                    <input id="buscar-curso" type="search" placeholder="Buscar curso…" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+                </label>
+            </div>
+
+            <div class="overflow-hidden md:rounded-lg md:bg-white md:shadow">
+                <table class="tabla-cursos w-full text-sm md:text-base">
+                    <caption class="sr-only">Cursos con nivel, duración, modalidad e inversión</caption>
+                    <thead class="bg-slate-900 text-left text-xs uppercase tracking-wider text-white">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">Curso</th>
+                            <th scope="col" class="px-4 py-3">Nivel</th>
+                            <th scope="col" class="px-4 py-3">Duración</th>
+                            <th scope="col" class="px-4 py-3">Modalidad</th>
+                            <th scope="col" class="px-4 py-3">Inversión</th>
+                            <th scope="col" class="px-4 py-3"><span class="sr-only">Acción</span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-cursos">
+                        <!-- Las filas se generan desde js/app.js -->
+                    </tbody>
+                </table>
+                <p id="sin-resultados" class="hidden px-4 py-10 text-center text-gray-600">No hay cursos con ese filtro.</p>
+            </div>
+            <p class="mt-4 text-sm text-gray-500">Precios de ejemplo en pesos dominicanos. Academia ficticia.</p>
+        </section>
+    </main>
+
+    <footer class="border-t border-gray-200 bg-white">
+        <div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 px-4 py-6 text-sm text-gray-600">
+            <p>&copy; <span data-anio>2026</span> Alern DevTech · Academia ficticia</p>
+            <p>Demo de portafolio · Hecho por <a href="https://ariel-fyb-labs.pages.dev/" target="_blank" rel="noopener" class="font-semibold text-blue-600 hover:underline">Ariel FyB Labs</a></p>
+        </div>
+    </footer>
+    <script src="js/app.js"></script>
+</body>
+</html>

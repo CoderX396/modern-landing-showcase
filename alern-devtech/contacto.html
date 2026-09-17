@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alern DevTech | Inscripción</title>
+    <meta name="description" content="Formulario de inscripción a los cursos de Alern DevTech. Demo de portafolio con academia ficticia.">
+    <link rel="canonical" href="https://alern-devtech.pages.dev/contacto.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- CDN de Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } };</script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+    <header class="sticky top-0 z-20 bg-white/95 shadow-sm backdrop-blur">
+        <nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3" aria-label="Principal">
+            <a href="index.html" class="flex items-center gap-2 text-xl font-extrabold text-blue-600">
+                <span class="grid h-9 w-9 place-items-center rounded-lg bg-blue-600 text-sm text-white" aria-hidden="true">&lt;/&gt;</span>
+                Alern DevTech
+            </a>
+            <button id="boton-menu" type="button" class="rounded-lg border border-gray-300 px-3 py-2 text-sm font-semibold md:hidden" aria-expanded="false" aria-controls="menu">Menú</button>
+            <ul id="menu" class="hidden w-full flex-col gap-1 font-semibold md:flex md:w-auto md:flex-row md:items-center md:gap-6">
+                <li><a href="index.html" class="block rounded-lg px-2 py-2 hover:text-blue-500">Inicio</a></li>
+                <li><a href="cursos.html" class="block rounded-lg px-2 py-2 hover:text-blue-500">Cursos</a></li>
+                <li><a href="contacto.html" class="block rounded-lg bg-blue-600 px-4 py-2 text-white ring-2 ring-blue-300 hover:bg-blue-700" aria-current="page">Inscripción</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-5">
+        <section class="md:col-span-3">
+            <h1 class="mb-2 text-3xl font-bold md:text-4xl">Inscripción</h1>
+            <p class="mb-6 text-gray-600">Completa tus datos y te contactamos para confirmar tu cupo.</p>
+
+            <form id="form-inscripcion" class="space-y-5 rounded-xl bg-white p-6 shadow" novalidate>
+                <div class="grid gap-5 md:grid-cols-2">
+                    <div>
+                        <label for="nombre" class="mb-1 block font-semibold">Nombre completo</label>
+                        <input id="nombre" name="nombre" type="text" autocomplete="name" required aria-describedby="error-nombre" class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 aria-[invalid=true]:border-rose-500">
+                        <p id="error-nombre" class="mt-1 text-sm text-rose-600" aria-live="polite"></p>
+                    </div>
+                    <div>
+                        <label for="correo" class="mb-1 block font-semibold">Correo electrónico</label>
+                        <input id="correo" name="correo" type="email" autocomplete="email" required aria-describedby="error-correo" class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 aria-[invalid=true]:border-rose-500">
+                        <p id="error-correo" class="mt-1 text-sm text-rose-600" aria-live="polite"></p>
+                    </div>
+                </div>
+
+                <div class="grid gap-5 md:grid-cols-2">
+                    <div>
+                        <label for="telefono" class="mb-1 block font-semibold">Teléfono <span class="font-normal text-gray-500">(opcional)</span></label>
+                        <input id="telefono" name="telefono" type="tel" autocomplete="tel" placeholder="809-555-0123" aria-describedby="error-telefono" class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 aria-[invalid=true]:border-rose-500">
+                        <p id="error-telefono" class="mt-1 text-sm text-rose-600" aria-live="polite"></p>
+                    </div>
+                    <div>
+                        <label for="curso" class="mb-1 block font-semibold">Curso</label>
+                        <select id="curso" name="curso" required aria-describedby="error-curso" class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 aria-[invalid=true]:border-rose-500">
+                            <option value="">Escoge un curso</option>
+                        </select>
+                        <p id="error-curso" class="mt-1 text-sm text-rose-600" aria-live="polite"></p>
+                    </div>
+                </div>
+
+                <fieldset>
+                    <legend class="mb-2 font-semibold">Modalidad</legend>
+                    <div class="flex flex-wrap gap-3">
+                        <label class="flex cursor-pointer items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="modalidad" value="Presencial" checked class="accent-blue-600"> Presencial
+                        </label>
+                        <label class="flex cursor-pointer items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="modalidad" value="Virtual" class="accent-blue-600"> Virtual
+                        </label>
+                    </div>
+                </fieldset>
+
+                <div>
+                    <label for="horario" class="mb-1 block font-semibold">Horario preferido</label>
+                    <select id="horario" name="horario" class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+                        <option>Mañana (8:00 – 11:00 AM)</option>
+                        <option>Tarde (2:00 – 5:00 PM)</option>
+                        <option>Noche (6:30 – 9:30 PM)</option>
+                        <option>Sábados (9:00 AM – 1:00 PM)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="mensaje" class="mb-1 block font-semibold">¿Algo que debamos saber? <span class="font-normal text-gray-500">(opcional)</span></label>
+                    <textarea id="mensaje" name="mensaje" rows="3" maxlength="400" class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"></textarea>
+                </div>
+
+                <div>
+                    <label class="flex items-start gap-2 text-sm text-gray-700">
+                        <input id="acepto" name="acepto" type="checkbox" required aria-describedby="error-acepto" class="mt-1 accent-blue-600">
+                        Acepto que Alern DevTech use estos datos para contactarme sobre mi inscripción.
+                    </label>
+                    <p id="error-acepto" class="mt-1 text-sm text-rose-600" aria-live="polite"></p>
+                </div>
+
+                <button type="submit" class="w-full rounded-lg bg-blue-600 px-5 py-3 font-semibold text-white hover:bg-blue-700">Enviar inscripción</button>
+                <p class="text-center text-xs text-gray-500">Demo: los datos no se envían ni se guardan.</p>
+            </form>
+
+            <div id="inscripcion-exito" class="hidden rounded-xl bg-white p-8 text-center shadow" tabindex="-1" role="status">
+                <p class="mb-2 text-5xl" aria-hidden="true">🎉</p>
+                <h2 class="mb-2 text-2xl font-bold">¡Listo, <span id="exito-nombre"></span>!</h2>
+                <p class="mb-1 text-gray-700">Recibimos tu solicitud para <strong id="exito-curso"></strong>.</p>
+                <p class="mb-6 text-gray-500" id="exito-detalle"></p>
+                <button id="otra-inscripcion" type="button" class="rounded-lg border border-gray-300 px-5 py-2 font-semibold hover:bg-gray-50">Hacer otra inscripción</button>
+            </div>
+        </section>
+
+        <aside class="space-y-4 md:col-span-2">
+            <div class="rounded-xl bg-slate-900 p-6 text-white">
+                <h2 class="mb-4 text-xl font-bold">¿Tienes dudas?</h2>
+                <ul class="space-y-3 text-slate-300">
+                    <li><span class="block text-sm text-slate-400">Correo</span>hola@alerndevtech.example</li>
+                    <li><span class="block text-sm text-slate-400">Teléfono</span>809-000-0000</li>
+                    <li><span class="block text-sm text-slate-400">Atención</span>Lunes a viernes, 9:00 AM – 6:00 PM</li>
+                </ul>
+            </div>
+            <div class="rounded-xl border border-blue-200 bg-blue-50 p-6">
+                <h2 class="mb-2 font-bold text-blue-900">¿Qué pasa después?</h2>
+                <ol class="list-inside list-decimal space-y-1 text-blue-900">
+                    <li>Te escribimos en 24 horas para confirmar.</li>
+                    <li>Apartas el cupo con el primer pago.</li>
+                    <li>Recibes el acceso y el calendario de clases.</li>
+                </ol>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="border-t border-gray-200 bg-white">
+        <div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 px-4 py-6 text-sm text-gray-600">
+            <p>&copy; <span data-anio>2026</span> Alern DevTech · Academia ficticia</p>
+            <p>Demo de portafolio · Hecho por <a href="https://ariel-fyb-labs.pages.dev/" target="_blank" rel="noopener" class="font-semibold text-blue-600 hover:underline">Ariel FyB Labs</a></p>
+        </div>
+    </footer>
+    <script src="js/app.js"></script>
+</body>
+</html>

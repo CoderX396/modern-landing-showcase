@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alern DevTech | Inicio</title>
+    <meta name="description" content="Academia de desarrollo de software: HTML, JavaScript, React, Python y Node.js con proyectos reales. Demo de portafolio con academia ficticia.">
+    <link rel="canonical" href="https://alern-devtech.pages.dev/">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta property="og:title" content="Alern DevTech | Aprende a programar con proyectos reales">
+    <meta property="og:description" content="Cursos de desarrollo de software para empezar desde cero o subir de nivel.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- CDN de Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } };</script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+    <header class="sticky top-0 z-20 bg-white/95 shadow-sm backdrop-blur">
+        <nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3" aria-label="Principal">
+            <a href="index.html" class="flex items-center gap-2 text-xl font-extrabold text-blue-600">
+                <span class="grid h-9 w-9 place-items-center rounded-lg bg-blue-600 text-sm text-white" aria-hidden="true">&lt;/&gt;</span>
+                Alern DevTech
+            </a>
+            <button id="boton-menu" type="button" class="rounded-lg border border-gray-300 px-3 py-2 text-sm font-semibold md:hidden" aria-expanded="false" aria-controls="menu">Menú</button>
+            <ul id="menu" class="hidden w-full flex-col gap-1 font-semibold md:flex md:w-auto md:flex-row md:items-center md:gap-6">
+                <li><a href="index.html" class="block rounded-lg px-2 py-2 text-blue-600" aria-current="page">Inicio</a></li>
+                <li><a href="cursos.html" class="block rounded-lg px-2 py-2 hover:text-blue-500">Cursos</a></li>
+                <li><a href="contacto.html" class="block rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Inscripción</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-600 text-white">
+            <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 md:grid-cols-2">
+                <div>
+                    <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-100">Academia de desarrollo de software</p>
+                    <h1 class="mb-4 text-4xl font-extrabold leading-tight md:text-5xl">Bienvenidos a Alern DevTech</h1>
+                    <p class="mb-8 text-lg text-blue-100">Tu futuro en el desarrollo de software comienza aquí. Aprende con proyectos reales, a tu ritmo y con mentores que trabajan en la industria.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="cursos.html" class="rounded-lg bg-white px-5 py-3 font-semibold text-blue-700 shadow hover:bg-blue-50">Ver cursos</a>
+                        <a href="contacto.html" class="rounded-lg border border-white/70 px-5 py-3 font-semibold hover:bg-white/10">Inscribirme</a>
+                    </div>
+                </div>
+                <div class="rounded-2xl bg-slate-900/80 p-5 font-mono text-sm shadow-2xl ring-1 ring-white/10" aria-hidden="true">
+                    <div class="mb-4 flex gap-2"><span class="h-3 w-3 rounded-full bg-rose-400"></span><span class="h-3 w-3 rounded-full bg-amber-300"></span><span class="h-3 w-3 rounded-full bg-emerald-400"></span></div>
+                    <p><span class="text-pink-400">const</span> <span class="text-sky-300">estudiante</span> = {</p>
+                    <p class="pl-5">meta: <span class="text-emerald-300">'Mi primer empleo en tech'</span>,</p>
+                    <p class="pl-5">cursos: [<span class="text-emerald-300">'HTML'</span>, <span class="text-emerald-300">'JavaScript'</span>, <span class="text-emerald-300">'React'</span>],</p>
+                    <p class="pl-5">proyectos: <span class="text-amber-300">6</span>,</p>
+                    <p>};</p>
+                    <p class="mt-3"><span class="text-sky-300">estudiante</span>.<span class="text-yellow-200">empezar</span>(); <span class="text-slate-400">// hoy</span></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mx-auto max-w-6xl px-4 py-16">
+            <h2 class="mb-2 text-3xl font-bold">Cómo aprendes con nosotros</h2>
+            <p class="mb-8 text-gray-600">Menos teoría suelta y más práctica guiada.</p>
+            <div class="grid gap-6 md:grid-cols-3">
+                <article class="rounded-xl bg-white p-6 shadow">
+                    <p class="mb-3 text-3xl" aria-hidden="true">🛠️</p>
+                    <h3 class="mb-2 text-xl font-bold">Proyectos reales</h3>
+                    <p class="text-gray-600">Cada módulo termina con un proyecto que puedes poner en tu portafolio.</p>
+                </article>
+                <article class="rounded-xl bg-white p-6 shadow">
+                    <p class="mb-3 text-3xl" aria-hidden="true">🧑‍🏫</p>
+                    <h3 class="mb-2 text-xl font-bold">Mentores de la industria</h3>
+                    <p class="text-gray-600">Revisan tu código y te explican cómo se trabaja en un equipo de verdad.</p>
+                </article>
+                <article class="rounded-xl bg-white p-6 shadow">
+                    <p class="mb-3 text-3xl" aria-hidden="true">🕒</p>
+                    <h3 class="mb-2 text-xl font-bold">Horarios flexibles</h3>
+                    <p class="text-gray-600">Clases presenciales y virtuales en la mañana, la tarde, la noche o los sábados.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="bg-white">
+            <div class="mx-auto max-w-6xl px-4 py-16">
+                <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+                    <div>
+                        <h2 class="mb-2 text-3xl font-bold">Cursos destacados</h2>
+                        <p class="text-gray-600">Una ruta clara desde cero hasta tu primera aplicación.</p>
+                    </div>
+                    <a href="cursos.html" class="font-semibold text-blue-600 hover:underline">Ver todos los cursos →</a>
+                </div>
+                <div class="grid gap-6 md:grid-cols-3">
+                    <a href="contacto.html?curso=html-css" class="group rounded-xl border border-gray-200 p-6 hover:border-blue-400 hover:shadow-lg">
+                        <span class="mb-3 inline-block rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-800">Principiante</span>
+                        <h3 class="mb-2 text-xl font-bold group-hover:text-blue-600">HTML y CSS desde cero</h3>
+                        <p class="text-gray-600">Construye y publica tu primera página en 8 semanas.</p>
+                    </a>
+                    <a href="contacto.html?curso=javascript" class="group rounded-xl border border-gray-200 p-6 hover:border-blue-400 hover:shadow-lg">
+                        <span class="mb-3 inline-block rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-800">Principiante</span>
+                        <h3 class="mb-2 text-xl font-bold group-hover:text-blue-600">JavaScript moderno</h3>
+                        <p class="text-gray-600">Dale vida a tus páginas con eventos, DOM y APIs.</p>
+                    </a>
+                    <a href="contacto.html?curso=react" class="group rounded-xl border border-gray-200 p-6 hover:border-blue-400 hover:shadow-lg">
+                        <span class="mb-3 inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-semibold text-amber-800">Intermedio</span>
+                        <h3 class="mb-2 text-xl font-bold group-hover:text-blue-600">React: aplicaciones web</h3>
+                        <p class="text-gray-600">Componentes, rutas y estado global en 12 semanas.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="mx-auto max-w-6xl px-4 py-16">
+            <div class="flex flex-col items-start justify-between gap-6 rounded-2xl bg-slate-900 p-8 text-white md:flex-row md:items-center">
+                <div>
+                    <h2 class="mb-2 text-2xl font-bold">¿Listo para empezar?</h2>
+                    <p class="text-slate-300">Aparta tu cupo en menos de un minuto.</p>
+                </div>
+                <a href="contacto.html" class="rounded-lg bg-blue-500 px-5 py-3 font-semibold hover:bg-blue-400">Inscribirme ahora</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-gray-200 bg-white">
+        <div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 px-4 py-6 text-sm text-gray-600">
+            <p>&copy; <span data-anio>2026</span> Alern DevTech · Academia ficticia</p>
+            <p>Demo de portafolio · Hecho por <a href="https://ariel-fyb-labs.pages.dev/" target="_blank" rel="noopener" class="font-semibold text-blue-600 hover:underline">Ariel FyB Labs</a></p>
+        </div>
+    </footer>
+    <script src="js/app.js"></script>
+</body>
+</html>
