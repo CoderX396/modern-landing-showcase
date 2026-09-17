@@ -10,12 +10,19 @@ entre carpetas: cada demo es independiente y se puede borrar sin romper el resto
 | `titanium-fitness/` | Gimnasio — formulario real con Turnstile y autorespuesta | titanium-fitness.pages.dev |
 | `brasas-del-caribe/` | Restaurante — carta, reserva de mesa, pedido por WhatsApp | brasas-del-caribe.pages.dev |
 | `sylax-bio-robotics/` | Proyecto académico de Talendig — Bootstrap 5, multipágina | sylax-bio-robotics.pages.dev |
+| `kraftina-empaques/` | Tienda de empaques — catálogo con precio al detalle y por mayor, cotización por WhatsApp | kraftina-empaques.pages.dev |
+| `taller-ohmio/` | Taller de electrónica — diagnóstico guiado por WhatsApp y catálogo de controles | taller-ohmio.pages.dev |
+| `pegassus-truck/` | Concesionario de camiones — tabla de modelos y cotización al contado o financiada | pegassus-truck.pages.dev |
+| `alern-devtech/` | Academia de programación — multipágina con Tailwind, cursos con filtro e inscripción | alern-devtech.pages.dev |
 
 > La **página central / portafolio** no vive en este repo. Tiene el suyo aparte.
 
 Todos los negocios son **inventados**. Nombres, direcciones, teléfonos y precios
-son de relleno. Cada demo tiene su `privacidad.html` y su `terminos.html`, porque
-los cuatro recogen datos personales en un formulario.
+son de relleno. Los demos con formulario (Nova, Titanium, Brasas y Sylax) tienen
+su `privacidad.html` y su `terminos.html`, porque recogen datos personales.
+Kraftina, Ohmio, Pegassus y Alern no envían datos a ningún lado: Kraftina y Ohmio
+arman un mensaje que el visitante decide mandar por su WhatsApp, y Pegassus y Alern
+procesan el formulario solo en el navegador. Por eso no llevan esas dos páginas.
 
 ## Qué hay en la raíz y por qué
 
@@ -84,8 +91,9 @@ No lo corras en bucle sin cambios reales: es spam y te ignoran.
 
 ## Al agregar un demo nuevo
 
-1. Carpeta nueva con su `index.html`, `privacidad.html`, `terminos.html`,
-   `robots.txt`, `sitemap.xml` y una copia del `.txt` de la clave de IndexNow.
+1. Carpeta nueva con su `index.html`, `robots.txt`, `sitemap.xml` y una copia
+   del `.txt` de la clave de IndexNow. Si recoge datos en un formulario, también
+   `privacidad.html` y `terminos.html`.
 2. Añádelo a la lista `SITIOS` de `avisar-indexnow.mjs`.
 3. Añádelo a la tabla de arriba.
 4. Enlázalo desde la página central (otro repo) — si no, Google no lo encuentra.

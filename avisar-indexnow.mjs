@@ -31,6 +31,10 @@ const SITIOS = {
   'titanium-fitness.pages.dev':     ['/', '/privacidad.html', '/terminos.html'],
   'brasas-del-caribe.pages.dev':    ['/', '/privacidad.html', '/terminos.html'],
   'sylax-bio-robotics.pages.dev':   ['/', '/divisiones.html', '/labs.html', '/solicitudes.html', '/privacidad.html', '/terminos.html'],
+  'kraftina-empaques.pages.dev':    ['/'],
+  'taller-ohmio.pages.dev':         ['/'],
+  'pegassus-truck.pages.dev':       ['/'],
+  'alern-devtech.pages.dev':        ['/', '/cursos.html', '/contacto.html'],
 };
 
 const PUNTO = 'https://api.indexnow.org/indexnow';
