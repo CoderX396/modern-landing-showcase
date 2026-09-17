@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pegassus-truck.pages.dev/sitemap.xml

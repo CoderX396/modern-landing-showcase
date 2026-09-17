@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pegassus Truck | Distribuidores de camiones de todo tipo</title>
+  <meta name="description" content="Camiones para distribución urbana, transporte interestatal y minería. Cotiza al contado o con financiamiento. Demo de portafolio con negocio ficticio.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://pegassus-truck.pages.dev/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="theme-color" content="#1b2a3a">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_DO">
+  <meta property="og:title" content="Pegassus Truck | Distribuidores de camiones">
+  <meta property="og:description" content="Modelos, taller de mantenimiento y cotización al contado o financiada.">
+  <meta property="og:image" content="https://pegassus-truck.pages.dev/img/fachada-1400.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor cabecera-fila">
+      <a href="#inicio" class="marca">
+        <svg viewBox="0 0 48 32" aria-hidden="true"><path d="M2 26c10-2 16-8 20-18 2 6 6 9 12 9-4 2-7 5-8 9 6-3 12-4 20-2-10 4-24 6-44 2z" fill="currentColor"/></svg>
+        Pegassus <span>Truck</span>
+      </a>
+      <nav aria-label="Principal">
+        <ul class="menu">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#modelos">Modelos</a></li>
+          <li><a href="#taller">Taller</a></li>
+          <li><a href="#cotizacion" class="menu-cta">Cotización</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="portada">
+      <picture>
+        <source srcset="img/fachada-800.webp 800w, img/fachada-1400.webp 1400w" sizes="100vw" type="image/webp">
+        <img src="img/fachada-1400.webp" alt="Concesionario principal de Pegassus Truck con un camión volteo rojo, un mezclador de concreto y un tractocamión azul" class="portada-imagen" width="1400" height="781">
+      </picture>
+      <div class="contenedor portada-contenido">
+        <p class="etiqueta">Distribuidores de camiones de todo tipo</p>
+        <h1>Bienvenidos al mundo de las grandes máquinas</h1>
+        <p>En Pegassus Truck buscamos satisfacer las necesidades pesadas de nuestros clientes con nuestros monstruos mecánicos.</p>
+        <div class="botones">
+          <a href="#cotizacion" class="boton boton-principal">Cotizar un camión</a>
+          <a href="#modelos" class="boton boton-claro">Ver modelos</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="modelos" class="seccion">
+      <div class="contenedor">
+        <p class="etiqueta">Flota disponible</p>
+        <h2>Modelos disponibles</h2>
+        <p class="texto-suave">Precios de referencia antes de impuestos. Toca "Cotizar" para calcular tu total.</p>
+
+        <div class="tabla-contenedor">
+          <table>
+            <caption class="sr-only">Modelos de camiones con capacidad, aplicación y precio</caption>
+            <thead>
+              <tr>
+                <th scope="col">Modelo</th>
+                <th scope="col">Capacidad</th>
+                <th scope="col">Aplicación</th>
+                <th scope="col">Precio desde</th>
+                <th scope="col"><span class="sr-only">Acción</span></th>
+              </tr>
+            </thead>
+            <tbody id="tabla-modelos">
+              <!-- Las filas se generan desde script.js con los mismos datos que usa la cotización -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="taller" class="seccion seccion-oscura">
+      <div class="contenedor taller-grid">
+        <picture>
+          <source srcset="img/taller-800.webp 800w, img/taller-1400.webp 1024w" sizes="(max-width: 860px) 100vw, 50vw" type="image/webp">
+          <img src="img/taller-800.webp" alt="Taller de mantenimiento Pegassus con técnicos trabajando en tres camiones" class="taller-imagen" width="800" height="437" loading="lazy">
+        </picture>
+        <div>
+          <p class="etiqueta">Después de la compra</p>
+          <h2>Taller de mantenimiento propio</h2>
+          <ul class="lista-servicios">
+            <li><strong>Servicio técnico</strong> con personal certificado en cada modelo.</li>
+            <li><strong>Repuestos originales</strong> en inventario para que tu camión no se quede parado.</li>
+            <li><strong>Mantenimiento preventivo</strong> programado según los kilómetros recorridos.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="cotizacion" class="seccion">
+      <div class="contenedor cotizacion-grid">
+        <div>
+          <p class="etiqueta">Sin compromiso</p>
+          <h2>Solicitar cotización</h2>
+          <p class="texto-suave">Escoge el modelo y la forma de pago. La factura proforma se calcula al instante con ITBIS e intereses.</p>
+
+          <form id="formulario" novalidate>
+            <div class="campo">
+              <label for="nombre">Nombre y apellido</label>
+              <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+              <p class="campo-error" id="error-nombre">Escribe al menos 3 letras, sin números.</p>
+            </div>
+
+            <div class="campo">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+              <p class="campo-error" id="error-email">Escribe un correo válido, por ejemplo nombre@correo.com.</p>
+            </div>
+
+            <div class="campo">
+              <label for="camion">Modelo preferido</label>
+              <select id="camion" name="camion"></select>
+            </div>
+
+            <fieldset class="campo">
+              <legend>Método de compra</legend>
+              <div class="opciones">
+                <label class="opcion-radio"><input type="radio" id="contado" name="pago" value="contado" checked> Contado</label>
+                <label class="opcion-radio"><input type="radio" id="financiamiento" name="pago" value="financiamiento"> Financiamiento</label>
+              </div>
+              <div id="opciones-financiamiento"></div>
+            </fieldset>
+
+            <button type="submit" class="boton boton-principal">Calcular cotización</button>
+            <p class="nota">Demo: los datos no se envían ni se guardan.</p>
+          </form>
+        </div>
+
+        <div id="resultado-cotizacion" aria-live="polite">
+          <div class="ticket-vacio">
+            <p>Tu factura proforma aparecerá aquí.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie-fila">
+      <p>© <span id="anio">2026</span> Pegassus Truck · Negocio ficticio</p>
+      <p>Demo de portafolio · Hecho por <a href="https://ariel-fyb-labs.pages.dev/" target="_blank" rel="noopener">Ariel FyB Labs</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
