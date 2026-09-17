@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kraftina-empaques.pages.dev/sitemap.xml
