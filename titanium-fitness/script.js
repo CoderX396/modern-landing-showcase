@@ -499,7 +499,7 @@ document.getElementById('lead-form').addEventListener('submit', async function (
     btn.classList.add('btn-loading');
     btn.disabled = true;
  
-    // EN: Keep first/last name separate for the Apps Script email templates,
+    // EN: Keep first/last name separate for the email templates in /api/lead,
     //     while retaining a combined name for backwards compatibility.
     // ES: Nombre y apellido se mantienen separados para las plantillas de Apps
     //     Script, conservando el nombre completo por compatibilidad.
@@ -541,12 +541,12 @@ document.getElementById('lead-form').addEventListener('submit', async function (
             turnstileToken,
     };
 
-    // EN: /api/lead is the only submission channel. It relays the request to
-    //     Google Apps Script, where Turnstile, rate limiting, validation and
-    //     email delivery are handled. No provider key exists in the browser.
-    // ES: /api/lead es el único canal de envío. Reenvía la solicitud a Google
-    //     Apps Script, donde se gestionan Turnstile, el límite, la validación y
-    //     los correos. No existe ninguna clave del proveedor en el navegador.
+    // EN: /api/lead is the only submission channel. That Cloudflare Pages
+    //     Function handles Turnstile, rate limiting, validation and email
+    //     delivery. No provider key exists in the browser.
+    // ES: /api/lead es el único canal de envío. Esa función de Cloudflare Pages
+    //     gestiona Turnstile, el límite, la validación y los correos. No existe
+    //     ninguna clave del proveedor en el navegador.
     try {
         const leadRes = await fetch('/api/lead', {
             method: 'POST',

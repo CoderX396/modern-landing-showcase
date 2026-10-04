@@ -136,16 +136,18 @@
     <li>Escribes el formulario en tu navegador.</li>
     <li>Se envía a <code>/api/lead</code>, una función que corre en
         <strong>Cloudflare Pages</strong>, en el mismo dominio de esta página.</li>
-    <li>Esa función lo reenvía a un script de <strong>Google Apps Script</strong>.</li>
-    <li>El script verifica el Turnstile, valida los campos y manda
-        <strong>dos correos</strong>: uno a <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>
-        con tu consulta, y otro a la dirección que escribiste, confirmándote que
-        la recibimos (la respuesta automática).</li>
+    <li>Esa misma función verifica el Turnstile y valida los campos.</li>
+    <li>La función manda <strong>dos correos</strong> a través de
+        <strong>Resend</strong>, un servicio de envío de correo: uno a la bandeja
+        de Ariel FyB Labs con tu consulta, y otro a la dirección que escribiste,
+        confirmándote que la recibimos (la respuesta automática).</li>
   </ol>
   <div class="lg-aviso">
-    <p><strong>No hay base de datos.</strong> Tus datos no se guardan en ninguna
-    hoja de cálculo, ni CRM, ni servidor nuestro. Existen únicamente como un correo
-    en una bandeja de Gmail. Es la ruta completa, no hay copias en otro lado.</p>
+    <p><strong>No hay base de datos con tus datos.</strong> Tu consulta no se guarda
+    en ninguna hoja de cálculo, ni CRM, ni servidor nuestro: existe únicamente como
+    un correo. Lo único que se anota, durante 24 horas, es una huella irreversible
+    de tu correo y tu teléfono (no los datos en sí), para poder limitar los envíos a
+    tres por día. Pasado ese plazo se borra sola.</p>
   </div>
 
   <h2>4. Con quién se comparten</h2>
@@ -154,9 +156,11 @@
   <p>Sí pasan por tres proveedores de infraestructura, porque es lo que hace que el
   formulario funcione:</p>
   <ul>
-    <li><strong>Cloudflare</strong> — aloja el sitio y ejecuta el anti-spam.</li>
-    <li><strong>Google (Apps Script y Gmail)</strong> — procesa el envío y guarda
-        el correo resultante.</li>
+    <li><strong>Cloudflare</strong> — aloja el sitio, ejecuta el anti-spam y
+        procesa el envío.</li>
+    <li><strong>Resend</strong> — entrega los dos correos.</li>
+    <li><strong>El proveedor de la bandeja</strong> donde llega tu consulta —
+        guarda el correo resultante.</li>
     <li>Nadie más.</li>
   </ul>
   <p>Estos proveedores están fuera de República Dominicana, así que tus datos se
@@ -255,16 +259,18 @@
     <li>You fill in the form in your browser.</li>
     <li>It is sent to <code>/api/lead</code>, a function running on
         <strong>Cloudflare Pages</strong>, on this same domain.</li>
-    <li>That function forwards it to a <strong>Google Apps Script</strong>.</li>
-    <li>The script verifies Turnstile, validates the fields and sends
-        <strong>two emails</strong>: one to <a href="mailto:fyblabs.web@gmail.com">fyblabs.web@gmail.com</a>
-        with your enquiry, and one to the address you entered, confirming we got
-        it (the auto-reply).</li>
+    <li>That same function verifies Turnstile and validates the fields.</li>
+    <li>The function sends <strong>two emails</strong> through
+        <strong>Resend</strong>, an email delivery service: one to the Ariel FyB
+        Labs inbox with your enquiry, and one to the address you entered,
+        confirming we got it (the auto-reply).</li>
   </ol>
   <div class="lg-aviso">
-    <p><strong>There is no database.</strong> Your data is not saved to any
-    spreadsheet, CRM or server of ours. It exists solely as an email in a Gmail
-    inbox. That is the whole route; there are no copies elsewhere.</p>
+    <p><strong>There is no database holding your data.</strong> Your enquiry is not
+    saved to any spreadsheet, CRM or server of ours: it exists solely as an email.
+    The only thing recorded, for 24 hours, is an irreversible fingerprint of your
+    email and phone (not the data itself), so submissions can be limited to three
+    per day. After that it deletes itself.</p>
   </div>
 
   <h2>4. Who we share it with</h2>
@@ -273,9 +279,11 @@
   <p>It does pass through three infrastructure providers, because that is what
   makes the form work:</p>
   <ul>
-    <li><strong>Cloudflare</strong> — hosts the site and runs the anti-spam check.</li>
-    <li><strong>Google (Apps Script and Gmail)</strong> — processes the submission
-        and stores the resulting email.</li>
+    <li><strong>Cloudflare</strong> — hosts the site, runs the anti-spam check and
+        processes the submission.</li>
+    <li><strong>Resend</strong> — delivers the two emails.</li>
+    <li><strong>The provider of the inbox</strong> where your enquiry arrives —
+        stores the resulting email.</li>
     <li>No one else.</li>
   </ul>
   <p>These providers are outside the Dominican Republic, so your data is processed

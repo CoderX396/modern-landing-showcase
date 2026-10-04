@@ -77,13 +77,13 @@
             sitekey used below (see the .cf-turnstile div near the form) is
             PUBLIC by design, meant to be visible in page source — it only
             identifies which widget config to use. The matching SECRET key lives
-            only in Google Apps Script Properties and is never sent to the browser.
+            only in the Cloudflare Pages secrets and is never sent to the browser.
        ES: Cloudflare Turnstile — protección anti-bot/spam para el form de leads.
             La sitekey usada abajo (ver el div .cf-turnstile cerca del form) es
             PÚBLICA a propósito, está pensada para verse en el código fuente —
             solo identifica qué config de widget usar. La clave SECRETA vive
-            únicamente en las Propiedades del Script de Google Apps Script y
-            nunca se envía al navegador. -->
+            únicamente en los secretos de Cloudflare Pages y nunca se envía al
+            navegador. -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
  
     <!-- defer: deja de bloquear el parseo del HTML; se ejecuta en orden junto a script.js -->
@@ -267,12 +267,12 @@
                             verifica del lado servidor antes de aceptar el lead.
                             data-sitekey es la clave PÚBLICA — está bien que esté acá en el HTML. -->
                     <!-- EN: Consent checkbox. The form really does send personal data
-                            (name, email, WhatsApp) to a real inbox via Apps Script, so the
+                            (name, email, WhatsApp) to a real inbox via /api/lead, so the
                             visitor has to opt in knowingly and has to be able to read what
                             happens to it BEFORE sending. Validated in script.js — do not
                             rely on `required` alone, the submit handler is JS-driven.
                        ES: Casilla de consentimiento. El formulario sí manda datos personales
-                            (nombre, correo, WhatsApp) a una bandeja real vía Apps Script, así
+                            (nombre, correo, WhatsApp) a una bandeja real vía /api/lead, así
                             que el visitante tiene que aceptarlo a sabiendas y poder leer qué
                             pasa con ellos ANTES de enviar. Se valida en script.js — no confíes
                             solo en `required`, el submit lo maneja el JS. -->

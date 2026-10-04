@@ -1,5 +1,9 @@
 /**
- * Titanium Fit contact endpoint.
+ * Titanium Fit contact endpoint — PREVIOUS VERSION, NO LONGER IN USE.
+ *
+ * The form now runs entirely on Cloudflare (functions/api/lead.js). The Gmail
+ * account this script was deployed from was disabled, and the form died with
+ * it. Kept only as a reference of what the Apps Script version did.
  *
  * Deploy this project from fyblabs.web@gmail.com as a Web App:
  *   Execute as: Me
